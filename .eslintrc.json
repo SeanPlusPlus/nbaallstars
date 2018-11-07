@@ -1,0 +1,20 @@
+{
+  "extends": "airbnb",
+  "plugins": [
+    "json",
+    "react-hooks"
+  ],
+  "env": {
+    "jest": true,
+    "browser": true
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "max-len": [1, 100, 2, {
+      "ignoreComments": true
+    }],
+    "camelcase": 0,
+    "semi": [2, "never"],
+    "import/no-dynamic-require": 0
+  }
+}
