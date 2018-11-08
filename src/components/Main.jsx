@@ -17,7 +17,7 @@ const Main = () => (
         <Col sm={{ size: 10, offset: 1 }}>
           <Jumbotron>
             <h1 className="display-3">Fantasy NBA All-Stars</h1>
-            <p className="lead">Predict the lineups for each team!!!</p>
+            <p className="lead">Predict the lineups for each team</p>
           </Jumbotron>
         </Col>
       </Row>
