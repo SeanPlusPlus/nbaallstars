@@ -13,8 +13,11 @@ import {
   DropdownItem,
 } from 'reactstrap'
 
+// styles
 import '../styles/Nav.css'
-import logo from '../styles/logo.svg'
+
+// assets
+import logo from '../assets/logo.svg'
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
