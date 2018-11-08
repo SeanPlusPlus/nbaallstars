@@ -1,5 +1,7 @@
 import React from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import {
+  Jumbotron, Container, Row, Col,
+} from 'reactstrap'
 
 // styles
 import '../styles/Main.css'
@@ -13,7 +15,10 @@ const Main = () => (
     <Container id="main">
       <Row>
         <Col sm={{ size: 10, offset: 1 }}>
-          <h1>hello world</h1>
+          <Jumbotron>
+            <h1 className="display-3">Fantasy NBA All-Stars</h1>
+            <p className="lead">Predict the lineups for each team!!!</p>
+          </Jumbotron>
         </Col>
       </Row>
     </Container>
