@@ -37,10 +37,8 @@ const Navigation = () => {
       <Navbar color="dark" dark expand="md">
         <NavbarBrand href="/">
           <img className="App-logo" alt="logo" src={logo} />
-          {' // '}
-            All Stars
-          {' '}
         </NavbarBrand>
+        <NavbarBrand href="/">allstars</NavbarBrand>
         { localStorage.ALLSTARS_USERNAME
           && (<>
             <NavbarToggler onClick={e => handleToggle(e)} />

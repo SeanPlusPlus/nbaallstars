@@ -1,3 +1,7 @@
 body {
     background-color: #fafafa;
 }
+
+#main {
+    padding-top: 20px;
+}
