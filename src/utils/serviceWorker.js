@@ -31,6 +31,15 @@ const isLocalhost = Boolean(
     )
 );
 
+function showAlert() {
+  const el = document.getElementById('refresh')
+  if (el && el.style) {
+    el.style.display = 'block'
+  } else {
+    console.log('can not locate refresh element')
+  }
+}
+
 export function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
@@ -84,6 +93,8 @@ function registerValidSW(swUrl, config) {
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See http://bit.ly/CRA-PWA.'
               );
+
+              showAlert()
 
               // Execute callback
               if (config && config.onUpdate) {
