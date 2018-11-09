@@ -1,16 +1,32 @@
 const serverless = require('serverless-http')
 const express = require('express')
+const rp = require('request-promise')
 const dotenv = require('dotenv')
 
 dotenv.config()
 
-const { NODE_ENV } = process.env
+const {
+  NODE_ENV,
+  ESPN_API,
+} = process.env
 
 const app = express()
 
 app.get('/api', (req, res) => {
-  const message = 'hello world!'
-  res.send({ message })
+  const options = {
+    uri: ESPN_API,
+    method: 'GET',
+  }
+  rp(options)
+    .then((response) => {
+      const json = JSON.parse(response)
+      const sports = json.sports.map(s => s.slug)
+      res.send({ sports })
+    })
+    .catch(() => {
+      res.status(400)
+      res.send({ message: 'error connecting to api' })
+    })
 })
 
 if (NODE_ENV === 'development') {

@@ -9,6 +9,12 @@ import '../styles/Main.css'
 // local components
 import Nav from './Nav'
 
+fetch('/api').then(
+  response => response.json(),
+).then((jsonData) => {
+  console.log(jsonData)
+})
+
 const Main = () => (
   <>
     <Nav />
