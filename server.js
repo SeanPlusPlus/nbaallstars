@@ -9,7 +9,7 @@ const { NODE_ENV } = process.env
 const app = express()
 
 app.get('/api', (req, res) => {
-  const message = 'hello world'
+  const message = 'hello world!'
   res.send({ message })
 })
 

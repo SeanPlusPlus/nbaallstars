@@ -31,7 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "api": "nodemon api/index.js",
+    "server": "nodemon server.js",
     "build": "react-scripts build && rm -rf docs/ && mv build/ docs/",
     "lint": "eslint ./src/**/*.js* && eslint ./api/**/*.js* ",
     "test": "cross-env CI=true react-scripts test --env=jsdom --colors",
