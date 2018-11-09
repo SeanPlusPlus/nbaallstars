@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react'
 import {
-  Jumbotron, Container, Row, Col,
+  Jumbotron, Container, Row, Col, Progress,
 } from 'reactstrap'
 
 // styles
@@ -53,11 +53,15 @@ const Main = () => {
             <p className="lead">Predict the lineups for each team!!!</p>
           </Jumbotron>
           <hr />
-          <code>
-            API:
-            {' '}
-            {JSON.stringify(data, null, 2)}
-          </code>
+          { data === null ? (
+            <Progress animated color="success" value="25" />
+          ) : (
+            <code>
+              ESPN API DEMO:
+              {' '}
+              {JSON.stringify(data, null, 2)}
+            </code>
+          )}
         </Col>
       </Row>
     </Container>
