@@ -9,6 +9,7 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "jquery": "1.9.1",
+    "pg": "^7.6.1",
     "popper.js": "^1.14.3",
     "prop-types": "^15.6.2",
     "react": "16.7.0-alpha",
@@ -17,6 +18,7 @@
     "reactstrap": "^6.5.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
+    "sequelize": "^4.41.1",
     "serverless-http": "^1.8.0"
   },
   "devDependencies": {
@@ -36,7 +38,7 @@
     "start": "react-scripts start",
     "server": "nodemon server.js",
     "build": "react-scripts build && rm -rf docs/ && mv build/ docs/",
-    "lint": "eslint ./src/**/*.js* && eslint ./api/**/*.js* ",
+    "lint": "eslint ./src/**/*.js* && eslint ./*.js ",
     "test": "cross-env CI=true react-scripts test --env=jsdom --colors",
     "validate": "yarn lint && yarn test"
   },
