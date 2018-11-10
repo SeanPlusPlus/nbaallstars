@@ -18,7 +18,7 @@ ESPN_API='http://site.api.espn.com/apis/v2/scoreboard/header?showAirings=true&co
 ## Express API
 
 ```
-yarn api
+yarn server
 ```
 
 You can now hit the api locally here:
