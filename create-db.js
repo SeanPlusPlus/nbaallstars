@@ -18,7 +18,7 @@ const host = PG_HOST
 const sequelize = new Sequelize(database, username, password, {
   host,
   port: 5432,
-  logging: console.log,
+  logging: console.log, // eslint-disable-line no-console
   maxConcurrentQueries: 100,
   dialect: 'postgres',
   dialectOptions: {

@@ -31,7 +31,7 @@ app.get('/api', (req, res) => {
 
 if (NODE_ENV === 'development') {
   const port = 3001
-  app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+  app.listen(port, () => console.log(`Example app listening on port ${port}!`)) // eslint-disable-line no-console
 }
 
 module.exports.handler = serverless(app)
