@@ -47,3 +47,7 @@ https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions
 ## API Endpoint
 
 https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api
+
+## Database
+
+https://us-west-2.console.aws.amazon.com/rds/home?region=us-west-2#dbinstance:id=nbaallstars
