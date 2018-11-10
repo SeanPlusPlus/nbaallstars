@@ -38,3 +38,11 @@ http://localhost:3000/
 ## Husky
 
 We are using [husky](https://github.com/typicode/husky) on this project, so make sure that your repo passes the linter and tests before pushing.
+
+## Lambda
+
+https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/nbaallstars-dev-app?tab=graph
+
+## API Endpoint
+
+https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api
