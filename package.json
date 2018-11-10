@@ -3,10 +3,14 @@
   "homepage": ".",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "bootstrap": "^4.1.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
     "jquery": "1.9.1",
     "oauth": "^0.9.15",
+    "pg": "^7.6.1",
     "popper.js": "^1.14.3",
     "prop-types": "^15.6.2",
     "react": "16.7.0-alpha",
@@ -14,7 +18,9 @@
     "react-router-dom": "^4.3.1",
     "reactstrap": "^6.5.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.41.1",
+    "serverless-http": "^1.8.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
@@ -26,12 +32,14 @@
     "eslint-plugin-react": "^7.11.0",
     "eslint-plugin-react-hooks": "^0.0.0",
     "husky": "^1.1.3",
+    "nodemon": "^1.18.6",
     "react-scripts": "2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "nodemon server.js",
     "build": "react-scripts build && rm -rf docs/ && mv build/ docs/",
-    "lint": "eslint ./src/**/*.js*",
+    "lint": "eslint ./src/**/*.js* && eslint ./*.js ",
     "test": "cross-env CI=true react-scripts test --env=jsdom --colors",
     "validate": "yarn lint && yarn test"
   },
