@@ -2,6 +2,8 @@ const serverless = require('serverless-http')
 const express = require('express')
 const rp = require('request-promise')
 const dotenv = require('dotenv')
+const _ = require('lodash')
+const { User, sequelize } = require('./model')
 
 dotenv.config()
 
@@ -28,6 +30,16 @@ app.get('/api', (req, res) => {
       res.send({ message: 'error connecting to api' })
     })
 })
+
+app.get('/api/users', (req, res) => {
+  User.findAll().then((response) => {
+    const users = response.map(r => _.get(r, 'dataValues', {}))
+    console.log('users', users) // eslint-disable-line no-console
+    res.send({ users })
+    sequelize.close()
+  })
+})
+
 
 if (NODE_ENV === 'development') {
   const port = 3001
