@@ -52,6 +52,10 @@ https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api
 
 https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api/users
 
+## Postgres RDS Instance
+
+https://us-west-2.console.aws.amazon.com/rds/home?region=us-west-2#dbinstance:id=nbaallstars
+
 ## API Deployment
 
 ```
