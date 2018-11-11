@@ -36,7 +36,7 @@ app.get('/api/users', (req, res) => {
     const users = response.map(r => _.get(r, 'dataValues', {}))
     console.log('users', users) // eslint-disable-line no-console
     res.send({ users })
-    sequelize.close()
+    // sequelize.close()
   })
 })
 
