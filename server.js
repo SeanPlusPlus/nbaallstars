@@ -3,7 +3,7 @@ const express = require('express')
 const rp = require('request-promise')
 const dotenv = require('dotenv')
 const _ = require('lodash')
-const { User, sequelize } = require('./model')
+const User = require('./model')
 
 dotenv.config()
 
@@ -36,7 +36,6 @@ app.get('/api/users', (req, res) => {
     const users = response.map(r => _.get(r, 'dataValues', {}))
     console.log('users', users) // eslint-disable-line no-console
     res.send({ users })
-    // sequelize.close()
   })
 })
 
