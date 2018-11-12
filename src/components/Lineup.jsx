@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-
-// fake data generator
-const getItems = count => Array.from({ length: count }, (v, k) => k).map(k => ({
-  id: `item-${k}`,
-  content: `item ${k}`,
-}))
+import {
+  Progress,
+} from 'reactstrap'
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -19,7 +16,7 @@ const reorder = (list, startIndex, endIndex) => {
 const grid = 8
 
 const getBase = index => (
-  (index < 5) ? 'white' : 'grey'
+  (index < 2) ? 'white' : 'grey'
 )
 
 const getItemStyle = (isDragging, draggableStyle, idx) => ({
@@ -42,7 +39,7 @@ const getListStyle = isDraggingOver => ({
 })
 
 const Lineup = () => {
-  const [items, setItems] = useState(getItems(10))
+  const [items, setItems] = useState([])
 
   const onDragEnd = (result) => {
     // dropped outside the list
@@ -59,8 +56,29 @@ const Lineup = () => {
     setItems(i)
   }
 
-  // Normally you would want to split things out into separate components.
-  // But in this example everything is just done in one place for simplicity
+  useEffect(
+    () => {
+      if (items.length === 0) {
+        const uri = '/api'
+        fetch(uri)
+          .then(response => response.json())
+          .then((payload) => {
+            const { sports } = payload
+            const arr = sports.map(s => ({ id: s, content: s }))
+            const i = reorder(arr, 0, 0)
+            setItems(i)
+          })
+      }
+    },
+    [items],
+  )
+
+  if (items.length === 0) {
+    return (
+      <Progress animated color="success" value="25" />
+    )
+  }
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="droppable">
@@ -77,7 +95,6 @@ const Lineup = () => {
               >
                 {(provide, snap) => (
                   <div
-                    id={`idx-${index}`}
                     ref={provide.innerRef}
                     {...provide.draggableProps}
                     {...provide.dragHandleProps}
