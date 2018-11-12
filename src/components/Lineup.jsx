@@ -4,6 +4,8 @@ import {
   Progress,
 } from 'reactstrap'
 
+import '../styles/Lineup.css'
+
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
@@ -75,7 +77,9 @@ const Lineup = () => {
 
   if (items.length === 0) {
     return (
-      <Progress animated color="success" value="25" />
+      <div id="lineup-loader">
+        <Progress animated color="success" value="25" />
+      </div>
     )
   }
 

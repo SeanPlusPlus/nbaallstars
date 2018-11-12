@@ -1,7 +1,3 @@
-.starter {
-    background-color: #fafafa;
-}
-
-.bench {
-    background-color: blueviolet;
+#lineup-loader {
+    min-height: 336px;
 }
