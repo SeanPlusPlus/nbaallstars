@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 // fake data generator
@@ -41,73 +41,63 @@ const getListStyle = isDraggingOver => ({
   width: 250,
 })
 
-class Lineup extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      items: getItems(10),
-    }
-    this.onDragEnd = this.onDragEnd.bind(this)
-  }
+const Lineup = () => {
+  const [items, setItems] = useState(getItems(10))
 
-  onDragEnd(result) {
+  const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
       return
     }
 
-    const items = reorder(
-      this.state.items,
+    const i = reorder(
+      items,
       result.source.index,
       result.destination.index,
     )
 
-    this.setState({
-      items,
-    })
+    setItems(i)
   }
 
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
-  render() {
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              {this.state.items.map((item, index) => (
-                <Draggable
-                  key={item.id}
-                  draggableId={item.id}
-                  index={index}
-                >
-                  {(provided, snapshot) => (
-                    <div
-                      id={`idx-${index}`}
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style,
-                        index,
-                      )}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    )
-  }
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided, snapshot) => (
+          <div
+            ref={provided.innerRef}
+            style={getListStyle(snapshot.isDraggingOver)}
+          >
+            {items.map((item, index) => (
+              <Draggable
+                key={item.id}
+                draggableId={item.id}
+                index={index}
+              >
+                {(provided, snapshot) => (
+                  <div
+                    id={`idx-${index}`}
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    style={getItemStyle(
+                      snapshot.isDragging,
+                      provided.draggableProps.style,
+                      index,
+                    )}
+                  >
+                    {item.content}
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  )
 }
 
 export default Lineup
