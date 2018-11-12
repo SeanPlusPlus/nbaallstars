@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react'
 import {
-  Jumbotron, Container, Row, Col, Progress,
+  Container, Row, Col, Progress,
 } from 'reactstrap'
 
 // styles
@@ -8,6 +8,7 @@ import '../styles/Main.css'
 
 // local components
 import Nav from './Nav'
+import Lineup from './Lineup'
 
 // reducer
 import reducer from '../reducers/main'
@@ -47,11 +48,8 @@ const Main = () => {
     <Nav />
     <Container id="main">
       <Row>
-        <Col sm={{ size: 10, offset: 1 }}>
-          <Jumbotron>
-            <h1 className="display-3">Fantasy NBA All-Stars</h1>
-            <p className="lead">Predict the lineups for each team!!!</p>
-          </Jumbotron>
+        <Col sm={{ size: 12 }}>
+          <Lineup />
           <hr />
           { data === null ? (
             <Progress animated color="success" value="25" />
