@@ -19,7 +19,7 @@ const reorder = (list, startIndex, endIndex) => {
 const grid = 8
 
 const getBase = index => (
-  (index < 5) ? 'grey' : 'blue'
+  (index < 5) ? 'white' : 'grey'
 )
 
 const getItemStyle = (isDragging, draggableStyle, idx) => ({
@@ -75,15 +75,15 @@ const Lineup = () => {
                 draggableId={item.id}
                 index={index}
               >
-                {(provided, snapshot) => (
+                {(provide, snap) => (
                   <div
                     id={`idx-${index}`}
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
+                    ref={provide.innerRef}
+                    {...provide.draggableProps}
+                    {...provide.dragHandleProps}
                     style={getItemStyle(
-                      snapshot.isDragging,
-                      provided.draggableProps.style,
+                      snap.isDragging,
+                      provide.draggableProps.style,
                       index,
                     )}
                   >
