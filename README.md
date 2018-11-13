@@ -44,9 +44,17 @@ We are using [husky](https://github.com/typicode/husky) on this project, so make
 
 https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/nbaallstars-dev-app?tab=graph
 
-## API Endpoint
+## API Endpoint - Sports
 
 https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api
+
+## API Endpoint - Users
+
+https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api/users
+
+## Postgres RDS Instance
+
+https://us-west-2.console.aws.amazon.com/rds/home?region=us-west-2#dbinstance:id=nbaallstars
 
 ## API Deployment
 

@@ -3,6 +3,8 @@ const express = require('express')
 const rp = require('request-promise')
 const dotenv = require('dotenv')
 const OAuth = require('oauth')
+const _ = require('lodash')
+const User = require('./model')
 
 dotenv.config()
 
@@ -38,6 +40,14 @@ app.get('/api', (req, res) => {
       res.status(400)
       res.send({ message: 'error connecting to api' })
     })
+})
+
+app.get('/api/users', (req, res) => {
+  User.findAll().then((response) => {
+    const users = response.map(r => _.get(r, 'dataValues', {}))
+    console.log('users', users) // eslint-disable-line no-console
+    res.send({ users })
+  })
 })
 
 app.get('/twitter/request-token', (req, res) => {

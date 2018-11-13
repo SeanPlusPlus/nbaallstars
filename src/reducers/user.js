@@ -1,18 +1,18 @@
-import actionTypes from '../actionTypes/main'
+import actionTypes from '../actionTypes/user'
 
 const {
-  MAIN_DATA_FETCHING,
-  MAIN_DATA_FETCH_SUCCESS,
+  USERS_DATA_FETCHING,
+  USERS_DATA_FETCH_SUCCESS,
 } = actionTypes
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case MAIN_DATA_FETCHING:
+    case USERS_DATA_FETCHING:
       return {
         ...state,
         isFetching: true,
       }
-    case MAIN_DATA_FETCH_SUCCESS:
+    case USERS_DATA_FETCH_SUCCESS:
       return {
         ...state,
         data: action.payload,
