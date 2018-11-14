@@ -1,5 +1,6 @@
 const serverless = require('serverless-http')
 const express = require('express')
+const cookieSession = require('cookie-session')
 const rp = require('request-promise')
 const dotenv = require('dotenv')
 const OAuth = require('oauth')
@@ -24,6 +25,12 @@ const {
 } = process.env
 
 const app = express()
+app.use(cookieSession({
+  name: 'session',
+  keys: ['secret key here'],
+  httpOnly: false,
+  secure: false
+}));
 
 app.get('/api', (req, res) => {
   const options = {
@@ -51,26 +58,59 @@ app.get('/api/users', (req, res) => {
 })
 
 app.get('/twitter/request-token', (req, res) => {
-  res.header({'Access-Control-Allow-Origin': '*'})
-  logInWithTwitter().then((token) => {
-    res.send({token: token})
+  res.header({ 'Access-Control-Allow-Origin': '*' })
+  console.log(req)
+  logInWithTwitter().then((tokens) => {
+    req.session.oauthRequestToken = tokens.token;
+    req.session.oauthRequestTokenSecret = tokens.tokenSecret;
+    res.send({token: tokens.token})
   }).catch((error) => {
     res.status(500)
-    res.send({ message: 'Error getting request token', error: error})
+    res.send({ message: 'Error getting request token', error: error })
+  })
+})
+
+app.get('/twitter/access-token', (req, res) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' })
+  const {
+    oauth_token,
+    oauth_verifier
+  } = req.query
+  getAccessToken(oauth_token, oauth_verifier).then((token) => {
+    res.send({ token: token })
+  }).catch((error) => {
+    res.status(500)
+    res.send({ message: 'Error getting request token', error: error })
   })
 })
 
 function logInWithTwitter() {
   return new Promise((resolve, reject) => {
-    oauth.getOAuthRequestToken({ oauth_callback: 'http://localhost:3000' }, function (error, token, tokenSecret, parsedQueryString) {
+    oauth.getOAuthRequestToken({ oauth_callback: 'http://localhost:3000/login' }, function (error, token, tokenSecret, parsedQueryString) {
       if (error) {
         console.log(error)
         reject(new Error(error))
       } else {
+        //console.log(token)
+        //console.log(tokenSecret)
+        console.log(parsedQueryString)
+        resolve({token, tokenSecret})
+      }
+    })
+  })
+}
+
+function getAccessToken(oauthToken, oauthVerifier) {
+  return new Promise((resolve, reject) => {
+    oauth.getOAuthAccessToken(oauthToken, null, oauthVerifier, (error, token, tokenSecret, queryString) => {
+      if (error) {
+        console.log('Error', error)
+        reject(new Error(error))
+      } else {
         console.log(token)
         console.log(tokenSecret)
-        console.log(parsedQueryString)
-        resolve(token)
+        console.log(queryString)
+        resolve('Success')
       }
     })
   })
