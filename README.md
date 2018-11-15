@@ -13,6 +13,60 @@ Create a `.env` file in the root of the repo and add this line:
 ```
 NODE_ENV=development
 ESPN_API='http://site.api.espn.com/apis/v2/scoreboard/header?showAirings=true&contentorigin=espn&lang=en&region=us&contentorigin=espn&_ceID=4379198'
+PG_USERNAME=allstarsadminPG_PASSWORD=nba
+PG_DATABASE=nbaallstars
+PG_HOST=localhost
+```
+
+## Postgres
+
+Make sure you have postgres [installed on your local machine](https://gist.github.com/ibraheem4/ce5ccd3e4d7a65589ce84f2a3b7c23a3).
+
+1. Create an admin account to connect to our database
+
+```
+$ createuser -P -s -e allstarsadmin 
+```
+
+You will be prompted to create a password here. For the sake of this example, let's go with the password `nba`.
+
+2. Create the database
+
+```
+$ psql -d template1
+template1=# CREATE DATABASE nbaallstars WITH OWNER = allstarsadmin;
+```
+
+3. Create the `users` table for our new database and enter test records
+
+_Open a new terminal here_
+
+```
+$ node
+> const User = require('./model')
+> User.sync({ force: true })
+> const sean = { id: 'foo', username: 'SeanPlusPlus' }
+> const kane = { id: 'bar', username: 'Kanestapler' }
+> User.findOrCreate({ where: sean })
+> User.findOrCreate({ where: kane })
+```
+
+4. View the records in our database
+
+_Go back to the terminal with our psql connection_
+
+```
+template1=# \c nbaallstars allstarsadmin
+nbaallstars=# SELECT * FROM "users";
+```
+
+_* Note * If you ever want to drop all the tables in your database and start from scratch_
+
+```
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+GRANT ALL ON SCHEMA public TO allstarsadmin;
+GRANT ALL ON SCHEMA public TO public;
 ```
 
 ## Express API

@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const {
+  NODE_ENV,
   PG_PASSWORD,
   PG_USERNAME,
   PG_DATABASE,
@@ -23,9 +24,7 @@ const sequelize = new Sequelize(database, username, password, {
   logging: console.log, // eslint-disable-line no-console
   maxConcurrentQueries: 100,
   dialect: 'postgres',
-  dialectOptions: {
-    ssl: 'Amazon RDS',
-  },
+  dialectOptions: (NODE_ENV === 'development' ? undefined : { ssl: 'Amazon RDS' }),
   pool: { maxConnections: 5, maxIdleTime: 30 },
   language: 'en',
   operatorsAliases: {
@@ -43,32 +42,5 @@ const User = sequelize.define('user', {
   id: { type: Sequelize.STRING, primaryKey: true },
   username: { type: Sequelize.STRING, unique: true },
 })
-
-// create new users
-
-// User.sync({ force: true })
-
-// const sean = {
-//   id: 'cb5b4f23c852f675267ef22377585e48',
-//   username: 'SeanPlusPlus',
-// }
-
-// const kane = {
-//   id: '1a7afe5f017cbcb8412e124ac6788147',
-//   username: 'Kanestapler',
-// }
-
-// User
-//   .findOrCreate({ where: sean })
-
-// User
-//   .findOrCreate({ where: kane })
-
-
-// User.findAll().then((response) => {
-//   const users = response.map(r => _.get(r, 'dataValues', {}))
-//   console.log('users', users) // eslint-disable-line no-console
-//   sequelize.close()
-// })
 
 module.exports = User
