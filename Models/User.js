@@ -41,17 +41,23 @@ const sequelize = new Sequelize(database, username, password, {
 
 const User = sequelize.define('user', {
   id: { type: Sequelize.STRING, primaryKey: true },
-  username: { type: Sequelize.STRING, unique: true },
+  accessToken: { type: Sequelize.STRING, unique: true },
+  accessTokenSecret: { type: Sequelize.STRING, unique: true },
 })
-
+// User.findOne({ where: {id: '15616963'}}).then((user) => {
+//   console.log(user.dataValues)
+// })
 // create new users
 
-// User.sync({ force: true })
-
 // const sean = {
-//   id: 'cb5b4f23c852f675267ef22377585e48',
-//   username: 'SeanPlusPlus',
+//   id: '15616963',
+//   accessToken: '15616963-HgG4OVSYwTkHv4By7m3tsL0zBU0LZdzS7oLRPNxu2',
+//   accessTokenSecret: '9hBgdllFVOrN8RWIOpyKXhFt3pFUgixpb8ObsBt1OSO8j',
 // }
+
+// User.sync({ force: true }).then(() => {
+//   return User.create(sean);
+// })
 
 // const kane = {
 //   id: '1a7afe5f017cbcb8412e124ac6788147',

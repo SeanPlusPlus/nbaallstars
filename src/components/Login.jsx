@@ -14,8 +14,13 @@ import Auth from '../utils/auth'
 export default class Login extends React.Component {
   componentDidMount() {
     const queryParams = QueryString.parse(this.props.location.search)
-    if (queryParams.oauth_token && queryParams.oauth_verifier) {
-      getUserToken(queryParams)
+    const {
+      oauth_token,
+      oauth_verifier,
+    } = queryParams
+    if (oauth_token && oauth_verifier) {
+      getUserToken(oauth_token, oauth_verifier)
+      this.props.history.push('/')
     }
   }
 
@@ -31,13 +36,7 @@ export default class Login extends React.Component {
   }
 }
 
-function getUserToken(queryParams) {
-  const {
-    oauth_token,
-    oauth_verifier
-  } = queryParams
-  console.log(oauth_token)
-  console.log(oauth_verifier)
+function getUserToken(oauth_token, oauth_verifier) {
   Auth.getUserTokens(oauth_token, oauth_verifier)
 }
 
