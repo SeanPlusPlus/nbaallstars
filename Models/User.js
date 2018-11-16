@@ -4,6 +4,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const {
+  NODE_ENV,
   PG_PASSWORD,
   PG_USERNAME,
   PG_DATABASE,
@@ -23,9 +24,7 @@ const sequelize = new Sequelize(database, username, password, {
   logging: console.log, // eslint-disable-line no-console
   maxConcurrentQueries: 100,
   dialect: 'postgres',
-  dialectOptions: {
-    ssl: 'Amazon RDS',
-  },
+  dialectOptions: (NODE_ENV === 'development' ? undefined : { ssl: 'Amazon RDS' }),
   pool: { maxConnections: 5, maxIdleTime: 30 },
   language: 'en',
   operatorsAliases: {
