@@ -66,6 +66,12 @@ const getListStyle = isDraggingOver => ({
 })
 
 const Lineup = () => {
+  // TODO refactor state to something like this
+  // const [items, setItems] = useState({
+  //   east: [],
+  //   west: [],
+  //   pending: [],
+  // })
   const [sports, setSports] = useState([])
   const [random, setRandom] = useState(getItems(5))
 
