@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import * as QueryString from 'query-string'
 import {
-  Container
+  Container,
 } from 'reactstrap'
 
 // styles
@@ -11,16 +12,28 @@ import '../styles/Login.css'
 import Nav from './Nav'
 import Auth from '../utils/auth'
 
-export default class Login extends React.Component {
+function getUserToken(oauth_token, oauth_verifier) {
+  Auth.getUserTokens(oauth_token, oauth_verifier)
+}
+
+function redirectToTwitter() {
+  Auth.logInWithTwitter()
+}
+
+class Login extends React.Component {
   componentDidMount() {
-    const queryParams = QueryString.parse(this.props.location.search)
+    const {
+      location,
+      history,
+    } = this.props
+    const queryParams = QueryString.parse(location.search)
     const {
       oauth_token,
       oauth_verifier,
     } = queryParams
     if (oauth_token && oauth_verifier) {
       getUserToken(oauth_token, oauth_verifier)
-      this.props.history.push('/')
+      history.push('/')
     }
   }
 
@@ -29,17 +42,23 @@ export default class Login extends React.Component {
       <>
         <Nav />
         <Container id="main">
-            <button onClick={redirectToTwitter}>Log In With Twitter</button>
+          <button type="button" onClick={redirectToTwitter}>Log In With Twitter</button>
         </Container>
       </>
     )
   }
 }
 
-function getUserToken(oauth_token, oauth_verifier) {
-  Auth.getUserTokens(oauth_token, oauth_verifier)
+Login.propTypes = {
+  // This props are included by default by React. Not sure why ESLint throws this error.
+  // Worried that if I add them in defaultProps it could create errors.
+  // eslint-disable-next-line react/require-default-props
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }),
+  // eslint-disable-next-line react/require-default-props
+  history: PropTypes.arrayOf(PropTypes.string),
 }
 
-function redirectToTwitter() {
-  Auth.logInWithTwitter()
-}
+
+export default Login

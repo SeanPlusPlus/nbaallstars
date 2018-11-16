@@ -4,6 +4,8 @@ const rp = require('request-promise')
 const dotenv = require('dotenv')
 const _ = require('lodash')
 const dbUtil = require('./databaseUtil')
+const twitter = require('./twitter')
+const util = require('./util')
 
 dotenv.config()
 
@@ -41,11 +43,11 @@ app.get('/api/users', (req, res) => {
 
 app.get('/twitter/request-token', (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
-  logInWithTwitter().then((requestTokens) => {
+  twitter.getRequestToken().then((requestTokens) => {
     res.send({ requestTokens })
   }).catch((error) => {
     res.status(500)
-    res.send({ message: 'Error getting request token', error: error })
+    res.send({ message: 'Error getting request token', error })
   })
 })
 
@@ -56,18 +58,17 @@ app.get('/twitter/access-token', (req, res) => {
     authTokenSecret,
     authVerifier,
   } = req.query
-  getAccessToken(authToken, authTokenSecret, authVerifier).then((accessData) => {
+  twitter.getAccessToken(authToken, authTokenSecret, authVerifier).then((accessData) => {
     const {
       accessToken,
       accessTokenSecret,
       userID,
     } = accessData
-    const tokenHash = createTokenHash(accessToken, accessTokenSecret)
-    const cookie = `${userID}:${tokenHash}`
+    const cookie = util.createUserCookie(accessToken, accessTokenSecret, userID)
     res.send({ cookieToStore: cookie })
   }).catch((error) => {
     res.status(500)
-    res.send({ message: 'Error getting access token', error: error })
+    res.send({ message: 'Error getting access token', error })
   })
 })
 
@@ -76,15 +77,17 @@ app.get('/twitter/get-user', (req, res) => {
   const {
     userID,
     tokenHash,
-  } = req.query
-  getUserFromID(userID).then((userData) => {
+  } = util.decryptUserCookie(req.query.userCookie)
+  dbUtil.getUserFromID(userID).then((userData) => {
     const {
       accessToken,
       accessTokenSecret,
     } = userData.dataValues
-    if (tokenHash === createTokenHash(accessToken, accessTokenSecret)) {
+    if (util.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
+      // eslint-disable-next-line no-console
       console.log('USER VERIFIED')
     } else {
+      // eslint-disable-next-line no-console
       console.log('USER NOT VERIFIED')
     }
   })

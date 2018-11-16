@@ -8,7 +8,7 @@ function getAllUsers() {
   return User.findAll()
 }
 
-export {
+module.exports = {
   getUserFromID,
   getAllUsers,
 }

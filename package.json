@@ -44,7 +44,7 @@
     "start": "react-scripts start",
     "server": "nodemon Server/server.js",
     "build": "react-scripts build && rm -rf docs/ && mv build/ docs/",
-    "lint": "eslint ./src/**/*.js* && eslint ./*.js ",
+    "lint": "eslint ./src/**/*.js* && eslint ./Server/**/*.js && eslint ./Models/**/*.js",
     "test": "cross-env CI=true react-scripts test --env=jsdom --colors",
     "validate": "yarn lint && yarn test"
   },
