@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react'
 import {
-  Container, Row, Col, Progress, ListGroup, ListGroupItem,
+  Container, Progress, ListGroup, ListGroupItem,
 } from 'reactstrap'
 
 // styles
@@ -47,14 +47,11 @@ const Main = () => {
   <>
     <Nav />
     <Container id="main">
-      <Row>
-        <Col sm={{ size: 12 }}>
-          <legend>Headline Sports</legend>
-          <Lineup />
-          <hr />
-          { data === null ? (
-            <Progress animated color="success" value="25" />
-          ) : (
+      <Lineup />
+      <hr />
+      { data === null ? (
+        <Progress animated color="success" value="25" />
+      ) : (
             <>
               <legend>App Users</legend>
               <ListGroup>
@@ -64,9 +61,7 @@ const Main = () => {
                 }
               </ListGroup>
             </>
-          )}
-        </Col>
-      </Row>
+      )}
     </Container>
   </>
   )
