@@ -43,37 +43,5 @@ const User = sequelize.define('user', {
   accessToken: { type: Sequelize.STRING, unique: true },
   accessTokenSecret: { type: Sequelize.STRING, unique: true },
 })
-// User.findOne({ where: {id: '15616963'}}).then((user) => {
-//   console.log(user.dataValues)
-// })
-// create new users
-
-// const sean = {
-//   id: '15616963',
-//   accessToken: '15616963-HgG4OVSYwTkHv4By7m3tsL0zBU0LZdzS7oLRPNxu2',
-//   accessTokenSecret: '9hBgdllFVOrN8RWIOpyKXhFt3pFUgixpb8ObsBt1OSO8j',
-// }
-
-// User.sync({ force: true }).then(() => {
-//   return User.create(sean);
-// })
-
-// const kane = {
-//   id: '1a7afe5f017cbcb8412e124ac6788147',
-//   username: 'Kanestapler',
-// }
-
-// User
-//   .findOrCreate({ where: sean })
-
-// User
-//   .findOrCreate({ where: kane })
-
-
-// User.findAll().then((response) => {
-//   const users = response.map(r => _.get(r, 'dataValues', {}))
-//   console.log('users', users) // eslint-disable-line no-console
-//   sequelize.close()
-// })
 
 module.exports = User
