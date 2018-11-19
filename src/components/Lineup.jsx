@@ -82,30 +82,13 @@ const Lineup = () => {
     }
 
     if (source.droppableId === destination.droppableId) { // move items in same list
-      if (source.droppableId === 'sports') {
-        const s = reorder(
-          sports,
-          source.index,
-          destination.index,
-        )
-        const i = {
-          sports: s,
-          random,
-        }
-        setItems(i)
+      const key = source.droppableId
+      const reOrdered = reorder(items[key], source.index, destination.index)
+      const i = {
+        ...items,
+        [key]: reOrdered,
       }
-      if (source.droppableId === 'random') {
-        const r = reorder(
-          random,
-          source.index,
-          destination.index,
-        )
-        const i = {
-          sports,
-          random: r,
-        }
-        setItems(i)
-      }
+      setItems(i)
     } else { // move from one list to another
       const srcArr = (source.droppableId === 'sports') ? sports : random
       const destArr = (source.droppableId === 'sports') ? random : sports
