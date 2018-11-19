@@ -9,7 +9,7 @@ import {
 import '../styles/Lineup.css'
 
 // fake data generator
-const getItems = (count, offset = 0) => Array.from({ length: count }, (v, k) => k).map(k => ({
+const getInts = (count, offset = 0) => Array.from({ length: count }, (v, k) => k).map(k => ({
   id: `item-${k + offset}`,
   content: `item ${k + offset}`,
 }))
@@ -68,7 +68,7 @@ const getListStyle = isDraggingOver => ({
 const Lineup = () => {
   const [items, setItems] = useState({
     sports: [],
-    random: getItems(4),
+    ints: getInts(4),
   })
 
   const onDragEnd = (result) => {
@@ -114,10 +114,9 @@ const Lineup = () => {
           .then((payload) => {
             const arr = payload.sports.map(s => ({ id: s, content: s }))
             const sports = reorder(arr, 0, 0)
-            const { random } = items
             const i = {
+              ...items,
               sports,
-              random,
             }
             setItems(i)
           })
@@ -172,13 +171,13 @@ const Lineup = () => {
           </Droppable>
         </Col>
         <Col sm={{ size: 4 }}>
-          <Droppable droppableId="random">
+          <Droppable droppableId="ints">
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}
               >
-                {items.random.map((item, index) => (
+                {items.ints.map((item, index) => (
                   <Draggable
                     key={item.id}
                     draggableId={item.id}
