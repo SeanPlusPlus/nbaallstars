@@ -74,36 +74,33 @@ const Lineup = () => {
   const onDragEnd = (result) => {
     const { source, destination } = result
 
-    const { sports, random } = items
-
     // dropped outside the list
     if (!destination) {
       return
     }
 
-    if (source.droppableId === destination.droppableId) { // move items in same list
-      const key = source.droppableId
-      const reOrdered = reorder(items[key], source.index, destination.index)
+    const srcKey = source.droppableId
+    const destKey = destination.droppableId
+
+    if (srcKey === destKey) { // move items in same list
+      const reOrdered = reorder(items[srcKey], source.index, destination.index)
       const i = {
         ...items,
-        [key]: reOrdered,
+        [srcKey]: reOrdered,
       }
       setItems(i)
     } else { // move from one list to another
-      const srcArr = (source.droppableId === 'sports') ? sports : random
-      const destArr = (source.droppableId === 'sports') ? random : sports
+      const srcArr = items[srcKey]
+      const destArr = items[destKey]
       const res = move(
         srcArr,
         destArr,
         source,
         destination,
       )
-
       const i = {
-        sports: res.sports,
-        random: res.random,
+        ...res,
       }
-
       setItems(i)
     }
   }
