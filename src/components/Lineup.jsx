@@ -8,35 +8,33 @@ import {
 
 import '../styles/Lineup.css'
 
-// fake data generator
 const getInts = (count, offset = 0) => Array.from({ length: count }, (v, k) => k).map(k => ({
   id: `item-${k + offset}`,
   content: `item ${k + offset}`,
 }))
 
-// a little function to help us with reordering the result
+const getGoats = () => ([
+  'lebron',
+  'mj',
+  'wilt',
+  'kobe',
+]).map(g => ({ id: g, content: g }))
+
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
   const [removed] = result.splice(startIndex, 1)
   result.splice(endIndex, 0, removed)
-
   return result
 }
 
-/**
- * Moves an item from one list to another list.
- */
 const move = (source, destination, droppableSource, droppableDestination) => {
   const sourceClone = Array.from(source)
   const destClone = Array.from(destination)
   const [removed] = sourceClone.splice(droppableSource.index, 1)
-
   destClone.splice(droppableDestination.index, 0, removed)
-
   const result = {}
   result[droppableSource.droppableId] = sourceClone
   result[droppableDestination.droppableId] = destClone
-
   return result
 }
 
@@ -69,6 +67,7 @@ const Lineup = () => {
   const [items, setItems] = useState({
     sports: [],
     ints: getInts(4),
+    goats: getGoats(),
   })
 
   const onDragEnd = (result) => {
@@ -99,6 +98,7 @@ const Lineup = () => {
         destination,
       )
       const i = {
+        ...items,
         ...res,
       }
       setItems(i)
@@ -178,6 +178,40 @@ const Lineup = () => {
                 style={getListStyle(snapshot.isDraggingOver)}
               >
                 {items.ints.map((item, index) => (
+                  <Draggable
+                    key={item.id}
+                    draggableId={item.id}
+                    index={index}
+                  >
+                    {(provide, snap) => (
+                      <div
+                        ref={provide.innerRef}
+                        {...provide.draggableProps}
+                        {...provide.dragHandleProps}
+                        style={getItemStyle(
+                          snap.isDragging,
+                          provide.draggableProps.style,
+                          index,
+                        )}
+                      >
+                        {item.content}
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </Col>
+        <Col sm={{ size: 4 }}>
+          <Droppable droppableId="goats">
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                style={getListStyle(snapshot.isDraggingOver)}
+              >
+                {items.goats.map((item, index) => (
                   <Draggable
                     key={item.id}
                     draggableId={item.id}
