@@ -66,17 +66,15 @@ const getListStyle = isDraggingOver => ({
 })
 
 const Lineup = () => {
-  // TODO refactor state to something like this
-  // const [items, setItems] = useState({
-  //   east: [],
-  //   west: [],
-  //   pending: [],
-  // })
-  const [sports, setSports] = useState([])
-  const [random, setRandom] = useState(getItems(5))
+  const [items, setItems] = useState({
+    sports: [],
+    random: getItems(4),
+  })
 
   const onDragEnd = (result) => {
     const { source, destination } = result
+
+    const { sports, random } = items
 
     // dropped outside the list
     if (!destination) {
@@ -90,7 +88,11 @@ const Lineup = () => {
           source.index,
           destination.index,
         )
-        setSports(s)
+        const i = {
+          sports: s,
+          random,
+        }
+        setItems(i)
       }
       if (source.droppableId === 'random') {
         const r = reorder(
@@ -98,7 +100,11 @@ const Lineup = () => {
           source.index,
           destination.index,
         )
-        setRandom(r)
+        const i = {
+          sports,
+          random: r,
+        }
+        setItems(i)
       }
     } else { // move from one list to another
       const srcArr = (source.droppableId === 'sports') ? sports : random
@@ -110,28 +116,37 @@ const Lineup = () => {
         destination,
       )
 
-      setSports(res.sports)
-      setRandom(res.random)
+      const i = {
+        sports: res.sports,
+        random: res.random,
+      }
+
+      setItems(i)
     }
   }
 
   useEffect(
     () => {
-      if (sports.length === 0) {
+      if (items.sports.length === 0) {
         const uri = '/api'
         fetch(uri)
           .then(response => response.json())
           .then((payload) => {
             const arr = payload.sports.map(s => ({ id: s, content: s }))
-            const i = reorder(arr, 0, 0)
-            setSports(i)
+            const sports = reorder(arr, 0, 0)
+            const { random } = items
+            const i = {
+              sports,
+              random,
+            }
+            setItems(i)
           })
       }
     },
-    [sports],
+    [items],
   )
 
-  if (sports.length === 0) {
+  if (items.sports.length === 0) {
     return (
       <div id="lineup-loader">
         <Progress animated color="success" value="25" />
@@ -149,7 +164,7 @@ const Lineup = () => {
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}
               >
-                {sports.map((item, index) => (
+                {items.sports.map((item, index) => (
                   <Draggable
                     key={item.id}
                     draggableId={item.id}
@@ -183,7 +198,7 @@ const Lineup = () => {
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}
               >
-                {random.map((item, index) => (
+                {items.random.map((item, index) => (
                   <Draggable
                     key={item.id}
                     draggableId={item.id}
