@@ -57,7 +57,7 @@ Login.propTypes = {
     search: PropTypes.string,
   }),
   // eslint-disable-next-line react/require-default-props
-  history: PropTypes.arrayOf(PropTypes.string),
+  history: PropTypes.shape({}),
 }
 
 
