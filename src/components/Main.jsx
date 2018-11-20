@@ -56,7 +56,7 @@ const Main = () => {
               <legend>App Users</legend>
               <ListGroup>
                 { data.users.map(u => (
-                  <ListGroupItem key={u.id}>{u.username}</ListGroupItem>
+                  <ListGroupItem key={u.id}>{u.id}</ListGroupItem>
                 ))
                 }
               </ListGroup>

@@ -40,7 +40,8 @@ const sequelize = new Sequelize(database, username, password, {
 
 const User = sequelize.define('user', {
   id: { type: Sequelize.STRING, primaryKey: true },
-  username: { type: Sequelize.STRING, unique: true },
+  accessToken: { type: Sequelize.STRING, unique: true },
+  accessTokenSecret: { type: Sequelize.STRING, unique: true },
 })
 
 module.exports = User
