@@ -3,9 +3,9 @@ const express = require('express')
 const rp = require('request-promise')
 const dotenv = require('dotenv')
 const _ = require('lodash')
-const dbUtil = require('./databaseUtil')
-const twitter = require('./twitter')
-const util = require('./util')
+const database = require('./util/database')
+const twitter = require('./util/twitter')
+const session = require('./util/session')
 
 dotenv.config()
 
@@ -34,7 +34,7 @@ app.get('/api', (req, res) => {
 })
 
 app.get('/api/users', (req, res) => {
-  dbUtil.getAllUsers().then((response) => {
+  database.getAllUsers().then((response) => {
     const users = response.map(r => _.get(r, 'dataValues', {}))
     console.log('users', users) // eslint-disable-line no-console
     res.send({ users })
@@ -64,8 +64,13 @@ app.get('/twitter/access-token', (req, res) => {
       accessTokenSecret,
       userID,
     } = accessData
-    const cookie = util.createUserCookie(accessToken, accessTokenSecret, userID)
-    res.send({ cookieToStore: cookie })
+    const cookie = session.createUserCookie(accessToken, accessTokenSecret, userID)
+    database.updateOrCreate(userID, accessToken, accessTokenSecret).then(() => {
+      res.send({ cookieToStore: cookie })
+    }).catch((error) => {
+      res.status(500)
+      res.send({ message: 'Error saving user to database', error })
+    })
   }).catch((error) => {
     res.status(500)
     res.send({ message: 'Error getting access token', error })
@@ -77,13 +82,13 @@ app.get('/twitter/get-user', (req, res) => {
   const {
     userID,
     tokenHash,
-  } = util.decryptUserCookie(req.query.userCookie)
-  dbUtil.getUserFromID(userID).then((userData) => {
+  } = session.decryptUserCookie(req.query.userCookie)
+  database.getUserFromID(userID).then((userData) => {
     const {
       accessToken,
       accessTokenSecret,
     } = userData.dataValues
-    if (util.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
+    if (session.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
       // eslint-disable-next-line no-console
       console.log('USER VERIFIED')
     } else {
