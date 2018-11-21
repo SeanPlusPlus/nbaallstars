@@ -33,6 +33,13 @@ app.get('/api', (req, res) => {
     })
 })
 
+app.get('/api/players', (req, res) => {
+  dbUtil.getAllPlayers().then((response) => {
+    const players = response.map(r => _.get(r, 'dataValues', {}))
+    res.send({ players })
+  })
+})
+
 app.get('/api/users', (req, res) => {
   dbUtil.getAllUsers().then((response) => {
     const users = response.map(r => _.get(r, 'dataValues', {}))

@@ -45,7 +45,7 @@ _Open a new terminal here_
 ```
 $ node
 > const User = require('./model')
-> User.sync({ force: true })
+> User.sync()
 > const sean = { id: 'foo', username: 'SeanPlusPlus' }
 > const kane = { id: 'bar', username: 'Kanestapler' }
 > User.findOrCreate({ where: sean })
@@ -64,11 +64,10 @@ nbaallstars=# SELECT * FROM "users";
 _* Note * If you ever want to drop all the tables in your database and start from scratch_
 
 ```
-DROP SCHEMA public CASCADE;
-CREATE SCHEMA public;
-GRANT ALL ON SCHEMA public TO allstarsadmin;
-GRANT ALL ON SCHEMA public TO public;
+node Models/reset.js
 ```
+
+Also, if you reset the db and then restart the server the tables will now get re-created.
 
 ## Express API
 
@@ -107,6 +106,10 @@ https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api
 
 https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api/users
 
+## API Endpoint - Players
+
+https://o3zt8boj60.execute-api.us-west-2.amazonaws.com/dev/api/players
+
 ## Postgres RDS Instance
 
 https://us-west-2.console.aws.amazon.com/rds/home?region=us-west-2#dbinstance:id=nbaallstars
@@ -117,6 +120,10 @@ https://us-west-2.console.aws.amazon.com/rds/home?region=us-west-2#dbinstance:id
 sls deploy
 ```
 
-## Database
+## Adding data to the database 
 
-https://us-west-2.console.aws.amazon.com/rds/home?region=us-west-2#dbinstance:id=nbaallstars
+to add players:
+
+```
+node Models/addPlayers.js
+```

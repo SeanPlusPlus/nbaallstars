@@ -1,0 +1,34 @@
+{
+    "players": [
+        {
+            "name": "LeBron James"
+        },
+        {
+            "name": "Kevin Durant"
+        },
+        {
+            "name": "Kemba Walker"
+        },
+        {
+            "name": "Anthony Davis"
+        },
+        {
+            "name": "Russell Westbrook"
+        },
+        {
+            "name": "Kyrie Irving"
+        },
+        {
+            "name": "Steph Curry"
+        },
+        {
+            "name": "DeMar DeRozan"
+        },
+        {
+            "name": "Kawhi Leonard"
+        },
+        {
+            "name": "Giannis Antetokounmpo"
+        }
+    ]
+}
