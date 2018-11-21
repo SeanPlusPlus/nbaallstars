@@ -18,7 +18,7 @@ const host = PG_HOST
 
 const { Op } = Sequelize
 
-const connection = new Sequelize(database, username, password, {
+const sequelize = new Sequelize(database, username, password, {
   host,
   port: 5432,
   logging: console.log, // eslint-disable-line no-console
@@ -38,4 +38,4 @@ const connection = new Sequelize(database, username, password, {
   },
 })
 
-module.exports = connection
+module.exports = sequelize
