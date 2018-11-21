@@ -89,11 +89,15 @@ app.get('/twitter/get-user', (req, res) => {
       accessTokenSecret,
     } = userData.dataValues
     if (session.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
-      // eslint-disable-next-line no-console
-      console.log('USER VERIFIED')
+      twitter.getUserInfo(accessToken, accessTokenSecret).then((twitterUser) => {
+        res.send(twitterUser)
+      }).catch((error) => {
+        res.status(500)
+        res.send({ message: 'Error getting user', error })
+      })
     } else {
-      // eslint-disable-next-line no-console
-      console.log('USER NOT VERIFIED')
+      res.status(401)
+      res.send({ message: 'Error authorizing user token cookie' })
     }
   })
 })

@@ -1,18 +1,28 @@
-const rp = require('request-promise')
-const cookie = require('./cookieUtil')
+import { getUserAccessTokenCookie } from './cookie'
 
-function redirectUserToTwitter(requestToken) {
-  const url = `https://api.twitter.com/oauth/authenticate?oauth_token=${requestToken}`
-  window.location.href = url
-}
+const rp = require('request-promise')
+const cookie = require('./cookie')
+
+// Temporary. Need to go in .env?
+const serverUrl = 'http://localhost:3001'
+const twitterApiUrl = 'https://api.twitter.com'
 
 function urlBuilder(base, resource, querys) {
-  const params = Object.keys(querys).map(k => (`${k}=${querys[k]}`)).join('&')
+  let params = ''
+  if (querys) {
+    params = Object.keys(querys).map(k => (`${k}=${querys[k]}`)).join('&')
+  }
   return base + resource + params
 }
 
+function redirectUserToTwitter(oauth_token) {
+  const url = urlBuilder(twitterApiUrl, '/oauth/authenticate?', { oauth_token })
+  window.location.href = url
+}
+
 function logInWithTwitter() {
-  rp.get('http://localhost:3001/twitter/request-token').then((responseBody) => {
+  const url = urlBuilder(serverUrl, '/twitter/request-token')
+  rp.get(url).then((responseBody) => {
     const response = JSON.parse(responseBody)
     const {
       requestToken,
@@ -28,7 +38,7 @@ function getUserTokens(authToken, authVerifier) {
   const authTokenSecret = cookie.getRequestTokenSecretCookie()
   cookie.deleteRequestTokenSecretCookie()
   const url = urlBuilder(
-    'http://localhost:3001',
+    serverUrl,
     '/twitter/access-token?',
     {
       authToken,
@@ -43,8 +53,30 @@ function getUserTokens(authToken, authVerifier) {
   })
 }
 
+function getUserInfoFromCookie() {
+  const userCookie = getUserAccessTokenCookie()
+  if (!userCookie) {
+    return
+  }
+  const url = urlBuilder(serverUrl, '/twitter/get-user/?', { userCookie })
+  rp.get(url).then((userItem) => {
+    const twitterUserInfo = JSON.parse(userItem)
+    // eslint-disable-next-line no-console
+    console.log(twitterUserInfo)
+  }).catch((error) => {
+    // Not sure what to do here. An error occured so maybe we should log them out and have them try again?
+    // eslint-disable-next-line no-console
+    console.log(error)
+  })
+}
+
+function logOut() {
+  cookie.deleteUserAccessTokenCookie()
+}
 
 export default {
   getUserTokens,
   logInWithTwitter,
+  getUserInfoFromCookie,
+  logOut,
 }

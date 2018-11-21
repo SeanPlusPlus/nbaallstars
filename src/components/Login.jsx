@@ -20,6 +20,10 @@ function redirectToTwitter() {
   Auth.logInWithTwitter()
 }
 
+function logOut() {
+  Auth.logOut()
+}
+
 class Login extends React.Component {
   componentDidMount() {
     const {
@@ -35,6 +39,7 @@ class Login extends React.Component {
       getUserToken(oauth_token, oauth_verifier)
       history.push('/')
     }
+    Auth.getUserInfoFromCookie()
   }
 
   render() {
@@ -43,6 +48,7 @@ class Login extends React.Component {
         <Nav />
         <Container id="main">
           <button type="button" onClick={redirectToTwitter}>Log In With Twitter</button>
+          <button type="button" onClick={logOut}>Log Out</button>
         </Container>
       </>
     )
