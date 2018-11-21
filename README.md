@@ -119,3 +119,11 @@ https://us-west-2.console.aws.amazon.com/rds/home?region=us-west-2#dbinstance:id
 ```
 sls deploy
 ```
+
+## Adding data to the database 
+
+to add players:
+
+```
+node Models/addPlayers.js
+```
