@@ -18,10 +18,11 @@ app.get('/api/players', (req, res) => {
   dbUtil.getAllPlayers().then((response) => {
     const players = response.map((r) => {
       const data = _.get(r, 'dataValues', {})
-      const { id, name } = data
+      const { id, name, captain } = data
       return {
         id,
         name,
+        captain,
       }
     })
     res.send({ players })
