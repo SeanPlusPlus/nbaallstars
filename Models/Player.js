@@ -8,6 +8,7 @@ const Player = sequelize.define('player', {
     autoIncrement: true,
   },
   name: { type: Sequelize.STRING },
+  captain: { type: Sequelize.STRING },
 })
 
 Player.sync()

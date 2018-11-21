@@ -12,7 +12,6 @@ Create a `.env` file in the root of the repo and add this line:
 
 ```
 NODE_ENV=development
-ESPN_API='http://site.api.espn.com/apis/v2/scoreboard/header?showAirings=true&contentorigin=espn&lang=en&region=us&contentorigin=espn&_ceID=4379198'
 PG_USERNAME=allstarsadmin
 PG_PASSWORD=nba
 PG_DATABASE=nbaallstars
