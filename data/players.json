@@ -1,0 +1,36 @@
+{
+    "players": [
+        {
+            "name": "LeBron James",
+            "captain": "west"
+        },
+        {
+            "name": "Kevin Durant"
+        },
+        {
+            "name": "Kemba Walker"
+        },
+        {
+            "name": "Anthony Davis"
+        },
+        {
+            "name": "Russell Westbrook"
+        },
+        {
+            "name": "Kyrie Irving",
+            "captain": "east"
+        },
+        {
+            "name": "Steph Curry"
+        },
+        {
+            "name": "DeMar DeRozan"
+        },
+        {
+            "name": "Kawhi Leonard"
+        },
+        {
+            "name": "Giannis Antetokounmpo"
+        }
+    ]
+}

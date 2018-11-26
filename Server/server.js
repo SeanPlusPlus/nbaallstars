@@ -1,6 +1,5 @@
 const serverless = require('serverless-http')
 const express = require('express')
-const rp = require('request-promise')
 const dotenv = require('dotenv')
 const _ = require('lodash')
 const database = require('./util/database')
@@ -11,26 +10,23 @@ dotenv.config()
 
 const {
   NODE_ENV,
-  ESPN_API,
 } = process.env
 
 const app = express()
 
-app.get('/api', (req, res) => {
-  const options = {
-    uri: ESPN_API,
-    method: 'GET',
-  }
-  rp(options)
-    .then((response) => {
-      const json = JSON.parse(response)
-      const sports = json.sports.map(s => s.slug)
-      res.send({ sports })
+app.get('/api/players', (req, res) => {
+  dbUtil.getAllPlayers().then((response) => {
+    const players = response.map((r) => {
+      const data = _.get(r, 'dataValues', {})
+      const { id, name, captain } = data
+      return {
+        id,
+        name,
+        captain,
+      }
     })
-    .catch(() => {
-      res.status(400)
-      res.send({ message: 'error connecting to api' })
-    })
+    res.send({ players })
+  })
 })
 
 app.get('/api/users', (req, res) => {

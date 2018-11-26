@@ -8,18 +8,6 @@ import {
 
 import '../styles/Lineup.css'
 
-const getInts = (count, offset = 0) => Array.from({ length: count }, (v, k) => k).map(k => ({
-  id: `item-${k + offset}`,
-  content: `item ${k + offset}`,
-}))
-
-const getGoats = () => ([
-  'lebron',
-  'mj',
-  'wilt',
-  'kobe',
-]).map(g => ({ id: g, content: g }))
-
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
   const [removed] = result.splice(startIndex, 1)
@@ -65,9 +53,9 @@ const getListStyle = isDraggingOver => ({
 
 const Lineup = () => {
   const [items, setItems] = useState({
-    sports: [],
-    ints: getInts(4),
-    goats: getGoats(),
+    west: [],
+    pending: [],
+    east: [],
   })
 
   const onDragEnd = (result) => {
@@ -107,16 +95,29 @@ const Lineup = () => {
 
   useEffect(
     () => {
-      if (items.sports.length === 0) {
-        const uri = '/api'
+      if (items.pending.length === 0) {
+        const uri = '/api/players'
         fetch(uri)
           .then(response => response.json())
           .then((payload) => {
-            const arr = payload.sports.map(s => ({ id: s, content: s }))
-            const sports = reorder(arr, 0, 0)
+            const pending = payload.players
+              .filter(p => p.captain === null)
+              .map(s => ({ id: s.id, content: s.name }))
+            pending.unshift({ id: 'pending', content: '-- Pending --' })
+
+            const west = payload.players
+              .filter(p => p.captain === 'west')
+              .map(s => ({ id: s.id, content: s.name }))
+
+            const east = payload.players
+              .filter(p => p.captain === 'east')
+              .map(s => ({ id: s.id, content: s.name }))
+
             const i = {
               ...items,
-              sports,
+              pending,
+              west,
+              east,
             }
             setItems(i)
           })
@@ -125,7 +126,7 @@ const Lineup = () => {
     [items],
   )
 
-  if (items.sports.length === 0) {
+  if (items.pending.length === 0) {
     return (
       <div id="lineup-loader">
         <Progress animated color="success" value="25" />
@@ -137,17 +138,18 @@ const Lineup = () => {
     <Row>
       <DragDropContext onDragEnd={onDragEnd}>
         <Col sm={{ size: 4 }}>
-          <Droppable droppableId="sports">
+          <Droppable droppableId="west">
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}
               >
-                {items.sports.map((item, index) => (
+                {items.west.map((item, index) => (
                   <Draggable
                     key={item.id}
                     draggableId={item.id}
                     index={index}
+                    isDragDisabled={index === 0}
                   >
                     {(provide, snap) => (
                       <div
@@ -171,17 +173,18 @@ const Lineup = () => {
           </Droppable>
         </Col>
         <Col sm={{ size: 4 }}>
-          <Droppable droppableId="ints">
+          <Droppable droppableId="pending">
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}
               >
-                {items.ints.map((item, index) => (
+                {items.pending.map((item, index) => (
                   <Draggable
                     key={item.id}
                     draggableId={item.id}
                     index={index}
+                    isDragDisabled={index === 0}
                   >
                     {(provide, snap) => (
                       <div
@@ -205,17 +208,18 @@ const Lineup = () => {
           </Droppable>
         </Col>
         <Col sm={{ size: 4 }}>
-          <Droppable droppableId="goats">
+          <Droppable droppableId="east">
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}
               >
-                {items.goats.map((item, index) => (
+                {items.east.map((item, index) => (
                   <Draggable
                     key={item.id}
                     draggableId={item.id}
                     index={index}
+                    isDragDisabled={index === 0}
                   >
                     {(provide, snap) => (
                       <div
