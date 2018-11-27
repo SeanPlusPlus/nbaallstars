@@ -15,7 +15,7 @@ const {
 const app = express()
 
 app.get('/api/players', (req, res) => {
-  dbUtil.getAllPlayers().then((response) => {
+  database.getAllPlayers().then((response) => {
     const players = response.map((r) => {
       const data = _.get(r, 'dataValues', {})
       const { id, name, captain } = data
@@ -32,7 +32,6 @@ app.get('/api/players', (req, res) => {
 app.get('/api/users', (req, res) => {
   database.getAllUsers().then((response) => {
     const users = response.map(r => _.get(r, 'dataValues', {}))
-    console.log('users', users) // eslint-disable-line no-console
     res.send({ users })
   })
 })
@@ -61,7 +60,7 @@ app.get('/twitter/access-token', (req, res) => {
       userID,
     } = accessData
     const cookie = session.createUserCookie(accessToken, accessTokenSecret, userID)
-    database.updateOrCreate(userID, accessToken, accessTokenSecret).then(() => {
+    database.updateOrCreateUser(userID, accessToken, accessTokenSecret).then(() => {
       res.send({ cookieToStore: cookie })
     }).catch((error) => {
       res.status(500)

@@ -13,7 +13,7 @@ import Nav from './Nav'
 import Auth from '../utils/auth'
 
 function getUserToken(oauth_token, oauth_verifier) {
-  Auth.getUserTokens(oauth_token, oauth_verifier)
+  return Auth.getUserTokens(oauth_token, oauth_verifier)
 }
 
 function redirectToTwitter() {
@@ -36,8 +36,9 @@ class Login extends React.Component {
       oauth_verifier,
     } = queryParams
     if (oauth_token && oauth_verifier) {
-      getUserToken(oauth_token, oauth_verifier)
-      history.push('/')
+      getUserToken(oauth_token, oauth_verifier).then(() => {
+        history.push('/')
+      })
     }
     Auth.getUserInfoFromCookie()
   }

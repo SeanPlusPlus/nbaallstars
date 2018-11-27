@@ -46,7 +46,7 @@ function getUserTokens(authToken, authVerifier) {
       authVerifier,
     },
   )
-  rp.get(url).then((responseBody) => {
+  return rp.get(url).then((responseBody) => {
     const response = JSON.parse(responseBody)
     cookie.setUserAccessTokenCookie(response.cookieToStore)
   }).catch(() => {
