@@ -72,6 +72,7 @@ function getUserInfoFromCookie() {
 
 function logOut() {
   cookie.deleteUserAccessTokenCookie()
+  window.location.reload()
 }
 
 export default {
