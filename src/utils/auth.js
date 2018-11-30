@@ -56,18 +56,10 @@ function getUserTokens(authToken, authVerifier) {
 function getUserInfoFromCookie() {
   const userCookie = getUserAccessTokenCookie()
   if (!userCookie) {
-    return
+    return Promise.reject()
   }
   const url = urlBuilder(serverUrl, '/twitter/get-user/?', { userCookie })
-  rp.get(url).then((userItem) => {
-    const twitterUserInfo = JSON.parse(userItem)
-    // eslint-disable-next-line no-console
-    console.log(twitterUserInfo)
-  }).catch((error) => {
-    // Not sure what to do here. An error occured so maybe we should log them out and have them try again?
-    // eslint-disable-next-line no-console
-    console.log(error)
-  })
+  return rp.get(url)
 }
 
 function logOut() {
