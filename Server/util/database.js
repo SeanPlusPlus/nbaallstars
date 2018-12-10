@@ -1,5 +1,5 @@
-const User = require('../../models/User')
-const Player = require('../../models/Player')
+const User = require('../../models/user')
+const Player = require('../../models/player')
 
 function getUserFromID(userID) {
   return User.findOne({ where: { id: userID } })
