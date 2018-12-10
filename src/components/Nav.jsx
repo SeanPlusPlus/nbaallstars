@@ -39,7 +39,7 @@ const Navigation = () => {
               alt="User avatar"
               src={user.profile_image_url.replace('_normal', '')}
             />
-            Kane Stapler
+            {user.name}
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem onClick={() => Auth.logOut()}>
