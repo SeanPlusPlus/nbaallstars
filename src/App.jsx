@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Refresh from './components/Refresh'
 import Main from './components/Main'
 import Login from './components/Login'
-//import Twitter from './components/Twitter' <Route path="/sign-in-with-twitter" exact component={Twitter} />
 
 const App = () => (
   <Router>
@@ -16,7 +15,6 @@ const App = () => (
       <Refresh />
       <Route path="/" exact component={Main} />
       <Route path="/login" exact component={Login} />
-      
     </>
   </Router>
 )

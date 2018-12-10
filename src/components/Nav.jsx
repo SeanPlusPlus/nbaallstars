@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useGlobal } from 'reactn'
 import {
   Navbar,
   NavbarBrand,
@@ -18,7 +19,7 @@ import logo from '../assets/logo.svg'
 import Auth from '../utils/auth'
 
 const Navigation = () => {
-  const [user, setUser] = useState()
+  const [user, setUser] = useGlobal('user')
   useEffect(() => {
     Auth.getUserInfoFromCookie().then((twitterUserData) => {
       const userData = JSON.parse(twitterUserData)
@@ -27,12 +28,17 @@ const Navigation = () => {
   }, [])
   let userComponent
   if (user) {
+    // eslint-disable-next-line no-console
     console.log(user)
     userComponent = (
       <Nav className="ml-auto" navbar>
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle className="user-card" nav caret>
-            <img className="twitter-avatar" alt="User avatar" src={user.profile_image_url.replace('_normal', '')} />
+            <img
+              className="twitter-avatar"
+              alt="User avatar"
+              src={user.profile_image_url.replace('_normal', '')}
+            />
             Kane Stapler
           </DropdownToggle>
           <DropdownMenu right>
