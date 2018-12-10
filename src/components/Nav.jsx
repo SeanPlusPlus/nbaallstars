@@ -33,16 +33,21 @@ const Navigation = () => {
     userComponent = (
       <Nav className="ml-auto" navbar>
         <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle className="user-card" nav caret>
+          <DropdownToggle className="user-card" nav>
             <img
-              className="twitter-avatar"
+              className="twitter-avatar rounded-circle"
               alt="User avatar"
               src={user.profile_image_url.replace('_normal', '')}
             />
-            {user.name}
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem onClick={() => Auth.logOut()}>
+            <DropdownItem className="signed-in-as">
+              Signed in as
+              {' '}
+              <strong>{user.name}</strong>
+            </DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem onClick={() => Auth.logOut()} className="link">
               Logout
             </DropdownItem>
           </DropdownMenu>

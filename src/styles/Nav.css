@@ -22,3 +22,11 @@
 .user-card {
     padding: 0;
 }
+
+.link:hover {
+    cursor: pointer;
+}
+
+.signed-in-as:hover {
+    background-color: transparent;
+}
