@@ -13,3 +13,12 @@
 .App-logo-login {
     height: 7vmin;
 }
+
+.twitter-avatar {
+    height: 3vmax;
+    padding-right: 5px;
+}
+
+.user-card {
+    padding: 0;
+}

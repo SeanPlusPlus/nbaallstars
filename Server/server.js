@@ -2,9 +2,9 @@ const serverless = require('serverless-http')
 const express = require('express')
 const dotenv = require('dotenv')
 const _ = require('lodash')
-const dbUtil = require('./databaseUtil')
-const twitter = require('./twitter')
-const util = require('./util')
+const database = require('./util/database')
+const twitter = require('./util/twitter')
+const session = require('./util/session')
 
 dotenv.config()
 
@@ -15,7 +15,7 @@ const {
 const app = express()
 
 app.get('/api/players', (req, res) => {
-  dbUtil.getAllPlayers().then((response) => {
+  database.getAllPlayers().then((response) => {
     const players = response.map((r) => {
       const data = _.get(r, 'dataValues', {})
       const { id, name, captain } = data
@@ -30,9 +30,8 @@ app.get('/api/players', (req, res) => {
 })
 
 app.get('/api/users', (req, res) => {
-  dbUtil.getAllUsers().then((response) => {
+  database.getAllUsers().then((response) => {
     const users = response.map(r => _.get(r, 'dataValues', {}))
-    console.log('users', users) // eslint-disable-line no-console
     res.send({ users })
   })
 })
@@ -60,8 +59,13 @@ app.get('/twitter/access-token', (req, res) => {
       accessTokenSecret,
       userID,
     } = accessData
-    const cookie = util.createUserCookie(accessToken, accessTokenSecret, userID)
-    res.send({ cookieToStore: cookie })
+    const cookie = session.createUserCookie(accessToken, accessTokenSecret, userID)
+    database.updateOrCreateUser(userID, accessToken, accessTokenSecret).then(() => {
+      res.send({ cookieToStore: cookie })
+    }).catch((error) => {
+      res.status(500)
+      res.send({ message: 'Error saving user to database', error })
+    })
   }).catch((error) => {
     res.status(500)
     res.send({ message: 'Error getting access token', error })
@@ -73,18 +77,22 @@ app.get('/twitter/get-user', (req, res) => {
   const {
     userID,
     tokenHash,
-  } = util.decryptUserCookie(req.query.userCookie)
-  dbUtil.getUserFromID(userID).then((userData) => {
+  } = session.decryptUserCookie(req.query.userCookie)
+  database.getUserFromID(userID).then((userData) => {
     const {
       accessToken,
       accessTokenSecret,
     } = userData.dataValues
-    if (util.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
-      // eslint-disable-next-line no-console
-      console.log('USER VERIFIED')
+    if (session.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
+      twitter.getUserInfo(accessToken, accessTokenSecret).then((twitterUser) => {
+        res.send(twitterUser)
+      }).catch((error) => {
+        res.status(500)
+        res.send({ message: 'Error getting user', error })
+      })
     } else {
-      // eslint-disable-next-line no-console
-      console.log('USER NOT VERIFIED')
+      res.status(401)
+      res.send({ message: 'Error authorizing user token cookie' })
     }
   })
 })

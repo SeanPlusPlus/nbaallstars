@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const Player = require('../Models/Player')
+const Player = require('./player')
 
 const data = fs.readFileSync('./data/players.json')
 

@@ -47,15 +47,19 @@ function getAccessToken(authToken, authTokenSecret, authVerifier) {
 }
 
 function getUserInfo(userAccessToken, userAccessTokenSecret) {
-  oauth.get(
-    'https://api.twitter.com/1.1/account/verify_credentials.json',
-    userAccessToken,
-    userAccessTokenSecret,
-    (response) => {
-    // eslint-disable-next-line no-console
-      console.log(response)
-    },
-  )
+  return new Promise((resolve, reject) => {
+    oauth.get(
+      'https://api.twitter.com/1.1/account/verify_credentials.json',
+      userAccessToken,
+      userAccessTokenSecret,
+      (error, result) => {
+        if (error) {
+          reject(JSON.parse(error))
+        }
+        resolve(JSON.parse(result))
+      },
+    )
+  })
 }
 
 module.exports = {

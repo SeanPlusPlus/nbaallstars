@@ -13,6 +13,10 @@ function deleteRequestTokenSecretCookie() {
   document.cookie = `${requestTokenSecretKey}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
 }
 
+function deleteUserAccessTokenCookie() {
+  document.cookie = `${userAccessToken}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+}
+
 function getCookie(name) {
   const value = `; ${document.cookie}`
   const parts = value.split(`; ${name}=`)
@@ -36,4 +40,5 @@ export {
   deleteRequestTokenSecretCookie,
   getRequestTokenSecretCookie,
   getUserAccessTokenCookie,
+  deleteUserAccessTokenCookie,
 }

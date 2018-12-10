@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import * as QueryString from 'query-string'
 import {
@@ -13,40 +13,36 @@ import Nav from './Nav'
 import Auth from '../utils/auth'
 
 function getUserToken(oauth_token, oauth_verifier) {
-  Auth.getUserTokens(oauth_token, oauth_verifier)
+  return Auth.getUserTokens(oauth_token, oauth_verifier)
 }
 
-function redirectToTwitter() {
-  Auth.logInWithTwitter()
-}
-
-class Login extends React.Component {
-  componentDidMount() {
+const Login = (props) => {
+  useEffect(() => {
     const {
       location,
       history,
-    } = this.props
+    } = props
     const queryParams = QueryString.parse(location.search)
     const {
       oauth_token,
       oauth_verifier,
     } = queryParams
     if (oauth_token && oauth_verifier) {
-      getUserToken(oauth_token, oauth_verifier)
-      history.push('/')
+      getUserToken(oauth_token, oauth_verifier).then(() => {
+        history.push('/')
+      })
     }
-  }
+  })
 
-  render() {
-    return (
-      <>
-        <Nav />
-        <Container id="main">
-          <button type="button" onClick={redirectToTwitter}>Log In With Twitter</button>
-        </Container>
-      </>
-    )
-  }
+  return (
+    <>
+      <Nav />
+      <Container id="main">
+        <button type="button" onClick={() => Auth.logInWithTwitter()}>Log In With Twitter</button>
+        <button type="button" onClick={() => Auth.logOut()}>Log Out</button>
+      </Container>
+    </>
+  )
 }
 
 Login.propTypes = {
