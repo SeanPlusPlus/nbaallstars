@@ -5,6 +5,7 @@ const _ = require('lodash')
 const database = require('./util/database')
 const twitter = require('./util/twitter')
 const session = require('./util/session')
+const { auth, isAdmin } = require('./auth')
 
 dotenv.config()
 
@@ -14,7 +15,18 @@ const {
 
 const app = express()
 
-app.get('/api/players', (req, res) => {
+app.get('/api/profile', auth, (req, res) => {
+  res.send(req.profile)
+})
+
+app.get('/api/users', auth, isAdmin, (req, res) => {
+  database.getAllUsers().then((response) => {
+    const users = response.map(r => _.get(r, 'dataValues', {}))
+    res.send({ users })
+  })
+})
+
+app.get('/api/players', auth, (req, res) => {
   database.getAllPlayers().then((response) => {
     const players = response.map((r) => {
       const data = _.get(r, 'dataValues', {})
@@ -26,13 +38,6 @@ app.get('/api/players', (req, res) => {
       }
     })
     res.send({ players })
-  })
-})
-
-app.get('/api/users', (req, res) => {
-  database.getAllUsers().then((response) => {
-    const users = response.map(r => _.get(r, 'dataValues', {}))
-    res.send({ users })
   })
 })
 

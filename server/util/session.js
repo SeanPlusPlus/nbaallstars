@@ -13,6 +13,13 @@ function createUserCookie(accessToken, accessTokenSecret, userID) {
 }
 
 function decryptUserCookie(userCookie) {
+  if (!userCookie) {
+    return {
+      userID: null,
+      tokenHash: null,
+    }
+  }
+
   const userIDandHash = userCookie.split(':')
   return {
     userID: userIDandHash[0],
