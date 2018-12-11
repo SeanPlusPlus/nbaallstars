@@ -1,10 +1,6 @@
 {
     "players": [
         {
-            "name": "LeBron James",
-            "captain": "west"
-        },
-        {
             "name": "Kevin Durant"
         },
         {
@@ -15,10 +11,6 @@
         },
         {
             "name": "Russell Westbrook"
-        },
-        {
-            "name": "Kyrie Irving",
-            "captain": "east"
         },
         {
             "name": "Steph Curry"

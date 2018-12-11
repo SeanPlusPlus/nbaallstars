@@ -49,6 +49,7 @@ const getListStyle = isDraggingOver => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
   padding: grid,
   width: 250,
+  minHeight: 300,
 })
 
 const Lineup = () => {
@@ -65,6 +66,9 @@ const Lineup = () => {
     if (!destination) {
       return
     }
+
+    // get event
+    console.log(source, destination)
 
     const srcKey = source.droppableId
     const destKey = destination.droppableId
@@ -95,29 +99,19 @@ const Lineup = () => {
 
   useEffect(
     () => {
-      if (items.pending.length === 0) {
+      if (items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) {
+        console.log(items)
+
         const uri = '/api/players'
         fetch(uri)
           .then(response => response.json())
           .then((payload) => {
             const pending = payload.players
-              .filter(p => p.captain === null)
-              .map(s => ({ id: s.id, content: s.name }))
-            pending.unshift({ id: 'pending', content: '-- Pending --' })
-
-            const west = payload.players
-              .filter(p => p.captain === 'west')
-              .map(s => ({ id: s.id, content: s.name }))
-
-            const east = payload.players
-              .filter(p => p.captain === 'east')
               .map(s => ({ id: s.id, content: s.name }))
 
             const i = {
               ...items,
               pending,
-              west,
-              east,
             }
             setItems(i)
           })
@@ -126,7 +120,7 @@ const Lineup = () => {
     [items],
   )
 
-  if (items.pending.length === 0) {
+  if (items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) {
     return (
       <div id="lineup-loader">
         <Progress animated color="success" value="25" />
@@ -138,6 +132,7 @@ const Lineup = () => {
     <Row>
       <DragDropContext onDragEnd={onDragEnd}>
         <Col sm={{ size: 4 }}>
+          <legend>LeBron James</legend>
           <Droppable droppableId="west">
             {(provided, snapshot) => (
               <div
@@ -149,7 +144,6 @@ const Lineup = () => {
                     key={item.id}
                     draggableId={item.id}
                     index={index}
-                    isDragDisabled={index === 0}
                   >
                     {(provide, snap) => (
                       <div
@@ -172,42 +166,47 @@ const Lineup = () => {
             )}
           </Droppable>
         </Col>
+
+        { items.pending.length > 0 && (
+          <Col sm={{ size: 4 }}>
+            <legend>Pending</legend>
+            <Droppable droppableId="pending">
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  style={getListStyle(snapshot.isDraggingOver)}
+                >
+                  {items.pending.map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
+                      {(provide, snap) => (
+                        <div
+                          ref={provide.innerRef}
+                          {...provide.draggableProps}
+                          {...provide.dragHandleProps}
+                          style={getItemStyle(
+                            snap.isDragging,
+                            provide.draggableProps.style,
+                            null,
+                          )}
+                        >
+                          {item.content}
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </Col>
+        )}
+
         <Col sm={{ size: 4 }}>
-          <Droppable droppableId="pending">
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                style={getListStyle(snapshot.isDraggingOver)}
-              >
-                {items.pending.map((item, index) => (
-                  <Draggable
-                    key={item.id}
-                    draggableId={item.id}
-                    index={index}
-                    isDragDisabled={index === 0}
-                  >
-                    {(provide, snap) => (
-                      <div
-                        ref={provide.innerRef}
-                        {...provide.draggableProps}
-                        {...provide.dragHandleProps}
-                        style={getItemStyle(
-                          snap.isDragging,
-                          provide.draggableProps.style,
-                          index,
-                        )}
-                      >
-                        {item.content}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </Col>
-        <Col sm={{ size: 4 }}>
+          <legend>Kyrie Irving</legend>
           <Droppable droppableId="east">
             {(provided, snapshot) => (
               <div
