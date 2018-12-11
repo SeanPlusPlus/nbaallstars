@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Refresh from './components/Refresh'
 import Main from './components/Main'
 import Login from './components/Login'
+import Profile from './components/Profile'
 
 const App = () => (
   <Router>
@@ -15,6 +16,7 @@ const App = () => (
       <Refresh />
       <Route path="/" exact component={Main} />
       <Route path="/login" exact component={Login} />
+      <Route path="/profile" exact component={Profile} />
     </>
   </Router>
 )
