@@ -49,6 +49,7 @@ const getListStyle = isDraggingOver => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
   padding: grid,
   width: 250,
+  minHeight: 300,
 })
 
 const Lineup = () => {
@@ -65,6 +66,9 @@ const Lineup = () => {
     if (!destination) {
       return
     }
+
+    console.log(source, destination)
+
 
     const srcKey = source.droppableId
     const destKey = destination.droppableId
@@ -101,23 +105,11 @@ const Lineup = () => {
           .then(response => response.json())
           .then((payload) => {
             const pending = payload.players
-              .filter(p => p.captain === null)
-              .map(s => ({ id: s.id, content: s.name }))
-            pending.unshift({ id: 'pending', content: '-- Pending --' })
-
-            const west = payload.players
-              .filter(p => p.captain === 'west')
-              .map(s => ({ id: s.id, content: s.name }))
-
-            const east = payload.players
-              .filter(p => p.captain === 'east')
               .map(s => ({ id: s.id, content: s.name }))
 
             const i = {
               ...items,
               pending,
-              west,
-              east,
             }
             setItems(i)
           })
@@ -138,6 +130,7 @@ const Lineup = () => {
     <Row>
       <DragDropContext onDragEnd={onDragEnd}>
         <Col sm={{ size: 4 }}>
+          <legend>LeBron James</legend>
           <Droppable droppableId="west">
             {(provided, snapshot) => (
               <div
@@ -149,7 +142,6 @@ const Lineup = () => {
                     key={item.id}
                     draggableId={item.id}
                     index={index}
-                    isDragDisabled={index === 0}
                   >
                     {(provide, snap) => (
                       <div
@@ -173,6 +165,7 @@ const Lineup = () => {
           </Droppable>
         </Col>
         <Col sm={{ size: 4 }}>
+          <legend>Pending</legend>
           <Droppable droppableId="pending">
             {(provided, snapshot) => (
               <div
@@ -184,7 +177,6 @@ const Lineup = () => {
                     key={item.id}
                     draggableId={item.id}
                     index={index}
-                    isDragDisabled={index === 0}
                   >
                     {(provide, snap) => (
                       <div
@@ -194,7 +186,7 @@ const Lineup = () => {
                         style={getItemStyle(
                           snap.isDragging,
                           provide.draggableProps.style,
-                          index,
+                          null,
                         )}
                       >
                         {item.content}
@@ -208,6 +200,7 @@ const Lineup = () => {
           </Droppable>
         </Col>
         <Col sm={{ size: 4 }}>
+          <legend>Kyrie Irving</legend>
           <Droppable droppableId="east">
             {(provided, snapshot) => (
               <div

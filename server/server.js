@@ -26,7 +26,7 @@ app.get('/api/users', auth, isAdmin, (req, res) => {
   })
 })
 
-app.get('/api/players', auth, (req, res) => {
+app.get('/api/players', (req, res) => {
   database.getAllPlayers().then((response) => {
     const players = response.map((r) => {
       const data = _.get(r, 'dataValues', {})
