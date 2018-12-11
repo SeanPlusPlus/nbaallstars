@@ -11,6 +11,6 @@ const Player = sequelize.define('player', {
   captain: { type: Sequelize.STRING },
 })
 
-Player.sync()
+// Player.sync()
 
 module.exports = Player
