@@ -7,6 +7,6 @@ const User = sequelize.define('user', {
   accessTokenSecret: { type: Sequelize.STRING, unique: true },
 })
 
-User.sync()
+// User.sync()
 
 module.exports = User
