@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useGlobal } from 'reactn'
+import { Link } from 'react-router-dom'
 import {
   Navbar,
   NavbarBrand,
@@ -19,17 +20,9 @@ import logo from '../assets/logo.svg'
 import Auth from '../utils/auth'
 
 const Navigation = () => {
-  const [user, setUser] = useGlobal('user')
-  useEffect(() => {
-    Auth.getUserInfoFromCookie().then((twitterUserData) => {
-      const userData = JSON.parse(twitterUserData)
-      setUser(userData)
-    }).catch(() => {})
-  }, [])
+  const [user] = useGlobal('user')
   let userComponent
   if (user) {
-    // eslint-disable-next-line no-console
-    console.log(user)
     userComponent = (
       <Nav className="ml-auto" navbar>
         <UncontrolledDropdown nav inNavbar>
@@ -42,9 +35,11 @@ const Navigation = () => {
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem className="signed-in-as">
-              Signed in as
-              {' '}
-              <strong>{user.name}</strong>
+              <Link to="/profile">
+                Signed in as
+                {' '}
+                <strong>{user.name}</strong>
+              </Link>
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem onClick={() => Auth.logOut()} className="link">

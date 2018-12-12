@@ -67,9 +67,6 @@ const Lineup = () => {
       return
     }
 
-    // get event
-    console.log(source, destination)
-
     const srcKey = source.droppableId
     const destKey = destination.droppableId
 
@@ -100,8 +97,6 @@ const Lineup = () => {
   useEffect(
     () => {
       if (items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) {
-        console.log(items)
-
         const uri = '/api/players'
         fetch(uri)
           .then(response => response.json())
