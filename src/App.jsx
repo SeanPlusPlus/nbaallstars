@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useGlobal } from 'reactn'
+import React from 'react'
+import { setGlobal } from 'reactn'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Auth from './utils/auth'
 
@@ -13,13 +13,10 @@ import Login from './components/Login'
 import Profile from './components/Profile'
 
 const App = () => {
-  const setUser = useGlobal('user')[1]
-  useEffect(() => {
-    Auth.getUserInfoFromCookie().then((twitterUserData) => {
-      const userData = JSON.parse(twitterUserData)
-      setUser(userData)
-    }).catch(() => {})
-  }, [])
+  Auth.getUserInfoFromCookie().then((twitterUserData) => {
+    const userData = JSON.parse(twitterUserData)
+    setGlobal({ user: userData })
+  }).catch(() => {})
   return (
     <Router>
     <>
