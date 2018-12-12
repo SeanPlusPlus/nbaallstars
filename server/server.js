@@ -99,6 +99,8 @@ app.get('/api/add-user', auth, (req, res) => {
 })
 
 app.get('/twitter/get-user', (req, res) => {
+  console.log('cookie', req.cookies)
+
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     userID,
