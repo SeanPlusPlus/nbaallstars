@@ -1,4 +1,3 @@
-const rp = require('request-promise').defaults({ jar: true })
 const cookie = require('./cookie')
 
 function get(url) {

@@ -99,7 +99,7 @@ app.get('/api/add-user', auth, (req, res) => {
 })
 
 app.get('/twitter/get-user', (req, res) => {
-  console.log('cookie', req.cookies)
+  console.log('cookie', req.cookies) // eslint-disable-line no-console
 
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
