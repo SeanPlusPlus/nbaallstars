@@ -14,6 +14,8 @@ function updateOrCreateUser(id, accessToken, accessTokenSecret) {
     id,
     accessToken,
     accessTokenSecret,
+    isAdmin: false,
+    isInvited: false,
   })
 }
 
@@ -21,9 +23,17 @@ function getAllPlayers() {
   return Player.findAll()
 }
 
+function addUserToGame(user) {
+  User.update(
+    { isInvited: true },
+    { where: user.id },
+  )
+}
+
 module.exports = {
   getUserFromID,
   getAllUsers,
   updateOrCreateUser,
   getAllPlayers,
+  addUserToGame,
 }

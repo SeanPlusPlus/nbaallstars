@@ -2,6 +2,7 @@ const serverless = require('serverless-http')
 const express = require('express')
 const dotenv = require('dotenv')
 const _ = require('lodash')
+const cookieParser = require('cookie-parser')
 const database = require('./util/database')
 const twitter = require('./util/twitter')
 const session = require('./util/session')
@@ -11,12 +12,16 @@ dotenv.config()
 
 const {
   NODE_ENV,
+  ADD_USER_PASSCODE,
 } = process.env
 
 const app = express()
+app.use(cookieParser())
+
+// TODO: Add to middlewear res.header({ 'Access-Control-Allow-Origin': '*' })
 
 app.get('/api/profile', auth, (req, res) => {
-  res.send(req.profile)
+  res.send(req.profile.user)
 })
 
 app.get('/api/users', auth, isAdmin, (req, res) => {
@@ -26,7 +31,7 @@ app.get('/api/users', auth, isAdmin, (req, res) => {
   })
 })
 
-app.get('/api/players', (req, res) => {
+app.get('/api/players', auth, (req, res) => {
   database.getAllPlayers().then((response) => {
     const players = response.map((r) => {
       const data = _.get(r, 'dataValues', {})
@@ -77,12 +82,28 @@ app.get('/twitter/access-token', (req, res) => {
   })
 })
 
+app.get('/api/add-user', auth, (req, res) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' })
+  const addUserPasscode = req.query.passcode
+  if (addUserPasscode === ADD_USER_PASSCODE) {
+    database.addUserToGame(req.profile.user).then(() => {
+      res.send({ message: 'Success' })
+    }).catch((error) => {
+      res.status(500)
+      res.send({ message: error })
+    })
+  } else {
+    res.status(401)
+    res.send({ message: 'Incorrect passcode' })
+  }
+})
+
 app.get('/twitter/get-user', (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     userID,
     tokenHash,
-  } = session.decryptUserCookie(req.query.userCookie)
+  } = session.decryptUserCookie(req.header.cookie)
   database.getUserFromID(userID).then((userData) => {
     const {
       accessToken,

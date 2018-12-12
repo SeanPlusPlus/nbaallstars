@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import * as QueryString from 'query-string'
 import {
-  Container,
+  Container, Button,
+  Label, Input,
 } from 'reactstrap'
 
 // styles
@@ -17,6 +18,7 @@ function getUserToken(oauth_token, oauth_verifier) {
 }
 
 const Login = (props) => {
+  const [passcode, setPasscode] = useState('')
   useEffect(() => {
     const {
       location,
@@ -34,12 +36,24 @@ const Login = (props) => {
     }
   })
 
+  function onSubmit() {
+    Auth.addUser(passcode)
+  }
+
   return (
     <>
       <Nav />
       <Container id="main">
-        <button type="button" onClick={() => Auth.logInWithTwitter()}>Log In With Twitter</button>
-        <button type="button" onClick={() => Auth.logOut()}>Log Out</button>
+        <Label for="passcode-input">Passcode</Label>
+        <Input
+          type="text"
+          name="passcode"
+          id="passcode-input"
+          value={passcode}
+          placeholder="Enter Passcode"
+          onChange={e => setPasscode(e.target.value)}
+        />
+        <Button onClick={onSubmit}>Submit</Button>
       </Container>
     </>
   )

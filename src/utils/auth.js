@@ -1,7 +1,7 @@
 import { getUserAccessTokenCookie } from './cookie'
 
-const rp = require('request-promise')
 const cookie = require('./cookie')
+const request = require('./request')
 
 // Temporary. Need to go in .env?
 const serverUrl = 'http://localhost:3001'
@@ -22,7 +22,7 @@ function redirectUserToTwitter(oauth_token) {
 
 function logInWithTwitter() {
   const url = urlBuilder(serverUrl, '/twitter/request-token')
-  rp.get(url).then((responseBody) => {
+  request.get(url).then((responseBody) => {
     const response = JSON.parse(responseBody)
     const {
       requestToken,
@@ -46,7 +46,7 @@ function getUserTokens(authToken, authVerifier) {
       authVerifier,
     },
   )
-  return rp.get(url).then((responseBody) => {
+  return request.get(url).then((responseBody) => {
     const response = JSON.parse(responseBody)
     cookie.setUserAccessTokenCookie(response.cookieToStore)
   }).catch(() => {
@@ -58,8 +58,8 @@ function getUserInfoFromCookie() {
   if (!userCookie) {
     return Promise.reject()
   }
-  const url = urlBuilder(serverUrl, '/twitter/get-user/?', { userCookie })
-  return rp.get(url)
+  const url = urlBuilder(serverUrl, '/twitter/get-user/')
+  return request.get(url)
 }
 
 function logOut() {
@@ -67,9 +67,21 @@ function logOut() {
   window.location.reload()
 }
 
+function addUser(passcode) {
+  const url = urlBuilder(serverUrl, '/api/add-user/?', { passcode })
+  request.get(url).then((data) => {
+    // eslint-disable-next-line no-console
+    console.log(data)
+  }).catch((error) => {
+    // eslint-disable-next-line no-console
+    console.log(error)
+  })
+}
+
 export default {
   getUserTokens,
   logInWithTwitter,
   getUserInfoFromCookie,
   logOut,
+  addUser,
 }

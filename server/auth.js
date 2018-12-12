@@ -7,8 +7,7 @@ const { NODE_ENV } = process.env
 const auth = (req, res, next) => new Promise((resolve) => {
   const cookie = _.get(req, 'headers.cookie', '').split('=')[1]
   const { userID, tokenHash } = session.decryptUserCookie(cookie)
-
-  console.log(userID)
+  console.log('UserID', userID)
 
 
   if (!userID) {
@@ -37,12 +36,8 @@ const auth = (req, res, next) => new Promise((resolve) => {
           })
           resolve(null)
         } else {
-          // TODO !!!
-          const isAdmin = user.isAdmin || false
-
           req.profile = {
-            id: user.id,
-            isAdmin,
+            user,
           }
           resolve(next())
         }
