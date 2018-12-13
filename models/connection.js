@@ -17,7 +17,6 @@ const database = PG_DATABASE
 const host = PG_HOST
 
 const { Op } = Sequelize
-console.log(NODE_ENV)
 
 const sequelize = new Sequelize(database, username, password, {
   host,
