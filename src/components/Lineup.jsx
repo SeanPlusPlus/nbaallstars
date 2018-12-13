@@ -102,7 +102,6 @@ const Lineup = () => {
           .then(response => response.json())
           .then((payload) => {
             if (payload.players) {
-              console.log(payload.players)
               const pending = payload.players
                 .map(s => ({ id: s.id, content: s.name, headshot: s.headshotUrl }))
               const i = {
@@ -124,10 +123,6 @@ const Lineup = () => {
       </div>
     )
   }
-
-  items.pending.map((item) => {
-    console.log(item)
-  })
 
   return (
     <Row>
