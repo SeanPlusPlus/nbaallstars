@@ -1,28 +1,148 @@
 {
     "players": [
         {
-            "name": "Kevin Durant"
+            "name": "Kevin Durant",
+            "id": "3202",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3202?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3202.png"
         },
         {
-            "name": "Kemba Walker"
+            "name": "Kemba Walker",
+            "id": "6479",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/6479?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/6479.png"
         },
         {
-            "name": "Anthony Davis"
+            "name": "Anthony Davis",
+            "id": "6583",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/6583?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/6583.png"
         },
         {
-            "name": "Russell Westbrook"
+            "name": "Russell Westbrook",
+            "id": "3468",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3468?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3468.png"
         },
         {
-            "name": "Steph Curry"
+            "name": "Steph Curry",
+            "id": "3975",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3975?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3975.png"
         },
         {
-            "name": "DeMar DeRozan"
+            "name": "DeMar DeRozan",
+            "id": "3978",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3978?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3978.png"
         },
         {
-            "name": "Kawhi Leonard"
+            "name": "Kawhi Leonard",
+            "id": "6450",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/6450?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/6450.png"
         },
         {
-            "name": "Giannis Antetokounmpo"
+            "name": "Giannis Antetokounmpo",
+            "id": "3032977",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3032977?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3032977.png"
+        },
+        {
+            "name": "LeBron James",
+            "id": "1966",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/1966?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/1966.png"
+        },
+        {
+            "name": "Kyrie Irving",
+            "id": "6442",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/6442?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/6442.png"
+        },
+        {
+            "name": "James Harden",
+            "id": "3992",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3992?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3992.png"
+        },
+        {
+            "name": "Damian Lillard",
+            "id": "6606",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/6606?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/6606.png"
+        },
+        {
+            "name": "Chris Paul",
+            "id": "2779",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/2779?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/2779.png"
+        },
+        {
+            "name": "Paul George",
+            "id": "4251",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/4251?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/4251.png"
+        },
+        {
+            "name": "Draymond Green",
+            "id": "6589",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/6589?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/6589.png"
+        },
+        {
+            "name": "Karl-Anthony Towns",
+            "id": "3136195",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3136195?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3136195.png"
+        },
+        {
+            "name": "Victor Oladipo",
+            "id": "2527963",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/2527963?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/2527963.png"
+        },
+        {
+            "name": "Joel Embiid",
+            "id": "3059318",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3059318?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3059318.png"
+        },
+        {
+            "name": "John Wall",
+            "id": "4237",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/4237?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/4237.png"
+        },
+        {
+            "name": "Kyle Lowry",
+            "id": "3012",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3012?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3012.png"
+        },
+        {
+            "name": "Gordon Hayward",
+            "id": "4249",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/4249?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/4249.png"
+        },
+        {
+            "name": "Ben Simmons",
+            "id": "3907387",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3907387?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3907387.png"
+        },
+        {
+            "name": "Kevin Love",
+            "id": "3449",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/3449?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/3449.png"
+        },
+        {
+            "name": "Andre Drummond",
+            "id": "6585",
+            "espnUrl": "http://site.web.api.espn.com/apis/common/v3/sports/basketball/nba/athletes/6585?region=us&lang=en&contentorigin=espn",
+            "headshotUrl": "https://a.espncdn.com/i/headshots/nba/players/full/6585.png"
         }
     ]
 }

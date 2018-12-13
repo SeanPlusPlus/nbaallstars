@@ -35,11 +35,11 @@ app.get('/api/players', auth, invited, (req, res) => {
   database.getAllPlayers().then((response) => {
     const players = response.map((r) => {
       const data = _.get(r, 'dataValues', {})
-      const { id, name, captain } = data
+      const { id, name, headshotUrl } = data
       return {
         id,
         name,
-        captain,
+        headshotUrl,
       }
     })
     res.send({ players })

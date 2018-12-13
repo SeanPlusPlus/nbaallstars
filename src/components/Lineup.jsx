@@ -29,7 +29,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const grid = 8
 
 const getBase = index => (
-  (index < 2) ? 'white' : 'grey'
+  (index < 5) ? 'white' : 'grey'
 )
 
 const getItemStyle = (isDragging, draggableStyle, idx) => ({
@@ -102,8 +102,9 @@ const Lineup = () => {
           .then(response => response.json())
           .then((payload) => {
             if (payload.players) {
+              console.log(payload.players)
               const pending = payload.players
-                .map(s => ({ id: s.id, content: s.name }))
+                .map(s => ({ id: s.id, content: s.name, headshot: s.headshotUrl }))
               const i = {
                 ...items,
                 pending,
@@ -123,6 +124,10 @@ const Lineup = () => {
       </div>
     )
   }
+
+  items.pending.map((item) => {
+    console.log(item)
+  })
 
   return (
     <Row>
@@ -152,6 +157,7 @@ const Lineup = () => {
                           index,
                         )}
                       >
+                        <img height="45px" src={item.headshot} alt="headshot" />
                         {item.content}
                       </div>
                     )}
@@ -189,6 +195,7 @@ const Lineup = () => {
                             null,
                           )}
                         >
+                          <img height="45px" src={item.headshot} alt="headshot" />
                           {item.content}
                         </div>
                       )}
@@ -227,6 +234,7 @@ const Lineup = () => {
                           index,
                         )}
                       >
+                        <img height="45px" src={item.headshot} alt="headshot" />
                         {item.content}
                       </div>
                     )}

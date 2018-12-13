@@ -3,14 +3,12 @@ const sequelize = require('./connection')
 
 const Player = sequelize.define('player', {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     primaryKey: true,
-    autoIncrement: true,
   },
   name: { type: Sequelize.STRING },
-  captain: { type: Sequelize.STRING },
+  espnUrl: { type: Sequelize.STRING, unique: true },
+  headshotUrl: { type: Sequelize.STRING, unique: true },
 })
-
-// Player.sync()
 
 module.exports = Player
