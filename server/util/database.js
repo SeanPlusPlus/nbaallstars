@@ -9,13 +9,17 @@ function getAllUsers() {
   return User.findAll()
 }
 
-function updateOrCreateUser(id, accessToken, accessTokenSecret) {
-  return User.upsert({
-    id,
-    accessToken,
-    accessTokenSecret,
-    isAdmin: false,
-    isInvited: false,
+function createUserIfDoesntExist(id, accessToken, accessTokenSecret) {
+  return getUserFromID(id).then((user) => {
+    if (!user) {
+      User.upsert({
+        id,
+        accessToken,
+        accessTokenSecret,
+        isAdmin: false,
+        isInvited: false,
+      })
+    }
   })
 }
 
@@ -24,16 +28,16 @@ function getAllPlayers() {
 }
 
 function addUserToGame(user) {
-  User.update(
+  return User.update(
     { isInvited: true },
-    { where: user.id },
+    { where: { id: user.id } },
   )
 }
 
 module.exports = {
   getUserFromID,
   getAllUsers,
-  updateOrCreateUser,
+  createUserIfDoesntExist,
   getAllPlayers,
   addUserToGame,
 }

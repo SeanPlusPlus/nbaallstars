@@ -5,10 +5,7 @@ const database = require('./util/database')
 const { NODE_ENV } = process.env
 
 const auth = (req, res, next) => new Promise((resolve) => {
-  const cookie = _.get(req, 'headers.cookie', '').split('=')[1]
-  const { userID, tokenHash } = session.decryptUserCookie(cookie)
-  console.log('UserID', userID)
-
+  const { userID, tokenHash } = session.decryptUserCookie(req.cookies)
 
   if (!userID) {
     res.status(401)
@@ -46,9 +43,9 @@ const auth = (req, res, next) => new Promise((resolve) => {
   }
 })
 
-const isAdmin = (req, res, next) => {
-  const admin = _.get(req, 'profile.isAdmin', false)
-  if (!admin) {
+const admin = (req, res, next) => {
+  const isAdmin = _.get(req, 'profile.user.isAdmin', false)
+  if (!isAdmin) {
     res.status(403)
     res.send({
       message: 'Access Denied',
@@ -58,4 +55,16 @@ const isAdmin = (req, res, next) => {
   }
 }
 
-module.exports = { auth, isAdmin }
+const invited = (req, res, next) => {
+  const isInvited = _.get(req, 'profile.user.isInvited', false)
+  if (!isInvited) {
+    res.status(403)
+    res.send({
+      message: 'Access Denied',
+    })
+  } else {
+    return next()
+  }
+}
+
+module.exports = { auth, admin, invited }

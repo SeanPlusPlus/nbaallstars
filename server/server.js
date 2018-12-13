@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const database = require('./util/database')
 const twitter = require('./util/twitter')
 const session = require('./util/session')
-const { auth, isAdmin } = require('./auth')
+const { auth, admin, invited } = require('./auth')
 
 dotenv.config()
 
@@ -18,20 +18,20 @@ const {
 const app = express()
 app.use(cookieParser())
 
-// TODO: Add to middlewear res.header({ 'Access-Control-Allow-Origin': '*' })
+// TODO: Add to middlewear? res.header({ 'Access-Control-Allow-Origin': '*' })
 
 app.get('/api/profile', auth, (req, res) => {
   res.send(req.profile.user)
 })
 
-app.get('/api/users', auth, isAdmin, (req, res) => {
+app.get('/api/users', auth, admin, (req, res) => {
   database.getAllUsers().then((response) => {
     const users = response.map(r => _.get(r, 'dataValues', {}))
     res.send({ users })
   })
 })
 
-app.get('/api/players', auth, (req, res) => {
+app.get('/api/players', auth, invited, (req, res) => {
   database.getAllPlayers().then((response) => {
     const players = response.map((r) => {
       const data = _.get(r, 'dataValues', {})
@@ -70,7 +70,7 @@ app.get('/twitter/access-token', (req, res) => {
       userID,
     } = accessData
     const cookie = session.createUserCookie(accessToken, accessTokenSecret, userID)
-    database.updateOrCreateUser(userID, accessToken, accessTokenSecret).then(() => {
+    database.createUserIfDoesntExist(userID, accessToken, accessTokenSecret).then(() => {
       res.send({ cookieToStore: cookie })
     }).catch((error) => {
       res.status(500)
@@ -93,34 +93,38 @@ app.get('/api/add-user', auth, (req, res) => {
       res.send({ message: error })
     })
   } else {
-    res.status(401)
     res.send({ message: 'Incorrect passcode' })
   }
 })
 
-app.get('/twitter/get-user', (req, res) => {
-  console.log('cookie', req.cookies) // eslint-disable-line no-console
-
+app.get('/api/get-user', (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     userID,
     tokenHash,
-  } = session.decryptUserCookie(req.header.cookie)
+  } = session.decryptUserCookie(req.cookies)
   database.getUserFromID(userID).then((userData) => {
-    const {
-      accessToken,
-      accessTokenSecret,
-    } = userData.dataValues
-    if (session.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
-      twitter.getUserInfo(accessToken, accessTokenSecret).then((twitterUser) => {
-        res.send(twitterUser)
-      }).catch((error) => {
-        res.status(500)
-        res.send({ message: 'Error getting user', error })
-      })
+    if (userData) {
+      const {
+        accessToken,
+        accessTokenSecret,
+        isAdmin,
+        isInvited,
+      } = userData.dataValues
+      if (session.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
+        twitter.getUserInfo(accessToken, accessTokenSecret).then((twitterUser) => {
+          res.send({ ...twitterUser, isAdmin, isInvited })
+        }).catch((error) => {
+          res.status(500)
+          res.send({ message: 'Error getting user', error })
+        })
+      } else {
+        res.status(401)
+        res.send({ message: 'Error authorizing user token cookie' })
+      }
     } else {
-      res.status(401)
-      res.send({ message: 'Error authorizing user token cookie' })
+      res.status(500)
+      res.send({ message: 'Error getting user' })
     }
   })
 })

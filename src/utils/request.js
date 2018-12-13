@@ -1,10 +1,5 @@
-const cookie = require('./cookie')
-
 function get(url) {
-  // eslint-disable-next-line no-unused-vars
-  const userCookie = cookie.getUserAccessTokenCookie()
-  // need to add cookie to request
-  return fetch(url, { credentials: 'include' })
+  return fetch(url, { credentials: 'include' }).then(response => response.json())
 }
 
 module.exports = {

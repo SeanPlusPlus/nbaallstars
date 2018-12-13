@@ -58,7 +58,6 @@ const Navigation = () => {
       </Nav>
     )
   }
-  console.log('rendering nav')
   return (
     <div>
       <Navbar color="dark" dark expand="md">

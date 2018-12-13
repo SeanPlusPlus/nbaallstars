@@ -101,14 +101,15 @@ const Lineup = () => {
         fetch(uri)
           .then(response => response.json())
           .then((payload) => {
-            const pending = payload.players
-              .map(s => ({ id: s.id, content: s.name }))
-
-            const i = {
-              ...items,
-              pending,
+            if (payload.players) {
+              const pending = payload.players
+                .map(s => ({ id: s.id, content: s.name }))
+              const i = {
+                ...items,
+                pending,
+              }
+              setItems(i)
             }
-            setItems(i)
           })
       }
     },

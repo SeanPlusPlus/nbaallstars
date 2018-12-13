@@ -4,6 +4,7 @@ import * as QueryString from 'query-string'
 import {
   Container, Button,
   Label, Input,
+  Alert,
 } from 'reactstrap'
 
 // styles
@@ -19,6 +20,8 @@ function getUserToken(oauth_token, oauth_verifier) {
 
 const Login = (props) => {
   const [passcode, setPasscode] = useState('')
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(false)
   useEffect(() => {
     const {
       location,
@@ -31,13 +34,25 @@ const Login = (props) => {
     } = queryParams
     if (oauth_token && oauth_verifier) {
       getUserToken(oauth_token, oauth_verifier).then(() => {
-        history.push('/')
+        history.push('/login')
       })
     }
   })
 
+  function dismissAlerts() {
+    setSuccess(false)
+    setError(false)
+  }
+
   function onSubmit() {
-    Auth.addUser(passcode)
+    dismissAlerts()
+    Auth.addUser(passcode).then((data) => {
+      if (data.message === 'Success') {
+        setSuccess(true)
+      } else {
+        setError(true)
+      }
+    })
   }
 
   return (
@@ -54,6 +69,12 @@ const Login = (props) => {
           onChange={e => setPasscode(e.target.value)}
         />
         <Button onClick={onSubmit}>Submit</Button>
+        <Alert className="alert-position" color="success" isOpen={success} toggle={dismissAlerts}>
+          Success! You have been granted access to play NBA All Stars Fantasy
+        </Alert>
+        <Alert className="alert-position" color="danger" isOpen={error} toggle={dismissAlerts}>
+          Incorrect Passcode
+        </Alert>
       </Container>
     </>
   )

@@ -14,8 +14,7 @@ import Profile from './components/Profile'
 
 const App = () => {
   Auth.getUserInfoFromCookie().then((twitterUserData) => {
-    const userData = JSON.parse(twitterUserData)
-    setGlobal({ user: userData })
+    setGlobal({ user: twitterUserData })
   }).catch(() => {})
   return (
     <Router>
