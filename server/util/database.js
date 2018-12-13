@@ -7,7 +7,12 @@ function getUserFromID(userID) {
 }
 
 function getAllUsers() {
-  return User.findAll()
+  return User.findAll({
+    order: [
+      ['lastLogin', 'DESC'],
+      ['name', 'ASC'],
+    ],
+  })
 }
 
 function createUserIfDoesntExist(id, accessToken, accessTokenSecret) {
