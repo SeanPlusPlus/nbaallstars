@@ -23,6 +23,16 @@ const Navigation = () => {
   const [user] = useGlobal('user')
   let userComponent
   if (user) {
+    let adminConsole
+    if (user.isAdmin) {
+      adminConsole = (
+        <DropdownItem>
+          <Link to="/admin">
+            Admin Console
+          </Link>
+        </DropdownItem>
+      )
+    }
     userComponent = (
       <Nav className="ml-auto" navbar>
         <UncontrolledDropdown nav inNavbar>
@@ -41,11 +51,7 @@ const Navigation = () => {
                 <strong>{user.name}</strong>
               </Link>
             </DropdownItem>
-            <DropdownItem>
-              <Link to="/admin">
-                Admin Console
-              </Link>
-            </DropdownItem>
+            {adminConsole}
             <DropdownItem divider />
             <DropdownItem onClick={() => Auth.logOut()} className="link">
               Logout

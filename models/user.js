@@ -12,6 +12,4 @@ const User = sequelize.define('user', {
   name: { type: Sequelize.STRING, unique: false },
 })
 
-User.sync()
-
 module.exports = User

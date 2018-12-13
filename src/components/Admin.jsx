@@ -35,29 +35,35 @@ const Admin = () => {
   if (user) {
     if (user.isAdmin) {
       // Show admin console
-      adminMessage = 'You are an admin'
-      userTable = accounts.map(account => (
+      const userTableRows = accounts.map(account => (
+        <tr>
+          <th scope="row">
+            <img alt="profile" height="50" src={account.photoURL.replace('normal', '400x400')} />
+          </th>
+          <td>{account.name}</td>
+          <td>{account.isInvited.toString()}</td>
+          <td>{account.isAdmin.toString()}</td>
+          <td>{formatDate(account.lastLogin)}</td>
+          <th>{account.id}</th>
+        </tr>
+      ))
+      userTable = (
         <Table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th />
               <th>Name</th>
               <th>Invited</th>
               <th>Admin</th>
               <th>Last Login</th>
+              <th>ID</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">{account.id}</th>
-              <td>{account.name}</td>
-              <td>{account.isInvited.toString()}</td>
-              <td>{account.isAdmin.toString()}</td>
-              <td>{formatDate(account.lastLogin)}</td>
-            </tr>
+            {userTableRows}
           </tbody>
         </Table>
-      ))
+      )
     } else {
       // User is not admin
       adminMessage = 'You are not an admin'

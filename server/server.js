@@ -24,7 +24,7 @@ app.get('/api/profile', auth, (req, res) => {
   res.send(req.profile.user)
 })
 
-app.get('/api/users', auth, (req, res) => {
+app.get('/api/users', auth, admin, (req, res) => {
   database.getAllUsers().then((response) => {
     const users = response.map(r => _.get(r, 'dataValues', {}))
     res.send({ users })
