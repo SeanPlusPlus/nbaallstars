@@ -41,6 +41,11 @@ const Navigation = () => {
                 <strong>{user.name}</strong>
               </Link>
             </DropdownItem>
+            <DropdownItem>
+              <Link to="/admin">
+                Admin Console
+              </Link>
+            </DropdownItem>
             <DropdownItem divider />
             <DropdownItem onClick={() => Auth.logOut()} className="link">
               Logout

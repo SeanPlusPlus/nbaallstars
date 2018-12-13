@@ -11,6 +11,7 @@ import Refresh from './components/Refresh'
 import Main from './components/Main'
 import Login from './components/Login'
 import Profile from './components/Profile'
+import Admin from './components/Admin'
 
 const App = () => {
   Auth.getUserInfoFromCookie().then((twitterUserData) => {
@@ -23,6 +24,7 @@ const App = () => {
       <Route path="/" exact component={Main} />
       <Route path="/login" exact component={Login} />
       <Route path="/profile" exact component={Profile} />
+      <Route path="/admin" exact component={Admin} />
     </>
     </Router>
   )
