@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useGlobal } from 'reactn'
 import PropTypes from 'prop-types'
 import * as QueryString from 'query-string'
 import {
   Container, Button,
   Label, Input,
-  Alert,
+  Alert, Progress,
 } from 'reactstrap'
 
 // styles
@@ -22,11 +23,12 @@ const Login = (props) => {
   const [passcode, setPasscode] = useState('')
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
+  const [user] = useGlobal('user')
+  const {
+    location,
+    history,
+  } = props
   useEffect(() => {
-    const {
-      location,
-      history,
-    } = props
     const queryParams = QueryString.parse(location.search)
     const {
       oauth_token,
@@ -49,19 +51,23 @@ const Login = (props) => {
     Auth.addUser(passcode).then((data) => {
       if (data.message === 'Success') {
         setSuccess(true)
+        setTimeout(() => { history.push('/') }, 1000)
       } else {
         setError(true)
       }
     })
   }
-
-  return (
-    <>
-      <Nav />
-      <Container id="main">
+  let loginComponent
+  if (!user) {
+    loginComponent = (
+      <Progress className="login-progress" animated color="danger" value="50" />
+    )
+  } else if (!user.isInvited) {
+    loginComponent = (
+      <div>
         <Label for="passcode-input">Passcode</Label>
         <Input
-          type="text"
+          type="password"
           name="passcode"
           id="passcode-input"
           value={passcode}
@@ -69,6 +75,17 @@ const Login = (props) => {
           onChange={e => setPasscode(e.target.value)}
         />
         <Button onClick={onSubmit}>Submit</Button>
+      </div>
+    )
+  } else {
+    history.push('/')
+  }
+
+  return (
+    <>
+      <Nav />
+      <Container id="main">
+        {loginComponent}
         <Alert className="alert-position" color="success" isOpen={success} toggle={dismissAlerts}>
           Success! You have been granted access to play NBA All Stars Fantasy
         </Alert>
