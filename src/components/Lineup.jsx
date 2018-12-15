@@ -158,9 +158,17 @@ const Lineup = () => {
                           index,
                         )}
                       >
-                        <img height="45px" src={item.headshot} alt="headshot" />
-                        {item.content}
-                        {item.position}
+                        <div className="headshot">
+                          <img height="55px" src={item.headshot} alt="headshot" />
+                        </div>
+                        <div className="player-info">
+                          <div>
+                            {item.content}
+                          </div>
+                          <div>
+                            {`${item.position} #${item.number}`}
+                          </div>
+                        </div>
                       </div>
                     )}
                   </Draggable>
@@ -198,7 +206,7 @@ const Lineup = () => {
                           )}
                         >
                           <div className="headshot">
-                            <img height="45px" src={item.headshot} alt="headshot" />
+                            <img height="55px" src={item.headshot} alt="headshot" />
                           </div>
                           <div className="player-info">
                             <div>
@@ -245,12 +253,17 @@ const Lineup = () => {
                           index,
                         )}
                       >
-                        <img height="45px" src={item.headshot} alt="headshot" />
-                        <span>{item.content}</span>
-                        <span>
-                          Position:
-                          {item.position}
-                        </span>
+                        <div className="headshot">
+                          <img height="55px" src={item.headshot} alt="headshot" />
+                        </div>
+                        <div className="player-info">
+                          <div>
+                            {item.content}
+                          </div>
+                          <div>
+                            {`${item.position} #${item.number}`}
+                          </div>
+                        </div>
                       </div>
                     )}
                   </Draggable>
