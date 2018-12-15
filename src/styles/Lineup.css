@@ -1,3 +1,7 @@
 #lineup-loader {
     min-height: 336px;
 }
+
+.headshot {
+    float: left;
+}

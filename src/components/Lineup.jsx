@@ -103,7 +103,13 @@ const Lineup = () => {
           .then((payload) => {
             if (payload.players) {
               const pending = payload.players
-                .map(s => ({ id: s.id, content: s.name, headshot: s.headshotUrl }))
+                .map(s => ({
+                  id: s.id,
+                  content: s.shortName,
+                  headshot: s.headshot.href,
+                  position: s.position.abbreviation,
+                  number: s.jersey,
+                }))
               const i = {
                 ...items,
                 pending,
@@ -154,6 +160,7 @@ const Lineup = () => {
                       >
                         <img height="45px" src={item.headshot} alt="headshot" />
                         {item.content}
+                        {item.position}
                       </div>
                     )}
                   </Draggable>
@@ -164,7 +171,7 @@ const Lineup = () => {
           </Droppable>
         </Col>
 
-        { items.pending.length > 0 && (
+        {items.pending.length > 0 && (
           <Col sm={{ size: 4 }}>
             <legend>Pending</legend>
             <Droppable droppableId="pending">
@@ -190,8 +197,17 @@ const Lineup = () => {
                             null,
                           )}
                         >
-                          <img height="45px" src={item.headshot} alt="headshot" />
-                          {item.content}
+                          <div className="headshot">
+                            <img height="45px" src={item.headshot} alt="headshot" />
+                          </div>
+                          <div className="player-info">
+                            <div>
+                              {item.content}
+                            </div>
+                            <div>
+                              {`${item.position} #${item.number}`}
+                            </div>
+                          </div>
                         </div>
                       )}
                     </Draggable>
@@ -230,7 +246,11 @@ const Lineup = () => {
                         )}
                       >
                         <img height="45px" src={item.headshot} alt="headshot" />
-                        {item.content}
+                        <span>{item.content}</span>
+                        <span>
+                          Position:
+                          {item.position}
+                        </span>
                       </div>
                     )}
                   </Draggable>

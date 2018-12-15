@@ -8,7 +8,6 @@ const Player = sequelize.define('player', {
   },
   name: { type: Sequelize.STRING },
   espnUrl: { type: Sequelize.STRING, unique: true },
-  headshotUrl: { type: Sequelize.STRING, unique: true },
 })
 
 module.exports = Player

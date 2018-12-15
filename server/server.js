@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const database = require('./util/database')
 const twitter = require('./util/twitter')
 const session = require('./util/session')
+const stats = require('./util/stats')
 const { auth, admin, invited } = require('./auth')
 
 dotenv.config()
@@ -33,16 +34,13 @@ app.get('/api/users', auth, admin, (req, res) => {
 
 app.get('/api/players', auth, invited, (req, res) => {
   database.getAllPlayers().then((response) => {
-    const players = response.map((r) => {
-      const data = _.get(r, 'dataValues', {})
-      const { id, name, headshotUrl } = data
-      return {
-        id,
-        name,
-        headshotUrl,
-      }
+    let players = response.map(player => _.get(player, 'dataValues', {}))
+    stats.getPlayerStats(players).then((playerStats) => {
+      players = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players })
+    }).catch(() => {
+      res.send({ players })
     })
-    res.send({ players })
   })
 })
 
