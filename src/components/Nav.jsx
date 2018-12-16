@@ -35,8 +35,8 @@ const Navigation = () => {
             </Link>
           </DropdownItem>
           <DropdownItem>
-            <Link to="/admin/add-player">
-              Add Players
+            <Link to="/admin/edit-players">
+              Edit Players
             </Link>
           </DropdownItem>
         </React.Fragment>

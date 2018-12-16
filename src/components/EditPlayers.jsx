@@ -6,45 +6,35 @@ import {
 } from 'reactstrap'
 
 // styles
-import '../styles/Users.css'
+import '../styles/EditPlayers.css'
 import request from '../utils/request'
+import playerUtil from '../utils/playerUtil'
 
 // local components
 import Nav from './Nav'
 
-function formatDate(dateString) {
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(dateString)
-}
-
-const Users = () => {
+const EditPlayers = () => {
   const [user] = useGlobal('user')
-  const [accounts, setAccounts] = useState([])
+  const [players, setPlayers] = useState([])
   useEffect(() => {
-    request.get('/api/users').then((data) => {
-      setAccounts(data.users)
+    request.get('/api/players').then((data) => {
+      setPlayers(data.players.map(s => playerUtil.getSanitizedPlayer(s)))
     })
   }, [])
   let adminMessage
   let userTable
   if (user) {
     if (user.isAdmin) {
-      // Show Users console
-      const userTableRows = accounts.map(account => (
-        <tr key={account.id}>
+      // Show Add Players console
+      const playerTableRows = players.map(player => (
+        <tr key={player.id}>
           <th scope="row">
-            <img alt="profile" height="50" src={account.photoURL.replace('normal', '400x400')} />
+            <img alt="profile" height="50" src={player.headshot} />
           </th>
-          <td>{account.name}</td>
-          <td>{account.isInvited.toString()}</td>
-          <td>{account.isAdmin.toString()}</td>
-          <td>{formatDate(account.lastLogin)}</td>
-          <th>{account.id}</th>
+          <td>{player.name}</td>
+          <td>{player.team}</td>
+          <td>{player.position}</td>
+          <th>{player.id}</th>
         </tr>
       ))
       userTable = (
@@ -53,14 +43,13 @@ const Users = () => {
             <tr>
               <th />
               <th>Name</th>
-              <th>Invited</th>
-              <th>Admin</th>
-              <th>Last Login</th>
+              <th>Team</th>
+              <th>Position</th>
               <th>ID</th>
             </tr>
           </thead>
           <tbody>
-            {userTableRows}
+            {playerTableRows}
           </tbody>
         </Table>
       )
@@ -83,4 +72,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default EditPlayers

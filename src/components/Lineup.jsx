@@ -5,10 +5,10 @@ import {
   Row,
   Col,
 } from 'reactstrap'
-import _ from 'lodash'
 
+import playerUtil from '../utils/playerUtil'
 import '../styles/Lineup.css'
-import jersey from '../assets/basketball-jersey.svg'
+
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
@@ -105,13 +105,7 @@ const Lineup = () => {
           .then((payload) => {
             if (payload.players) {
               const pending = payload.players
-                .map(s => ({
-                  id: s.id,
-                  content: _.get(s, 'athlete.displayName', s.name),
-                  headshot: _.get(s, 'athlete.headshot.href', jersey),
-                  position: _.get(s, 'athlete.position.abbreviation', 'N/A'),
-                  number: _.get(s, 'athlete.jersey', '00'),
-                }))
+                .map(s => (playerUtil.getSanitizedPlayer(s)))
               const i = {
                 ...items,
                 pending,
@@ -165,7 +159,7 @@ const Lineup = () => {
                         </div>
                         <div className="player-info">
                           <div>
-                            {item.content}
+                            {item.name}
                           </div>
                           <div>
                             {`${item.position} #${item.number}`}
@@ -212,7 +206,7 @@ const Lineup = () => {
                           </div>
                           <div className="player-info">
                             <div>
-                              {item.content}
+                              {item.name}
                             </div>
                             <div>
                               {`${item.position} #${item.number}`}
@@ -260,7 +254,7 @@ const Lineup = () => {
                         </div>
                         <div className="player-info">
                           <div>
-                            {item.content}
+                            {item.name}
                           </div>
                           <div>
                             {`${item.position} #${item.number}`}
