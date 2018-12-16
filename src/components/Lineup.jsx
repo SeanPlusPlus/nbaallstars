@@ -5,8 +5,10 @@ import {
   Row,
   Col,
 } from 'reactstrap'
+import _ from 'lodash'
 
 import '../styles/Lineup.css'
+import jersey from '../assets/basketball-jersey.svg'
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
@@ -105,10 +107,10 @@ const Lineup = () => {
               const pending = payload.players
                 .map(s => ({
                   id: s.id,
-                  content: s.shortName,
-                  headshot: s.headshot.href,
-                  position: s.position.abbreviation,
-                  number: s.jersey,
+                  content: _.get(s, 'shortName', s.name),
+                  headshot: _.get(s, 'headshot.href', jersey),
+                  position: _.get(s, 'position.abbreviation', 'N/A'),
+                  number: _.get(s, 'jersey', '00'),
                 }))
               const i = {
                 ...items,

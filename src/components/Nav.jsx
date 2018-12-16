@@ -26,11 +26,20 @@ const Navigation = () => {
     let adminConsole
     if (user.isAdmin) {
       adminConsole = (
-        <DropdownItem>
-          <Link to="/admin">
-            Admin Console
-          </Link>
-        </DropdownItem>
+        <React.Fragment>
+          <DropdownItem divider />
+          <DropdownItem header>Admin</DropdownItem>
+          <DropdownItem>
+            <Link to="/admin/users">
+              View All Users
+            </Link>
+          </DropdownItem>
+          <DropdownItem>
+            <Link to="/admin/add-player">
+              Add Players
+            </Link>
+          </DropdownItem>
+        </React.Fragment>
       )
     }
     userComponent = (

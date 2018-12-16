@@ -6,7 +6,7 @@ import {
 } from 'reactstrap'
 
 // styles
-import '../styles/Admin.css'
+import '../styles/Users.css'
 import request from '../utils/request'
 
 // local components
@@ -22,7 +22,7 @@ function formatDate(dateString) {
   }).format(dateString)
 }
 
-const Admin = () => {
+const Users = () => {
   const [user] = useGlobal('user')
   const [accounts, setAccounts] = useState([])
   useEffect(() => {
@@ -34,7 +34,7 @@ const Admin = () => {
   let userTable
   if (user) {
     if (user.isAdmin) {
-      // Show admin console
+      // Show Users console
       const userTableRows = accounts.map(account => (
         <tr>
           <th scope="row">
@@ -83,4 +83,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default Users
