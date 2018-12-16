@@ -48,7 +48,10 @@ const EditPlayers = () => {
             <img alt="profile" height="50" src={player.headshot} />
           </th>
           <td>{player.name}</td>
-          <td>{player.team}</td>
+          <td>
+            <img alt="team" className="team-logo" height="50" src={player.teamLogo} />
+            {player.team}
+          </td>
           <td>{player.position}</td>
           <td>{player.id}</td>
           <td>
