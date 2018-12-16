@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useGlobal } from 'reactn'
 import {
-  Container,
-  Table,
-  Button,
+  Container, Table,
+  Button, Label,
+  Input,
 } from 'reactstrap'
 
 // styles
@@ -17,6 +17,7 @@ import Nav from './Nav'
 const EditPlayers = () => {
   const [user] = useGlobal('user')
   const [players, setPlayers] = useState([])
+  const [playerIDInput, setPlayerIDInput] = useState([])
   function refreshPlayerData() {
     request.get('/api/players').then((data) => {
       setPlayers(data.players.map(s => playerUtil.getSanitizedPlayer(s)))
@@ -30,8 +31,14 @@ const EditPlayers = () => {
       refreshPlayerData()
     })
   }
+  function addPlayer() {
+    playerUtil.addPlayer(playerIDInput).then(() => {
+      refreshPlayerData()
+    })
+  }
   let adminMessage
   let userTable
+  let addUsers
   if (user) {
     if (user.isAdmin) {
       // Show Add Players console
@@ -49,6 +56,20 @@ const EditPlayers = () => {
           </td>
         </tr>
       ))
+      // Show add user section
+      addUsers = (
+        <div>
+          <Label for="playerID-input">Player ID</Label>
+          <Input
+            type="number"
+            name="playerID"
+            id="playerID-input"
+            value={playerIDInput}
+            onChange={e => setPlayerIDInput(e.target.value)}
+          />
+          <Button onClick={addPlayer}>Add Player</Button>
+        </div>
+      )
       userTable = (
         <Table>
           <thead>
@@ -77,6 +98,7 @@ const EditPlayers = () => {
     <>
       <Nav />
       <Container id="main">
+        {addUsers}
         {adminMessage}
         {userTable}
       </Container>

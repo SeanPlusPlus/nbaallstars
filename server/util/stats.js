@@ -8,6 +8,14 @@ function getPlayerStats(players) {
     .then(playerStats => playerStats.map(playerStat => JSON.parse(playerStat)))
 }
 
+function getPlayerName(playerID) {
+  return rp.get(`${ESPN_URL}${playerID}`).then((data) => {
+    const playerData = JSON.parse(data)
+    return playerData.athelete.displayName
+  }).catch(() => null)
+}
+
 module.exports = {
   getPlayerStats,
+  getPlayerName,
 }

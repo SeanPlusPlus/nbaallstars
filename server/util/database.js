@@ -1,6 +1,7 @@
 const User = require('../../models/user')
 const Player = require('../../models/player')
 const twitter = require('./twitter')
+const stats = require('./stats')
 
 function getUserFromID(userID) {
   return User.findOne({ where: { id: userID } })
@@ -68,6 +69,15 @@ function removePlayer(playerID) {
   })
 }
 
+function addPlayer(playerID) {
+  return stats.getPlayerName(playerID).then(playerName => (Player.findOrCreate({
+    where: {
+      id: playerID,
+      name: playerName,
+    },
+  })))
+}
+
 module.exports = {
   getUserFromID,
   getAllUsers,
@@ -75,4 +85,5 @@ module.exports = {
   getAllPlayers,
   addUserToGame,
   removePlayer,
+  addPlayer,
 }

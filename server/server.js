@@ -47,9 +47,21 @@ app.get('/api/players', auth, invited, (req, res) => {
 app.get('/api/remove-player', auth, admin, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
-    playerID
+    playerID,
   } = req.query
   database.removePlayer(playerID).then(() => {
+    res.send({ message: 'Success' })
+  }).catch(() => {
+    res.send({ message: 'Error removing player from database' })
+  })
+})
+
+app.get('/api/add-player', auth, admin, (req, res) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' })
+  const {
+    playerID,
+  } = req.query
+  database.addPlayer(playerID).then(() => {
     res.send({ message: 'Success' })
   }).catch(() => {
     res.send({ message: 'Error removing player from database' })

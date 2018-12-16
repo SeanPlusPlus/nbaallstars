@@ -15,7 +15,10 @@ const getSanitizedPlayer = player => ({
 
 const removePlayer = playerID => request.get(`/api/remove-player?playerID=${playerID}`)
 
+const addPlayer = playerID => request.get(`/api/add-player?playerID=${playerID}`)
+
 export default {
   getSanitizedPlayer,
   removePlayer,
+  addPlayer,
 }
