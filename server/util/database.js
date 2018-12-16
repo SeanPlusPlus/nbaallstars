@@ -60,10 +60,19 @@ function addUserToGame(user) {
   )
 }
 
+function removePlayer(playerID) {
+  return Player.destroy({
+    where: {
+      id: playerID,
+    },
+  })
+}
+
 module.exports = {
   getUserFromID,
   getAllUsers,
   createUserIfDoesntExist,
   getAllPlayers,
   addUserToGame,
+  removePlayer,
 }

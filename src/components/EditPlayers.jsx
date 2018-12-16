@@ -3,6 +3,7 @@ import { useGlobal } from 'reactn'
 import {
   Container,
   Table,
+  Button,
 } from 'reactstrap'
 
 // styles
@@ -16,11 +17,19 @@ import Nav from './Nav'
 const EditPlayers = () => {
   const [user] = useGlobal('user')
   const [players, setPlayers] = useState([])
-  useEffect(() => {
+  function refreshPlayerData() {
     request.get('/api/players').then((data) => {
       setPlayers(data.players.map(s => playerUtil.getSanitizedPlayer(s)))
     })
+  }
+  useEffect(() => {
+    refreshPlayerData()
   }, [])
+  function removePlayer(playerID) {
+    playerUtil.removePlayer(playerID).then(() => {
+      refreshPlayerData()
+    })
+  }
   let adminMessage
   let userTable
   if (user) {
@@ -34,7 +43,10 @@ const EditPlayers = () => {
           <td>{player.name}</td>
           <td>{player.team}</td>
           <td>{player.position}</td>
-          <th>{player.id}</th>
+          <td>{player.id}</td>
+          <td>
+            <Button close onClick={() => removePlayer(player.id)} />
+          </td>
         </tr>
       ))
       userTable = (

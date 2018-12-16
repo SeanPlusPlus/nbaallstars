@@ -1,6 +1,8 @@
 import _ from 'lodash'
-
 import jersey from '../assets/basketball-jersey.svg'
+
+const request = require('./request')
+
 
 const getSanitizedPlayer = player => ({
   id: player.id,
@@ -11,6 +13,9 @@ const getSanitizedPlayer = player => ({
   team: _.get(player, 'athlete.team.displayName', 'N/A'),
 })
 
+const removePlayer = playerID => request.get(`/api/remove-player?playerID=${playerID}`)
+
 export default {
   getSanitizedPlayer,
+  removePlayer,
 }
