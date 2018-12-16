@@ -6,3 +6,7 @@
     float: left;
     padding-right: 16px;
 }
+
+.player-stats {
+    font-size: 10px;
+}

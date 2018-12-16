@@ -209,7 +209,12 @@ const Lineup = () => {
                               {item.name}
                             </div>
                             <div>
-                              {`${item.position} #${item.number}`}
+                              {`${item.position} ${item.number}`}
+                            </div>
+                            <div className="player-stats">
+                              {`${item.stats[0].abbreviation}: ${Math.round(item.stats[0].value)}`}
+                              {` ${item.stats[1].abbreviation}: ${Math.round(item.stats[1].value)}`}
+                              {` ${item.stats[2].abbreviation}: ${Math.round(item.stats[2].value)}`}
                             </div>
                           </div>
                         </div>

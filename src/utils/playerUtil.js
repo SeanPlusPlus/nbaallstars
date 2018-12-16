@@ -9,9 +9,10 @@ const getSanitizedPlayer = player => ({
   name: _.get(player, 'athlete.displayName', player.name),
   headshot: _.get(player, 'athlete.headshot.href', jersey),
   position: _.get(player, 'athlete.position.abbreviation', 'N/A'),
-  number: _.get(player, 'athlete.jersey', '00'),
+  number: _.get(player, 'athlete.displayJersey', '00'),
   team: _.get(player, 'athlete.team.name', 'N/A'),
   teamLogo: _.get(player, 'athlete.team.logos.0.href', jersey), // TODO: New logo
+  stats: _.get(player, 'athlete.statsSummary.statistics', []),
 })
 
 const removePlayer = playerID => request.get(`/api/remove-player?playerID=${playerID}`)
