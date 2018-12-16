@@ -107,10 +107,10 @@ const Lineup = () => {
               const pending = payload.players
                 .map(s => ({
                   id: s.id,
-                  content: _.get(s, 'shortName', s.name),
-                  headshot: _.get(s, 'headshot.href', jersey),
-                  position: _.get(s, 'position.abbreviation', 'N/A'),
-                  number: _.get(s, 'jersey', '00'),
+                  content: _.get(s, 'athlete.displayName', s.name),
+                  headshot: _.get(s, 'athlete.headshot.href', jersey),
+                  position: _.get(s, 'athlete.position.abbreviation', 'N/A'),
+                  number: _.get(s, 'athlete.jersey', '00'),
                 }))
               const i = {
                 ...items,

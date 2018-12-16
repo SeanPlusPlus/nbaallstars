@@ -2,123 +2,83 @@
     "players": [
         {
             "name": "Kevin Durant",
-            "id": "3202",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3202"
+            "id": "3202"
         },
         {
             "name": "Kemba Walker",
-            "id": "6479",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/6479"
+            "id": "6479"
         },
         {
             "name": "Anthony Davis",
-            "id": "6583",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/6583"
+            "id": "6583"
         },
         {
             "name": "Russell Westbrook",
-            "id": "3468",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3468"
+            "id": "3468"
         },
         {
             "name": "Steph Curry",
-            "id": "3975",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3975"
+            "id": "3975"
         },
         {
             "name": "DeMar DeRozan",
-            "id": "3978",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3978"
+            "id": "3978"
         },
         {
             "name": "Kawhi Leonard",
-            "id": "6450",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/6450"
+            "id": "6450"
         },
         {
             "name": "Giannis Antetokounmpo",
-            "id": "3032977",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3032977"
+            "id": "3032977"
         },
         {
             "name": "LeBron James",
-            "id": "1966",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/1966"
+            "id": "1966"
         },
         {
             "name": "Kyrie Irving",
-            "id": "6442",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/6442"
+            "id": "6442"
         },
         {
             "name": "James Harden",
-            "id": "3992",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3992"
-        },
-        {
-            "name": "Damian Lillard",
-            "id": "6606",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/6606"
+            "id": "3992"
         },
         {
             "name": "Chris Paul",
-            "id": "2779",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/2779"
-        },
-        {
-            "name": "Paul George",
-            "id": "4251",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/4251"
+            "id": "2779"
         },
         {
             "name": "Draymond Green",
-            "id": "6589",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/6589"
+            "id": "6589"
         },
         {
             "name": "Karl-Anthony Towns",
-            "id": "3136195",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3136195"
-        },
-        {
-            "name": "Victor Oladipo",
-            "id": "2527963",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/2527963"
-        },
-        {
-            "name": "Joel Embiid",
-            "id": "3059318",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3059318"
+            "id": "3136195"
         },
         {
             "name": "John Wall",
-            "id": "4237",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/4237"
+            "id": "4237"
         },
         {
             "name": "Kyle Lowry",
-            "id": "3012",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3012"
+            "id": "3012"
         },
         {
             "name": "Gordon Hayward",
-            "id": "4249",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/4249"
-        },
-        {
-            "name": "Ben Simmons",
-            "id": "3907387",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3907387"
+            "id": "4249"
         },
         {
             "name": "Kevin Love",
-            "id": "3449",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/3449"
+            "id": "3449"
         },
         {
             "name": "Andre Drummond",
-            "id": "6585",
-            "espnUrl": "http://sports.core.api.prod.espninfra.starwave.com/v2/sports/basketball/leagues/nba/athletes/6585"
+            "id": "6585"
+        },
+        {
+            "name": "Nikola Jokic",
+            "id": "3112335"
         }
     ]
 }
