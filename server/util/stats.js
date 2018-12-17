@@ -11,7 +11,7 @@ function getPlayerStats(players) {
 function getPlayerName(playerID) {
   return rp.get(`${ESPN_URL}${playerID}`).then((data) => {
     const playerData = JSON.parse(data)
-    return playerData.athelete.displayName
+    return playerData.athlete.displayName
   }).catch(() => null)
 }
 
