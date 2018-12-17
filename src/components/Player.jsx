@@ -34,7 +34,7 @@ Player.propTypes = {
     number: PropTypes.string,
     stats: PropTypes.arrayOf(PropTypes.shape({
       abbreviation: PropTypes.string,
-      value: PropTypes.string,
+      value: PropTypes.number,
     })),
   }),
 }
