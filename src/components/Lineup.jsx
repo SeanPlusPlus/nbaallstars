@@ -8,6 +8,7 @@ import {
 
 import playerUtil from '../utils/playerUtil'
 import '../styles/Lineup.css'
+import Player from './Player'
 
 
 const reorder = (list, startIndex, endIndex) => {
@@ -154,17 +155,7 @@ const Lineup = () => {
                           index,
                         )}
                       >
-                        <div className="headshot">
-                          <img height="55px" src={item.headshot} alt="headshot" />
-                        </div>
-                        <div className="player-info">
-                          <div>
-                            {item.name}
-                          </div>
-                          <div>
-                            {`${item.position} #${item.number}`}
-                          </div>
-                        </div>
+                        <Player player={item} />
                       </div>
                     )}
                   </Draggable>
@@ -201,22 +192,7 @@ const Lineup = () => {
                             null,
                           )}
                         >
-                          <div className="headshot">
-                            <img height="55px" src={item.headshot} alt="headshot" />
-                          </div>
-                          <div className="player-info">
-                            <div>
-                              {item.name}
-                            </div>
-                            <div>
-                              {`${item.position} ${item.number}`}
-                            </div>
-                            <div className="player-stats">
-                              {`${item.stats[0].abbreviation}: ${Math.round(item.stats[0].value)}`}
-                              {` ${item.stats[1].abbreviation}: ${Math.round(item.stats[1].value)}`}
-                              {` ${item.stats[2].abbreviation}: ${Math.round(item.stats[2].value)}`}
-                            </div>
-                          </div>
+                          <Player player={item} />
                         </div>
                       )}
                     </Draggable>
@@ -254,17 +230,7 @@ const Lineup = () => {
                           index,
                         )}
                       >
-                        <div className="headshot">
-                          <img height="55px" src={item.headshot} alt="headshot" />
-                        </div>
-                        <div className="player-info">
-                          <div>
-                            {item.name}
-                          </div>
-                          <div>
-                            {`${item.position} #${item.number}`}
-                          </div>
-                        </div>
+                        <Player player={item} />
                       </div>
                     )}
                   </Draggable>

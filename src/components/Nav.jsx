@@ -26,7 +26,7 @@ const Navigation = () => {
     let adminConsole
     if (user.isAdmin) {
       adminConsole = (
-        <React.Fragment>
+        <>
           <DropdownItem divider />
           <DropdownItem header>Admin</DropdownItem>
           <DropdownItem>
@@ -39,7 +39,7 @@ const Navigation = () => {
               Edit Players
             </Link>
           </DropdownItem>
-        </React.Fragment>
+        </>
       )
     }
     userComponent = (
