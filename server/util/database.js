@@ -51,7 +51,12 @@ function createUserIfDoesntExist(id, accessToken, accessTokenSecret) {
 }
 
 function getAllPlayers() {
-  return Player.findAll()
+  return Player.findAll({
+    order: [
+      ['updatedAt', 'DESC'],
+      ['name', 'ASC'],
+    ],
+  })
 }
 
 function addUserToGame(user) {
