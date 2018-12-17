@@ -1,10 +1,10 @@
+import { setGlobal } from 'reactn'
 import { getUserAccessTokenCookie } from './cookie'
 
-const rp = require('request-promise')
 const cookie = require('./cookie')
+const request = require('./request')
 
 // Temporary. Need to go in .env?
-const serverUrl = 'http://localhost:3001'
 const twitterApiUrl = 'https://api.twitter.com'
 
 function urlBuilder(base, resource, querys) {
@@ -21,36 +21,17 @@ function redirectUserToTwitter(oauth_token) {
 }
 
 function logInWithTwitter() {
-  const url = urlBuilder(serverUrl, '/twitter/request-token')
-  rp.get(url).then((responseBody) => {
-    const response = JSON.parse(responseBody)
-    const {
-      requestToken,
-      requestTokenSecret,
-    } = response.requestTokens
-    cookie.setRequestTokenSecretCookie(requestTokenSecret)
-    redirectUserToTwitter(requestToken)
-  }).catch(() => {
-  })
-}
-
-function getUserTokens(authToken, authVerifier) {
-  const authTokenSecret = cookie.getRequestTokenSecretCookie()
-  cookie.deleteRequestTokenSecretCookie()
-  const url = urlBuilder(
-    serverUrl,
-    '/twitter/access-token?',
-    {
-      authToken,
-      authTokenSecret,
-      authVerifier,
-    },
-  )
-  return rp.get(url).then((responseBody) => {
-    const response = JSON.parse(responseBody)
-    cookie.setUserAccessTokenCookie(response.cookieToStore)
-  }).catch(() => {
-  })
+  const url = '/twitter/request-token'
+  request.get(url)
+    .then((response) => {
+      const {
+        requestToken,
+        requestTokenSecret,
+      } = response.requestTokens
+      cookie.setRequestTokenSecretCookie(requestTokenSecret)
+      redirectUserToTwitter(requestToken)
+    }).catch(() => {
+    })
 }
 
 function getUserInfoFromCookie() {
@@ -58,8 +39,29 @@ function getUserInfoFromCookie() {
   if (!userCookie) {
     return Promise.reject()
   }
-  const url = urlBuilder(serverUrl, '/twitter/get-user/?', { userCookie })
-  return rp.get(url)
+  const url = '/api/get-user/'
+  return request.get(url)
+}
+
+function getUserTokens(authToken, authVerifier) {
+  const authTokenSecret = cookie.getRequestTokenSecretCookie()
+  cookie.deleteRequestTokenSecretCookie()
+  const url = urlBuilder(
+    '',
+    '/twitter/access-token?',
+    {
+      authToken,
+      authTokenSecret,
+      authVerifier,
+    },
+  )
+  return request.get(url).then((response) => {
+    cookie.setUserAccessTokenCookie(response.cookieToStore)
+    getUserInfoFromCookie().then((twitterUserData) => {
+      setGlobal({ user: twitterUserData })
+    }).catch(() => {})
+  }).catch(() => {
+  })
 }
 
 function logOut() {
@@ -67,9 +69,15 @@ function logOut() {
   window.location.reload()
 }
 
+function addUser(passcode) {
+  const url = urlBuilder('', '/api/add-user/?', { passcode })
+  return request.get(url)
+}
+
 export default {
   getUserTokens,
   logInWithTwitter,
   getUserInfoFromCookie,
   logOut,
+  addUser,
 }

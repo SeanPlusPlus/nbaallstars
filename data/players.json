@@ -1,28 +1,84 @@
 {
     "players": [
         {
-            "name": "Kevin Durant"
+            "name": "Kevin Durant",
+            "id": "3202"
         },
         {
-            "name": "Kemba Walker"
+            "name": "Kemba Walker",
+            "id": "6479"
         },
         {
-            "name": "Anthony Davis"
+            "name": "Anthony Davis",
+            "id": "6583"
         },
         {
-            "name": "Russell Westbrook"
+            "name": "Russell Westbrook",
+            "id": "3468"
         },
         {
-            "name": "Steph Curry"
+            "name": "Steph Curry",
+            "id": "3975"
         },
         {
-            "name": "DeMar DeRozan"
+            "name": "DeMar DeRozan",
+            "id": "3978"
         },
         {
-            "name": "Kawhi Leonard"
+            "name": "Kawhi Leonard",
+            "id": "6450"
         },
         {
-            "name": "Giannis Antetokounmpo"
+            "name": "Giannis Antetokounmpo",
+            "id": "3032977"
+        },
+        {
+            "name": "LeBron James",
+            "id": "1966"
+        },
+        {
+            "name": "Kyrie Irving",
+            "id": "6442"
+        },
+        {
+            "name": "James Harden",
+            "id": "3992"
+        },
+        {
+            "name": "Chris Paul",
+            "id": "2779"
+        },
+        {
+            "name": "Draymond Green",
+            "id": "6589"
+        },
+        {
+            "name": "Karl-Anthony Towns",
+            "id": "3136195"
+        },
+        {
+            "name": "John Wall",
+            "id": "4237"
+        },
+        {
+            "name": "Kyle Lowry",
+            "id": "3012"
+        },
+        {
+            "name": "Gordon Hayward",
+            "id": "4249"
+        },
+        {
+            "name": "Kevin Love",
+            "id": "3449"
+        },
+        {
+            "name": "Andre Drummond",
+            "id": "6585"
+        },
+        {
+            "name": "Nikola Jokic",
+            "id": "3112335"
         }
     ]
 }

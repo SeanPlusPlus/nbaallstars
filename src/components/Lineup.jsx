@@ -6,7 +6,10 @@ import {
   Col,
 } from 'reactstrap'
 
+import playerUtil from '../utils/playerUtil'
 import '../styles/Lineup.css'
+import Player from './Player'
+
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list)
@@ -29,7 +32,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const grid = 8
 
 const getBase = index => (
-  (index < 2) ? 'white' : 'grey'
+  (index < 5) ? 'white' : 'grey'
 )
 
 const getItemStyle = (isDragging, draggableStyle, idx) => ({
@@ -67,9 +70,6 @@ const Lineup = () => {
       return
     }
 
-    // get event
-    console.log(source, destination)
-
     const srcKey = source.droppableId
     const destKey = destination.droppableId
 
@@ -100,20 +100,19 @@ const Lineup = () => {
   useEffect(
     () => {
       if (items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) {
-        console.log(items)
-
         const uri = '/api/players'
         fetch(uri)
           .then(response => response.json())
           .then((payload) => {
-            const pending = payload.players
-              .map(s => ({ id: s.id, content: s.name }))
-
-            const i = {
-              ...items,
-              pending,
+            if (payload.players) {
+              const pending = payload.players
+                .map(s => (playerUtil.getSanitizedPlayer(s)))
+              const i = {
+                ...items,
+                pending,
+              }
+              setItems(i)
             }
-            setItems(i)
           })
       }
     },
@@ -156,7 +155,7 @@ const Lineup = () => {
                           index,
                         )}
                       >
-                        {item.content}
+                        <Player player={item} />
                       </div>
                     )}
                   </Draggable>
@@ -167,7 +166,7 @@ const Lineup = () => {
           </Droppable>
         </Col>
 
-        { items.pending.length > 0 && (
+        {items.pending.length > 0 && (
           <Col sm={{ size: 4 }}>
             <legend>Pending</legend>
             <Droppable droppableId="pending">
@@ -193,7 +192,7 @@ const Lineup = () => {
                             null,
                           )}
                         >
-                          {item.content}
+                          <Player player={item} />
                         </div>
                       )}
                     </Draggable>
@@ -231,7 +230,7 @@ const Lineup = () => {
                           index,
                         )}
                       >
-                        {item.content}
+                        <Player player={item} />
                       </div>
                     )}
                   </Draggable>

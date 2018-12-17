@@ -1,0 +1,9 @@
+.alert-position {
+  position: absolute;
+  width: 80%;
+  bottom: 0;
+}
+
+.login-progress {
+  margin-top: 30%
+}

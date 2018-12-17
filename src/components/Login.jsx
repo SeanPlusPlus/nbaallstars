@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useGlobal } from 'reactn'
 import PropTypes from 'prop-types'
 import * as QueryString from 'query-string'
 import {
-  Container,
+  Container, Button,
+  Label, Input,
+  Alert, Progress,
 } from 'reactstrap'
 
 // styles
@@ -17,11 +20,15 @@ function getUserToken(oauth_token, oauth_verifier) {
 }
 
 const Login = (props) => {
+  const [passcode, setPasscode] = useState('')
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(false)
+  const [user] = useGlobal('user')
+  const {
+    location,
+    history,
+  } = props
   useEffect(() => {
-    const {
-      location,
-      history,
-    } = props
     const queryParams = QueryString.parse(location.search)
     const {
       oauth_token,
@@ -29,17 +36,62 @@ const Login = (props) => {
     } = queryParams
     if (oauth_token && oauth_verifier) {
       getUserToken(oauth_token, oauth_verifier).then(() => {
-        history.push('/')
+        history.push('/login')
       })
     }
   })
+
+  function dismissAlerts() {
+    setSuccess(false)
+    setError(false)
+  }
+
+  function onSubmit() {
+    dismissAlerts()
+    Auth.addUser(passcode).then((data) => {
+      if (data.message === 'Success') {
+        setSuccess(true)
+        setTimeout(() => { history.push('/') }, 1000)
+      } else {
+        setError(true)
+      }
+    })
+  }
+  let loginComponent
+  if (!user) {
+    loginComponent = (
+      <Progress className="login-progress" animated color="danger" value="50" />
+    )
+  } else if (!user.isInvited) {
+    loginComponent = (
+      <div>
+        <Label for="passcode-input">Passcode</Label>
+        <Input
+          type="password"
+          name="passcode"
+          id="passcode-input"
+          value={passcode}
+          placeholder="Enter Passcode"
+          onChange={e => setPasscode(e.target.value)}
+        />
+        <Button onClick={onSubmit}>Submit</Button>
+      </div>
+    )
+  } else {
+    history.push('/')
+  }
 
   return (
     <>
       <Nav />
       <Container id="main">
-        <button type="button" onClick={() => Auth.logInWithTwitter()}>Log In With Twitter</button>
-        <button type="button" onClick={() => Auth.logOut()}>Log Out</button>
+        {loginComponent}
+        <Alert className="alert-position" color="success" isOpen={success} toggle={dismissAlerts}>
+          Success! You have been granted access to play NBA All Stars Fantasy
+        </Alert>
+        <Alert className="alert-position" color="danger" isOpen={error} toggle={dismissAlerts}>
+          Incorrect Passcode
+        </Alert>
       </Container>
     </>
   )

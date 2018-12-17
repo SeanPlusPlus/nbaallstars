@@ -13,14 +13,13 @@ function createUserCookie(accessToken, accessTokenSecret, userID) {
 }
 
 function decryptUserCookie(userCookie) {
-  if (!userCookie) {
+  if (!userCookie.nbaallstars) {
     return {
       userID: null,
       tokenHash: null,
     }
   }
-
-  const userIDandHash = userCookie.split(':')
+  const userIDandHash = userCookie.nbaallstars.split(':')
   return {
     userID: userIDandHash[0],
     tokenHash: userIDandHash[1],
