@@ -2,7 +2,8 @@ const Sequelize = require('sequelize')
 const sequelize = require('./connection')
 
 const User = sequelize.define('user', {
-  id: { type: Sequelize.STRING, primaryKey: true },
+  id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+  twitterID: { type: Sequelize.STRING, unique: true },
   accessToken: { type: Sequelize.STRING, unique: true },
   accessTokenSecret: { type: Sequelize.STRING, unique: true },
   isAdmin: { type: Sequelize.BOOLEAN, unique: false },

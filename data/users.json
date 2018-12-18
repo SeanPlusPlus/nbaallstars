@@ -1,16 +1,16 @@
 [
     {
-        "id": "51766287",
+        "twitterID": "51766287",
         "accessToken": "51766287-iKQmwFc1WEjnHrX3A0UgCN4JWLmESQwwhzgwNkY49",
         "accessTokenSecret": "T9qVfnelKU20PQuNuzYR3xFTalUUG7kOMn6oSEaDokAr5",
-        "isAdmin": true,
-        "isInvited": true,
+        "isAdmin": false,
+        "isInvited": false,
         "photoURL": "http://pbs.twimg.com/profile_images/983515963164422144/4l14kaXU_normal.jpg",
         "lastLogin": "1544666823519",
         "name": "Kane Stapler"
     },
     {
-        "id": "1054466985176657921",
+        "twitterID": "1054466985176657921",
         "accessToken": "1054466985176657921-2Y24ZI4NbI72eRXcN1HuQyutNDQkll",
         "accessTokenSecret": "XJHIZzxszUuD72KeNv7fHooGEnSdffkA6bCsecy9U2aV2",
         "isAdmin": false,
@@ -20,7 +20,7 @@
         "name": "Trae's Treys"
     },
     {
-        "id": "1054466232223621120",
+        "twitterID": "1054466232223621120",
         "accessToken": "1054466232223621120-SOIYY23BfnuF0v2xmOUfg6re1xDNmr",
         "accessTokenSecret": "4HBgemn5QDEvCRAv2M84oQDnTR17U2oCT7BCZzwzRdHgq",
         "isAdmin": false,
@@ -30,7 +30,7 @@
         "name": "Trae Young Snowflake Test"
     },
     {
-        "id": "1234567890",
+        "twitterID": "1234567890",
         "accessToken": "1234567890-58486fec-9fbc-4ec8-b1a7-1937df0e8dc5",
         "accessTokenSecret": "ec71e846-dbb0-4ba4-81b4-767580df9512",
         "isAdmin": false,
@@ -40,7 +40,7 @@
         "name": "Stephen Curry"
     },
     {
-        "id": "2345678901",
+        "twitterID": "2345678901",
         "accessToken": "2345678901-cec85354-3128-457c-ab17-6183143a6974",
         "accessTokenSecret": "df840807-591f-49a6-84ff-4bbb974cc676",
         "isAdmin": false,
@@ -50,7 +50,7 @@
         "name": "Ninja"
     },
     {
-        "id": "3456789012",
+        "twitterID": "3456789012",
         "accessToken": "3456789012-c3614ac1-c0aa-4b9e-bdba-ea765550b896",
         "accessTokenSecret": "410dc777-e237-4a6e-b88d-f006b5fe651d",
         "isAdmin": false,
@@ -60,7 +60,7 @@
         "name": "Elon Musk"
     },
     {
-        "id": "4567890123",
+        "twitterID": "4567890123",
         "accessToken": "4567890123-e719ec61-0602-44f8-b2a3-2cb3c63a2def",
         "accessTokenSecret": "40362563-4ed7-47a0-99cc-d6df7c7eb381",
         "isAdmin": true,
@@ -70,7 +70,7 @@
         "name": "Aaron LaBerge"
     },
     {
-        "id": "5678901234",
+        "twitterID": "5678901234",
         "accessToken": "5678901234-e7b0db0d-7270-44fd-8735-4b1655d4f999",
         "accessTokenSecret": "1726c114-b235-47df-83a6-37f0dc72dde9",
         "isAdmin": false,
