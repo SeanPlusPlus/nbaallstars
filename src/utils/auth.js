@@ -39,7 +39,7 @@ function getUserInfoFromCookie() {
   if (!userCookie) {
     return Promise.reject()
   }
-  const url = '/api/get-user/'
+  const url = '/api/user/'
   return request.get(url)
 }
 
@@ -70,8 +70,8 @@ function logOut() {
 }
 
 function addUser(passcode) {
-  const url = urlBuilder('', '/api/add-user/?', { passcode })
-  return request.get(url)
+  const url = `/api/user/${passcode}`
+  return request.post(url)
 }
 
 export default {

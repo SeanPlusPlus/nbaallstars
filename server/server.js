@@ -44,24 +44,24 @@ app.get('/api/players', auth, invited, (req, res) => {
   })
 })
 
-app.get('/api/remove-player', auth, admin, (req, res) => {
+app.delete('/api/player/:id', auth, admin, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
-    playerID,
-  } = req.query
-  database.removePlayer(playerID).then(() => {
+    id,
+  } = req.params
+  database.removePlayer(id).then(() => {
     res.send({ message: 'Success' })
   }).catch(() => {
     res.send({ message: 'Error removing player from database' })
   })
 })
 
-app.get('/api/add-player', auth, admin, (req, res) => {
+app.post('/api/player/:id', auth, admin, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
-    playerID,
-  } = req.query
-  database.addPlayer(playerID).then(() => {
+    id,
+  } = req.params
+  database.addPlayer(id).then(() => {
     res.send({ message: 'Success' })
   }).catch(() => {
     res.send({ message: 'Error removing player from database' })
@@ -104,10 +104,10 @@ app.get('/twitter/access-token', (req, res) => {
   })
 })
 
-app.get('/api/add-user', auth, (req, res) => {
+app.post('/api/user/:passcode', auth, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
-  const addUserPasscode = req.query.passcode
-  if (addUserPasscode === ADD_USER_PASSCODE) {
+  const { passcode } = req.params
+  if (passcode === ADD_USER_PASSCODE) {
     database.addUserToGame(req.profile.user).then(() => {
       res.send({ message: 'Success' })
     }).catch((error) => {
@@ -119,7 +119,7 @@ app.get('/api/add-user', auth, (req, res) => {
   }
 })
 
-app.get('/api/get-user', (req, res) => {
+app.get('/api/user', (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     userID,
