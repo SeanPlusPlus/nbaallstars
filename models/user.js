@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize')
+const uuid = require('uuid/v4')
 const sequelize = require('./connection')
 
 const User = sequelize.define('user', {
-  id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+  id: { type: Sequelize.UUID, primaryKey: true, defaultValue: () => uuid() },
   twitterID: { type: Sequelize.STRING, unique: true },
   accessToken: { type: Sequelize.STRING, unique: true },
   accessTokenSecret: { type: Sequelize.STRING, unique: true },
