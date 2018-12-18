@@ -69,7 +69,7 @@ function addUserToGame(user) {
 function removePlayer(playerID) {
   return Player.destroy({
     where: {
-      id: playerID,
+      espnID: playerID,
     },
   })
 }
@@ -77,7 +77,7 @@ function removePlayer(playerID) {
 function addPlayer(playerID) {
   return stats.getPlayerName(playerID).then(playerName => (Player.findOrCreate({
     where: {
-      id: playerID,
+      espnID: playerID,
       name: playerName,
     },
   })))
