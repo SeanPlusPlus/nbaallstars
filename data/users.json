@@ -4,7 +4,7 @@
         "accessToken": "51766287-iKQmwFc1WEjnHrX3A0UgCN4JWLmESQwwhzgwNkY49",
         "accessTokenSecret": "T9qVfnelKU20PQuNuzYR3xFTalUUG7kOMn6oSEaDokAr5",
         "isAdmin": true,
-        "isInvited": false,
+        "isInvited": true,
         "photoURL": "http://pbs.twimg.com/profile_images/983515963164422144/4l14kaXU_normal.jpg",
         "lastLogin": "1544666823519",
         "name": "Kane Stapler"
