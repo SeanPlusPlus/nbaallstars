@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./connection')
-const Player = require('./player')
+const Player = require('../models/player')
+const Year = require('../models/year')
 
 const Captain = sequelize.define('captain', {
   id: {
@@ -12,5 +13,6 @@ const Captain = sequelize.define('captain', {
 })
 
 Captain.belongsTo(Player)
+Captain.belongsTo(Year)
 
 module.exports = Captain
