@@ -99,7 +99,7 @@ const Lineup = () => {
 
   useEffect(
     () => {
-      if (items !== null && items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) {
+      if (items !== null && items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) { // eslint-disable-line max-len
         const uri = '/api/players'
         fetch(uri)
           .then(response => response.json())
