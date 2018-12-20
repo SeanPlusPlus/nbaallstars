@@ -44,7 +44,7 @@ const Users = () => {
           <td>{account.isInvited.toString()}</td>
           <td>{account.isAdmin.toString()}</td>
           <td>{formatDate(account.lastLogin)}</td>
-          <td>{account.id}</td>
+          <td>{account.twitterID}</td>
         </tr>
       ))
       userTable = (

@@ -5,7 +5,7 @@ const request = require('./request')
 
 
 const getSanitizedPlayer = player => ({
-  id: player.id,
+  id: player.espnID,
   name: _.get(player, 'athlete.displayName', player.name),
   headshot: _.get(player, 'athlete.headshot.href', jersey),
   position: _.get(player, 'athlete.position.abbreviation', 'N/A'),

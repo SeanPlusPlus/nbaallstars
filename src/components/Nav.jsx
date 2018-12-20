@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { useGlobal } from 'reactn'
 import { Link } from 'react-router-dom'
 import {
@@ -46,11 +47,15 @@ const Navigation = () => {
       <Nav className="ml-auto" navbar>
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle className="user-card" nav>
-            <img
-              className="twitter-avatar rounded-circle"
-              alt="User avatar"
-              src={user.profile_image_url.replace('_normal', '')}
-            />
+            {
+              _.get(user, 'profile_image_url') && (
+              <img
+                className="twitter-avatar rounded-circle"
+                alt="User avatar"
+                src={user.profile_image_url.replace('_normal', '')}
+              />
+              )
+            }
           </DropdownToggle>
           <DropdownMenu right>
             <DropdownItem className="signed-in-as">
