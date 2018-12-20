@@ -12,7 +12,6 @@ import {
 import '../styles/Login.css'
 
 // local components
-import Nav from './Nav'
 import Auth from '../utils/auth'
 
 function getUserToken(oauth_token, oauth_verifier) {
@@ -60,7 +59,7 @@ const Login = (props) => {
   let loginComponent
   if (!user) {
     loginComponent = (
-      <Progress className="login-progress" animated color="danger" value="50" />
+      <Progress className="login-progress" animated color="warning" value="50" />
     )
   } else if (!user.isInvited) {
     loginComponent = (
@@ -78,12 +77,11 @@ const Login = (props) => {
       </div>
     )
   } else {
-    history.push('/')
+    window.location.href = '/'
   }
 
   return (
     <>
-      <Nav />
       <Container id="main">
         {loginComponent}
         <Alert className="alert-position" color="success" isOpen={success} toggle={dismissAlerts}>
