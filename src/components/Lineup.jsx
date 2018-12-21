@@ -99,7 +99,7 @@ const Lineup = () => {
 
   useEffect(
     () => {
-      if (items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) {
+      if (items !== null && items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) { // eslint-disable-line max-len
         const uri = '/api/players'
         fetch(uri)
           .then(response => response.json())
@@ -112,12 +112,26 @@ const Lineup = () => {
                 pending,
               }
               setItems(i)
+            } else {
+              setItems(null)
             }
           })
       }
     },
     [items],
   )
+
+  if (items === null) {
+    return (
+      <div id="lineup-loader">
+        <legend>
+          <i className="fa fa-warning" />
+          {' '}
+          Login Required
+        </legend>
+      </div>
+    )
+  }
 
   if (items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) {
     return (
