@@ -4,7 +4,7 @@ const twitter = require('./twitter')
 const stats = require('./stats')
 
 function getUserFromID(userID) {
-  return User.findOne({ where: { id: userID } })
+  return User.findOne({ where: { twitterID: userID } })
 }
 
 function getAllUsers() {
@@ -16,13 +16,13 @@ function getAllUsers() {
   })
 }
 
-function createUserIfDoesntExist(id, accessToken, accessTokenSecret) {
+function createUserIfDoesntExist(twitterID, accessToken, accessTokenSecret) {
   return new Promise((resolve, reject) => {
-    getUserFromID(id).then((user) => {
+    getUserFromID(twitterID).then((user) => {
       if (!user) {
         twitter.getUserInfo(accessToken, accessTokenSecret).then((data) => {
           User.upsert({
-            id,
+            twitterID,
             accessToken,
             accessTokenSecret,
             isAdmin: false,
@@ -39,7 +39,7 @@ function createUserIfDoesntExist(id, accessToken, accessTokenSecret) {
       } else {
         User.update(
           { lastLogin: Date.now() },
-          { where: { id } },
+          { where: { twitterID } },
         ).then(() => {
           resolve()
         }).catch(() => {
@@ -62,14 +62,14 @@ function getAllPlayers() {
 function addUserToGame(user) {
   return User.update(
     { isInvited: true },
-    { where: { id: user.id } },
+    { where: { twitterID: user.twitterID } },
   )
 }
 
 function removePlayer(playerID) {
   return Player.destroy({
     where: {
-      id: playerID,
+      espnID: playerID,
     },
   })
 }
@@ -77,7 +77,7 @@ function removePlayer(playerID) {
 function addPlayer(playerID) {
   return stats.getPlayerName(playerID).then(playerName => (Player.findOrCreate({
     where: {
-      id: playerID,
+      espnID: playerID,
       name: playerName,
     },
   })))

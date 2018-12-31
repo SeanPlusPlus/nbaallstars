@@ -44,6 +44,10 @@ const auth = (req, res, next) => new Promise((resolve) => {
 })
 
 const admin = (req, res, next) => {
+  if (NODE_ENV === 'development') {
+    return next()
+  }
+
   const isAdmin = _.get(req, 'profile.user.isAdmin', false)
   if (!isAdmin) {
     res.status(403)
