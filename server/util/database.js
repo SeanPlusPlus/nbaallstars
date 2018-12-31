@@ -174,18 +174,17 @@ function addAllstars(ids, year) {
       espnID: ids,
     },
   }).then((response) => {
-    const allstarPromises = response.map(r => _.get(r, 'dataValues.id', {})).map(playerId => Allstar.create({
-      playerId,
-      yearId: year,
-    }))
+    const allstarPromises = response.map(r => _.get(r, 'dataValues.id', {}))
+      .map(playerId => Allstar.create({
+        playerId,
+        yearId: year,
+      }))
     return Promise.all(allstarPromises)
   })
 }
 
 function getAllYears() {
-  return Year.findAll().then((response) => {
-    return response.map(r => _.get(r, 'dataValues.id', {}))
-  })
+  return Year.findAll().then(response => response.map(r => _.get(r, 'dataValues.id', {})))
 }
 
 function getPlayersThatArentAllstars(year) {
