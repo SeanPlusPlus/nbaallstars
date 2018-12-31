@@ -22,19 +22,9 @@ const removePlayer = playerID => request.remove(`/api/player/${playerID}`)
 
 const addPlayer = playerID => request.post(`/api/player/${playerID}`)
 
-const removeAllstar = (playerID, year) => {
-  console.log(`TODO: Remove ${playerID} in ${year} now`)
-  return new Promise((resolve) => {
-    resolve()
-  })
-}
+const removeAllstar = (playerID, year) => request.remove(`/api/allstars/${year}/${playerID}`)
 
-const addAllstars = (playerIDs, year) => {
-  console.log(`TODO: Add ${playerIDs} in ${year} now`)
-  return new Promise((resolve) => {
-    resolve()
-  })
-}
+const addAllstars = (playerIDs, year) => request.post(`/api/allstars/${year}/${playerIDs}`)
 
 export default {
   getSanitizedPlayer,

@@ -158,7 +158,30 @@ function getPlayersThatArentAllstars(year) {
   })
 }
 
-getPlayersThatArentAllstars(2018).then((players) => {
-  console.log(players)
-  sequelize.close()
-})
+// getPlayersThatArentAllstars(2018).then((players) => {
+//   console.log(players)
+//   sequelize.close()
+// })
+
+
+function removeAllstar(id, year) {
+  return Allstar.findOne({
+    include: [{
+      model: Player,
+      where: {
+        espnID: id,
+      },
+    }],
+    where: {
+      yearId: year,
+    },
+  }).then(player => Allstar.destroy({
+    where: {
+      id: _.get(player, 'dataValues.id', {}),
+    },
+  }))
+}
+
+// removeAllstar('2779', 2018).then(() => {
+//   sequelize.close()
+// })

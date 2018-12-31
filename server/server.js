@@ -52,6 +52,32 @@ app.get('/api/allstars/:year', (req, res) => {
   })
 })
 
+app.delete('/api/allstars/:year/:id', (req, res) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' })
+  const {
+    id,
+    year,
+  } = req.params
+  database.removeAllstar(id, year).then(() => {
+    res.send({ message: 'Success' })
+  }).catch(() => {
+    res.send({ message: 'Error removing player from database' })
+  })
+})
+
+app.post('/api/allstars/:year/:ids', (req, res) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' })
+  const {
+    ids,
+    year,
+  } = req.params
+  database.addAllstars(ids.split(','), year).then(() => {
+    res.send({ message: 'Success' })
+  }).catch(() => {
+    res.send({ message: 'Error removing player from database' })
+  })
+})
+
 app.get('/api/captains/:year', (req, res) => {
   const { year } = req.params
   database.getCaptainsForYear(year).then((response) => {

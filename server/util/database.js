@@ -150,6 +150,38 @@ function getAllstarsForYear(year) {
   })
 }
 
+function removeAllstar(id, year) {
+  return Allstar.findOne({
+    include: [{
+      model: Player,
+      where: {
+        espnID: id,
+      },
+    }],
+    where: {
+      yearId: year,
+    },
+  }).then(player => Allstar.destroy({
+    where: {
+      id: _.get(player, 'dataValues.id', {}),
+    },
+  }))
+}
+
+function addAllstars(ids, year) {
+  return Player.findAll({
+    where: {
+      espnID: ids,
+    },
+  }).then((response) => {
+    const allstarPromises = response.map(r => _.get(r, 'dataValues.id', {})).map(playerId => Allstar.create({
+      playerId,
+      yearId: year,
+    }))
+    return Promise.all(allstarPromises)
+  })
+}
+
 function getAllYears() {
   return Year.findAll().then((response) => {
     return response.map(r => _.get(r, 'dataValues.id', {}))
@@ -213,4 +245,6 @@ module.exports = {
   getAllYears,
   getCaptains,
   getPlayersThatArentAllstars,
+  removeAllstar,
+  addAllstars,
 }
