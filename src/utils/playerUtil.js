@@ -18,9 +18,9 @@ const getSanitizedPlayer = player => ({
   conference: _.get(player, 'conference', null),
 })
 
-const removePlayer = playerID => request.get(`/api/remove-player?playerID=${playerID}`)
+const removePlayer = playerID => request.remove(`/api/player/${playerID}`)
 
-const addPlayer = playerID => request.get(`/api/add-player?playerID=${playerID}`)
+const addPlayer = playerID => request.post(`/api/player/${playerID}`)
 
 const removeAllstar = (playerID, year) => {
   console.log(`TODO: Remove ${playerID} in ${year} now`)
