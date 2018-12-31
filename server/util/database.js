@@ -1,5 +1,10 @@
+const _ = require('lodash')
+
 const User = require('../../models/user')
 const Player = require('../../models/player')
+const Captain = require('../../models/captain')
+const Allstar = require('../../models/allstar')
+const Year = require('../../models/year')
 const twitter = require('./twitter')
 const stats = require('./stats')
 
@@ -83,6 +88,74 @@ function addPlayer(playerID) {
   })))
 }
 
+function getCaptainsWithESPNID(espnID, year) {
+  return Captain.findAll({
+    order: [
+      ['updatedAt', 'DESC'],
+    ],
+    include: [
+      {
+        model: Player,
+        where: {
+          espnID,
+        },
+      },
+    ],
+    where: {
+      yearId: year,
+    },
+  })
+}
+
+function getCaptainsForYear(year) {
+  return Captain.findAll({
+    order: [
+      ['updatedAt', 'DESC'],
+    ],
+    include: [
+      { model: Player },
+    ],
+    where: {
+      yearId: year,
+    },
+  })
+}
+
+function getCaptains() {
+  return Captain.findAll({
+    order: [
+      ['updatedAt', 'DESC'],
+    ],
+    include: [
+      { model: Player },
+    ],
+  }).then(response => response.map(captain => ({
+    ..._.get(captain, 'dataValues.player.dataValues', {}),
+    conference: captain.conference,
+    year: captain.yearId,
+  })))
+}
+
+function getAllstarsForYear(year) {
+  return Allstar.findAll({
+    order: [
+      ['updatedAt', 'DESC'],
+    ],
+    include: [
+      { model: Player },
+    ],
+    where: {
+      yearId: year,
+    },
+  })
+}
+
+function getAllYears() {
+  return Year.findAll().then((response) => {
+    return response.map(r => _.get(r, 'dataValues.id', {}))
+  })
+}
+
 module.exports = {
   getUserFromID,
   getAllUsers,
@@ -91,4 +164,9 @@ module.exports = {
   addUserToGame,
   removePlayer,
   addPlayer,
+  getCaptainsForYear,
+  getAllstarsForYear,
+  getCaptainsWithESPNID,
+  getAllYears,
+  getCaptains,
 }

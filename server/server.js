@@ -32,6 +32,50 @@ app.get('/api/users', auth, admin, (req, res) => {
   })
 })
 
+app.get('/api/years', auth, admin, (req, res) => {
+  database.getAllYears().then((years) => {
+    console.log(years)
+    res.send({ years })
+  })
+})
+
+app.get('/api/allstars/:year', (req, res) => {
+  const { year } = req.params
+  database.getAllstarsForYear(year).then((response) => {
+    let players = response.map(player => _.get(player, 'dataValues.player.dataValues', {}))
+    stats.getPlayerStats(players).then((playerStats) => {
+      players = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players })
+    }).catch(() => {
+      res.send({ players })
+    })
+  })
+})
+
+app.get('/api/captains/:year', (req, res) => {
+  const { year } = req.params
+  database.getCaptainsForYear(year).then((response) => {
+    let players = response.map(player => ({ ..._.get(player, 'dataValues.player.dataValues', {}), conference: player.conference }))
+    stats.getPlayerStats(players).then((playerStats) => {
+      players = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players })
+    }).catch(() => {
+      res.send({ players })
+    })
+  })
+})
+
+app.get('/api/captains', auth, admin, (req, res) => {
+  database.getCaptains().then((players) => {
+    stats.getPlayerStats(players).then((playerStats) => {
+      const output = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players: output })
+    }).catch(() => {
+      res.send({ players })
+    })
+  })
+})
+
 app.get('/api/players', auth, invited, (req, res) => {
   database.getAllPlayers().then((response) => {
     let players = response.map(player => _.get(player, 'dataValues', {}))

@@ -2,14 +2,15 @@ const Sequelize = require('sequelize')
 const uuid = require('uuid/v4')
 const sequelize = require('./connection')
 const Player = require('./player')
-const Year = require('./year')
+const Captain = require('./captain')
 
-const Captain = sequelize.define('captain', {
+const Result = sequelize.define('result', {
   id: { type: Sequelize.UUID, primaryKey: true, defaultValue: () => uuid() },
-  conference: { type: Sequelize.STRING },
+  pickOrder: { type: Sequelize.INTEGER },
 })
 
-Captain.belongsTo(Player)
-Captain.belongsTo(Year)
+Result.belongsTo(Player)
+Result.belongsTo(Captain)
 
-module.exports = Captain
+
+module.exports = Result

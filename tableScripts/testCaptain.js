@@ -1,6 +1,8 @@
 const dotenv = require('dotenv')
 const _ = require('lodash')
 
+const sequelize = require('../models/connection')
+
 dotenv.config({ path: '../.env' })
 
 const Captain = require('../models/captain')
@@ -110,6 +112,19 @@ function getCaptains() {
   })
 }
 
-getCaptains().then((data) => {
-  console.log(data.map(player => _.get(player, 'dataValues', {})))
+// getCaptains().then((data) => {
+//   console.log(data.map(player => _.get(player, 'dataValues', {})))
+// })
+
+function getPlayersThatArentAllstars() {
+  return Player.findAll({
+    include: [{
+      model: Allstar,
+    }],
+  })
+}
+
+getPlayersThatArentAllstars().then((players) => {
+  console.log(players)
+  sequelize.close()
 })

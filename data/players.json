@@ -1,84 +1,312 @@
 {
     "players": [
         {
-            "name": "Kevin Durant",
-            "espnID": "3202"
+            "id": "2056e88e-fd84-4c20-b49d-2b7e3686410c",
+            "espnID": "6585",
+            "name": "Andre Drummond"
         },
         {
-            "name": "Kemba Walker",
-            "espnID": "6479"
+            "id": "97c1c3e3-215b-48cc-976e-b6bc2b99fabb",
+            "espnID": "6583",
+            "name": "Anthony Davis"
         },
         {
-            "name": "Anthony Davis",
-            "espnID": "6583"
+            "id": "29412065-a5eb-40e2-90b8-d146fac493ea",
+            "espnID": "2779",
+            "name": "Chris Paul"
         },
         {
-            "name": "Russell Westbrook",
-            "espnID": "3468"
+            "id": "edae7590-5591-4b3a-8559-38927a417f1b",
+            "espnID": "3978",
+            "name": "DeMar DeRozan"
         },
         {
-            "name": "Steph Curry",
-            "espnID": "3975"
+            "id": "1a322116-c28d-47fa-8795-9ff03bfc7ac1",
+            "espnID": "6589",
+            "name": "Draymond Green"
         },
         {
-            "name": "DeMar DeRozan",
-            "espnID": "3978"
+            "id": "8444a5e0-c7f4-4bb5-a747-f5b4ebac1f5a",
+            "espnID": "3032977",
+            "name": "Giannis Antetokounmpo"
         },
         {
-            "name": "Kawhi Leonard",
-            "espnID": "6450"
+            "id": "3cd40d43-6c76-479d-b8a0-35f6235858d5",
+            "espnID": "4249",
+            "name": "Gordon Hayward"
         },
         {
-            "name": "Giannis Antetokounmpo",
-            "espnID": "3032977"
+            "id": "dc6580f2-ccb4-47e3-9e28-286c47bb0a67",
+            "espnID": "3992",
+            "name": "James Harden"
         },
         {
-            "name": "LeBron James",
-            "espnID": "1966"
+            "id": "6e6517ba-4d92-4e93-86d0-75b68522a6d6",
+            "espnID": "4237",
+            "name": "John Wall"
         },
         {
-            "name": "Kyrie Irving",
-            "espnID": "6442"
+            "id": "4f853e9b-e366-4df9-88bb-5bed52e94728",
+            "espnID": "3136195",
+            "name": "Karl-Anthony Towns"
         },
         {
-            "name": "James Harden",
-            "espnID": "3992"
+            "id": "b9d3545a-25e3-4495-848b-33b3a44b6c45",
+            "espnID": "6450",
+            "name": "Kawhi Leonard"
         },
         {
-            "name": "Chris Paul",
-            "espnID": "2779"
+            "id": "561b42af-d5d3-4a6a-b6f4-2eedb25a2059",
+            "espnID": "6479",
+            "name": "Kemba Walker"
         },
         {
-            "name": "Draymond Green",
-            "espnID": "6589"
+            "id": "a79ac6d0-d2a9-4bd0-b719-a71454f1ff66",
+            "espnID": "3202",
+            "name": "Kevin Durant"
         },
         {
-            "name": "Karl-Anthony Towns",
-            "espnID": "3136195"
+            "id": "f4c0cb87-f825-4794-a7a5-3f9d6dbf9033",
+            "espnID": "3449",
+            "name": "Kevin Love"
         },
         {
-            "name": "John Wall",
-            "espnID": "4237"
+            "id": "f2572ba8-7561-4032-add7-8dc61e06ba52",
+            "espnID": "3012",
+            "name": "Kyle Lowry"
         },
         {
-            "name": "Kyle Lowry",
-            "espnID": "3012"
+            "id": "a4a38a57-6e63-412b-818e-154b81e3a31c",
+            "espnID": "6442",
+            "name": "Kyrie Irving"
         },
         {
-            "name": "Gordon Hayward",
-            "espnID": "4249"
+            "id": "159189bd-a10d-4b17-9cbc-011b687d6b64",
+            "espnID": "1966",
+            "name": "LeBron James"
         },
         {
-            "name": "Kevin Love",
-            "espnID": "3449"
+            "id": "b59a0dfd-aaaa-426b-8b78-e91c4bde126d",
+            "espnID": "3112335",
+            "name": "Nikola Jokic"
         },
         {
-            "name": "Andre Drummond",
-            "espnID": "6585"
+            "id": "74469c68-5058-4ed5-aa63-cc3e89982ea8",
+            "espnID": "3468",
+            "name": "Russell Westbrook"
         },
         {
-            "name": "Nikola Jokic",
-            "espnID": "3112335"
+            "id": "040d9b40-5fc4-4d61-8c2b-294343c32de7",
+            "espnID": "3975",
+            "name": "Steph Curry"
+        }
+    ],
+    "captains": [
+        {
+            "id": "30e876e6-537f-44f2-acc0-8a431130f95b",
+            "conference": "west",
+            "playerId": "040d9b40-5fc4-4d61-8c2b-294343c32de7",
+            "yearId": 2018
+        },
+        {
+            "id": "1eee8187-8a64-46b1-8593-338e518d6f29",
+            "conference": "east",
+            "playerId": "b9d3545a-25e3-4495-848b-33b3a44b6c45",
+            "yearId": 2018
+        },
+        {
+            "id": "77211f43-5ae6-4d6a-a77c-c6f01750e8dd",
+            "conference": "west",
+            "playerId": "040d9b40-5fc4-4d61-8c2b-294343c32de7",
+            "yearId": 2019
+        },
+        {
+            "id": "559a937c-be26-46d9-b0bd-2ea7008779b9",
+            "conference": "east",
+            "playerId": "8444a5e0-c7f4-4bb5-a747-f5b4ebac1f5a",
+            "yearId": 2019
+        }
+    ],
+    "allstars": [
+        {
+            "id": "a0c053a6-075e-4136-81ec-355c37c66dba",
+            "playerId": "a79ac6d0-d2a9-4bd0-b719-a71454f1ff66",
+            "yearId": 2018
+        },
+        {
+            "id": "f450e1c2-3b6a-4ef3-8ab9-9c864b99f446",
+            "playerId": "561b42af-d5d3-4a6a-b6f4-2eedb25a2059",
+            "yearId": 2018
+        },
+        {
+            "id": "40b44cdb-ba86-4491-9a6b-b96fbb5afc74",
+            "playerId": "97c1c3e3-215b-48cc-976e-b6bc2b99fabb",
+            "yearId": 2018
+        },
+        {
+            "id": "199339e5-a47a-48b9-b53b-6ff3fe0ec291",
+            "playerId": "74469c68-5058-4ed5-aa63-cc3e89982ea8",
+            "yearId": 2018
+        },
+        {
+            "id": "de5a4412-f6ee-4bef-96f9-d960e4db332a",
+            "playerId": "edae7590-5591-4b3a-8559-38927a417f1b",
+            "yearId": 2018
+        },
+        {
+            "id": "613a4f2a-0518-4d40-acae-c69c39c73256",
+            "playerId": "8444a5e0-c7f4-4bb5-a747-f5b4ebac1f5a",
+            "yearId": 2018
+        },
+        {
+            "id": "4b4c7785-eba3-4acb-8372-600775ae2f64",
+            "playerId": "159189bd-a10d-4b17-9cbc-011b687d6b64",
+            "yearId": 2018
+        },
+        {
+            "id": "a6ac400e-c047-4fab-822b-2db0c94ecb72",
+            "playerId": "a4a38a57-6e63-412b-818e-154b81e3a31c",
+            "yearId": 2018
+        },
+        {
+            "id": "6f39bf74-848d-4cc2-bec6-d9201eab951c",
+            "playerId": "dc6580f2-ccb4-47e3-9e28-286c47bb0a67",
+            "yearId": 2018
+        },
+        {
+            "id": "abef9cb3-ca87-41ec-893d-7690bf9374bd",
+            "playerId": "29412065-a5eb-40e2-90b8-d146fac493ea",
+            "yearId": 2018
+        },
+        {
+            "id": "96573885-3de1-40bb-826c-93d1c082964b",
+            "playerId": "1a322116-c28d-47fa-8795-9ff03bfc7ac1",
+            "yearId": 2018
+        },
+        {
+            "id": "75550893-60a9-4880-b8d9-46d837195c64",
+            "playerId": "4f853e9b-e366-4df9-88bb-5bed52e94728",
+            "yearId": 2018
+        },
+        {
+            "id": "ed26fa52-da80-4eb3-a107-dbf5fe973350",
+            "playerId": "6e6517ba-4d92-4e93-86d0-75b68522a6d6",
+            "yearId": 2018
+        },
+        {
+            "id": "d89454c4-64ad-45c4-be28-7ece1b671e8c",
+            "playerId": "f2572ba8-7561-4032-add7-8dc61e06ba52",
+            "yearId": 2018
+        },
+        {
+            "id": "f4b87c87-8bc8-4e17-8438-ea518e2bae6a",
+            "playerId": "3cd40d43-6c76-479d-b8a0-35f6235858d5",
+            "yearId": 2018
+        },
+        {
+            "id": "f4099b8d-b176-4b08-951d-e22b8c0b2b1e",
+            "playerId": "f4c0cb87-f825-4794-a7a5-3f9d6dbf9033",
+            "yearId": 2018
+        },
+        {
+            "id": "0a160763-62b7-40b0-ac20-3cd2968b8f95",
+            "playerId": "2056e88e-fd84-4c20-b49d-2b7e3686410c",
+            "yearId": 2018
+        },
+        {
+            "id": "0fd02c2b-b556-4ae3-a64c-ea1a0124e731",
+            "playerId": "b59a0dfd-aaaa-426b-8b78-e91c4bde126d",
+            "yearId": 2018
+        },
+        {
+            "id": "bd17e5e9-92bf-49cc-8163-168f04202094",
+            "playerId": "a79ac6d0-d2a9-4bd0-b719-a71454f1ff66",
+            "yearId": 2019
+        },
+        {
+            "id": "92eccedf-22d6-4caf-91ef-d9a02acc4e13",
+            "playerId": "561b42af-d5d3-4a6a-b6f4-2eedb25a2059",
+            "yearId": 2019
+        },
+        {
+            "id": "3a552c54-18d2-4d23-b6b8-a542fa61d4f8",
+            "playerId": "97c1c3e3-215b-48cc-976e-b6bc2b99fabb",
+            "yearId": 2019
+        },
+        {
+            "id": "7c9ed5ed-4a43-4c14-99ef-116736ba01c3",
+            "playerId": "74469c68-5058-4ed5-aa63-cc3e89982ea8",
+            "yearId": 2019
+        },
+        {
+            "id": "91b5f126-d167-428d-b2e7-5e55036b86fc",
+            "playerId": "edae7590-5591-4b3a-8559-38927a417f1b",
+            "yearId": 2019
+        },
+        {
+            "id": "43bfeec5-5ddb-46bb-962c-3434cdfe555b",
+            "playerId": "b9d3545a-25e3-4495-848b-33b3a44b6c45",
+            "yearId": 2019
+        },
+        {
+            "id": "6ab4405a-df2d-46a8-9f7a-f3e6b910df1e",
+            "playerId": "159189bd-a10d-4b17-9cbc-011b687d6b64",
+            "yearId": 2019
+        },
+        {
+            "id": "ddc95a6c-25f0-499c-a9ee-72d62137f361",
+            "playerId": "a4a38a57-6e63-412b-818e-154b81e3a31c",
+            "yearId": 2019
+        },
+        {
+            "id": "cd6a79ab-e91b-4822-8280-b6865744d423",
+            "playerId": "dc6580f2-ccb4-47e3-9e28-286c47bb0a67",
+            "yearId": 2019
+        },
+        {
+            "id": "817d3967-2ac2-4799-ba4e-a082548ae8a5",
+            "playerId": "29412065-a5eb-40e2-90b8-d146fac493ea",
+            "yearId": 2019
+        },
+        {
+            "id": "99fa36ea-2f57-478a-8449-db379fbc7639",
+            "playerId": "1a322116-c28d-47fa-8795-9ff03bfc7ac1",
+            "yearId": 2019
+        },
+        {
+            "id": "00e92dee-85c0-4de2-8708-15f03732210a",
+            "playerId": "4f853e9b-e366-4df9-88bb-5bed52e94728",
+            "yearId": 2019
+        },
+        {
+            "id": "b76618a4-748f-41cf-83c8-6c101c46e1b1",
+            "playerId": "6e6517ba-4d92-4e93-86d0-75b68522a6d6",
+            "yearId": 2019
+        },
+        {
+            "id": "1e7d5574-b619-41cb-b69e-39b6f50602da",
+            "playerId": "f2572ba8-7561-4032-add7-8dc61e06ba52",
+            "yearId": 2019
+        },
+        {
+            "id": "b65116a9-bf6f-49bf-a040-9b6500faef88",
+            "playerId": "3cd40d43-6c76-479d-b8a0-35f6235858d5",
+            "yearId": 2019
+        },
+        {
+            "id": "3ad0b0d1-45e6-4282-ba84-545709623904",
+            "playerId": "f4c0cb87-f825-4794-a7a5-3f9d6dbf9033",
+            "yearId": 2019
+        },
+        {
+            "id": "28c7224c-b817-4c0c-86ba-3d671909d446",
+            "playerId": "2056e88e-fd84-4c20-b49d-2b7e3686410c",
+            "yearId": 2019
+        },
+        {
+            "id": "1de6f8c2-1f94-48e6-a879-0b936771b6a1",
+            "playerId": "b59a0dfd-aaaa-426b-8b78-e91c4bde126d",
+            "yearId": 2019
         }
     ]
 }

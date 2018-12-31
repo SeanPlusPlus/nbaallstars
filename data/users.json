@@ -1,82 +1,92 @@
-[
-    {
-        "twitterID": "51766287",
-        "accessToken": "51766287-iKQmwFc1WEjnHrX3A0UgCN4JWLmESQwwhzgwNkY49",
-        "accessTokenSecret": "T9qVfnelKU20PQuNuzYR3xFTalUUG7kOMn6oSEaDokAr5",
-        "isAdmin": true,
-        "isInvited": true,
-        "photoURL": "http://pbs.twimg.com/profile_images/983515963164422144/4l14kaXU_normal.jpg",
-        "lastLogin": "1544666823519",
-        "name": "Kane Stapler"
-    },
-    {
-        "twitterID": "1054466985176657921",
-        "accessToken": "1054466985176657921-2Y24ZI4NbI72eRXcN1HuQyutNDQkll",
-        "accessTokenSecret": "XJHIZzxszUuD72KeNv7fHooGEnSdffkA6bCsecy9U2aV2",
-        "isAdmin": false,
-        "isInvited": true,
-        "photoURL": "http://pbs.twimg.com/profile_images/1056803909191196672/_OpGXwQf_normal.jpg",
-        "lastLogin": "1544724532510",
-        "name": "Trae's Treys"
-    },
-    {
-        "twitterID": "1054466232223621120",
-        "accessToken": "1054466232223621120-SOIYY23BfnuF0v2xmOUfg6re1xDNmr",
-        "accessTokenSecret": "4HBgemn5QDEvCRAv2M84oQDnTR17U2oCT7BCZzwzRdHgq",
-        "isAdmin": false,
-        "isInvited": false,
-        "photoURL": "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
-        "lastLogin": "1544728372011",
-        "name": "Trae Young Snowflake Test"
-    },
-    {
-        "twitterID": "1234567890",
-        "accessToken": "1234567890-58486fec-9fbc-4ec8-b1a7-1937df0e8dc5",
-        "accessTokenSecret": "ec71e846-dbb0-4ba4-81b4-767580df9512",
-        "isAdmin": false,
-        "isInvited": true,
-        "photoURL": "https://pbs.twimg.com/profile_images/927275853322469376/4rIB1lNY_normal.jpg",
-        "lastLogin": "1544627312345",
-        "name": "Stephen Curry"
-    },
-    {
-        "twitterID": "2345678901",
-        "accessToken": "2345678901-cec85354-3128-457c-ab17-6183143a6974",
-        "accessTokenSecret": "df840807-591f-49a6-84ff-4bbb974cc676",
-        "isAdmin": false,
-        "isInvited": true,
-        "photoURL": "https://pbs.twimg.com/profile_images/1041900509131550720/AaOX--r3_normal.jpg",
-        "lastLogin": "1544927312345",
-        "name": "Ninja"
-    },
-    {
-        "twitterID": "3456789012",
-        "accessToken": "3456789012-c3614ac1-c0aa-4b9e-bdba-ea765550b896",
-        "accessTokenSecret": "410dc777-e237-4a6e-b88d-f006b5fe651d",
-        "isAdmin": false,
-        "isInvited": true,
-        "photoURL": "https://pbs.twimg.com/profile_images/972170159614906369/0o9cdCOp_normal.jpg",
-        "lastLogin": "1544417312345",
-        "name": "Elon Musk"
-    },
-    {
-        "twitterID": "4567890123",
-        "accessToken": "4567890123-e719ec61-0602-44f8-b2a3-2cb3c63a2def",
-        "accessTokenSecret": "40362563-4ed7-47a0-99cc-d6df7c7eb381",
-        "isAdmin": true,
-        "isInvited": true,
-        "photoURL": "https://pbs.twimg.com/profile_images/1049883646021300224/XnTPHR0R_normal.jpg",
-        "lastLogin": "1545007312345",
-        "name": "Aaron LaBerge"
-    },
-    {
-        "twitterID": "5678901234",
-        "accessToken": "5678901234-e7b0db0d-7270-44fd-8735-4b1655d4f999",
-        "accessTokenSecret": "1726c114-b235-47df-83a6-37f0dc72dde9",
-        "isAdmin": false,
-        "isInvited": false,
-        "photoURL": "https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_normal.jpg",
-        "lastLogin": "1544444354321",
-        "name": "Donald J. Trump"
-    }
-]
+{
+    "users": [
+        {
+            "id": "198413d3-cf18-4463-bc43-f7c8a3af046f",
+            "twitterID": "4567890123",
+            "accessToken": "4567890123-e719ec61-0602-44f8-b2a3-2cb3c63a2def",
+            "accessTokenSecret": "40362563-4ed7-47a0-99cc-d6df7c7eb381",
+            "isAdmin": true,
+            "isInvited": true,
+            "photoURL": "https://pbs.twimg.com/profile_images/1049883646021300224/XnTPHR0R_normal.jpg",
+            "lastLogin": "1545007312345",
+            "name": "Aaron LaBerge"
+        },
+        {
+            "id": "f76c11fe-1274-4d5c-8bf5-fda3047dbf56",
+            "twitterID": "2345678901",
+            "accessToken": "2345678901-cec85354-3128-457c-ab17-6183143a6974",
+            "accessTokenSecret": "df840807-591f-49a6-84ff-4bbb974cc676",
+            "isAdmin": false,
+            "isInvited": true,
+            "photoURL": "https://pbs.twimg.com/profile_images/1041900509131550720/AaOX--r3_normal.jpg",
+            "lastLogin": "1544927312345",
+            "name": "Ninja"
+        },
+        {
+            "id": "5325e725-8041-4735-8da1-a4fc6c051adb",
+            "twitterID": "1054466232223621120",
+            "accessToken": "1054466232223621120-SOIYY23BfnuF0v2xmOUfg6re1xDNmr",
+            "accessTokenSecret": "4HBgemn5QDEvCRAv2M84oQDnTR17U2oCT7BCZzwzRdHgq",
+            "isAdmin": false,
+            "isInvited": false,
+            "photoURL": "http://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png",
+            "lastLogin": "1544728372011",
+            "name": "Trae Young Snowflake Test"
+        },
+        {
+            "id": "5c09f6f6-c9a5-43e6-a521-65d5b4577100",
+            "twitterID": "1054466985176657921",
+            "accessToken": "1054466985176657921-2Y24ZI4NbI72eRXcN1HuQyutNDQkll",
+            "accessTokenSecret": "XJHIZzxszUuD72KeNv7fHooGEnSdffkA6bCsecy9U2aV2",
+            "isAdmin": false,
+            "isInvited": true,
+            "photoURL": "http://pbs.twimg.com/profile_images/1056803909191196672/_OpGXwQf_normal.jpg",
+            "lastLogin": "1544724532510",
+            "name": "Trae\"s Treys"
+        },
+        {
+            "id": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "twitterID": "51766287",
+            "accessToken": "51766287-iKQmwFc1WEjnHrX3A0UgCN4JWLmESQwwhzgwNkY49",
+            "accessTokenSecret": "T9qVfnelKU20PQuNuzYR3xFTalUUG7kOMn6oSEaDokAr5",
+            "isAdmin": true,
+            "isInvited": true,
+            "photoURL": "http://pbs.twimg.com/profile_images/983515963164422144/4l14kaXU_normal.jpg",
+            "lastLogin": "1544666823519",
+            "name": "Kane Stapler"
+        },
+        {
+            "id": "2672f425-ae92-4bb5-be32-dc8b6daed9ce",
+            "twitterID": "1234567890",
+            "accessToken": "1234567890-58486fec-9fbc-4ec8-b1a7-1937df0e8dc5",
+            "accessTokenSecret": "ec71e846-dbb0-4ba4-81b4-767580df9512",
+            "isAdmin": false,
+            "isInvited": true,
+            "photoURL": "https://pbs.twimg.com/profile_images/927275853322469376/4rIB1lNY_normal.jpg",
+            "lastLogin": "1544627312345",
+            "name": "Stephen Curry"
+        },
+        {
+            "id": "6c376589-2dae-4c4d-81d3-a7d12db489ee",
+            "twitterID": "5678901234",
+            "accessToken": "5678901234-e7b0db0d-7270-44fd-8735-4b1655d4f999",
+            "accessTokenSecret": "1726c114-b235-47df-83a6-37f0dc72dde9",
+            "isAdmin": false,
+            "isInvited": false,
+            "photoURL": "https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_normal.jpg",
+            "lastLogin": "1544444354321",
+            "name": "Donald J. Trump"
+        },
+        {
+            "id": "6a20a922-8260-467e-9465-35a787f2c875",
+            "twitterID": "3456789012",
+            "accessToken": "3456789012-c3614ac1-c0aa-4b9e-bdba-ea765550b896",
+            "accessTokenSecret": "410dc777-e237-4a6e-b88d-f006b5fe651d",
+            "isAdmin": false,
+            "isInvited": true,
+            "photoURL": "https://pbs.twimg.com/profile_images/972170159614906369/0o9cdCOp_normal.jpg",
+            "lastLogin": "1544417312345",
+            "name": "Elon Musk"
+        }
+    ]
+}

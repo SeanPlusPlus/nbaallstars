@@ -9,6 +9,7 @@ import {
 import playerUtil from '../utils/playerUtil'
 import '../styles/Lineup.css'
 import Player from './Player'
+import Captain from './Captain'
 
 
 const reorder = (list, startIndex, endIndex) => {
@@ -61,6 +62,7 @@ const Lineup = () => {
     pending: [],
     east: [],
   })
+  const [captains, setCaptains] = useState([])
 
   const onDragEnd = (result) => {
     const { source, destination } = result
@@ -100,11 +102,12 @@ const Lineup = () => {
   useEffect(
     () => {
       if (items !== null && items.pending.length === 0 && items.east.length === 0 && items.west.length === 0) { // eslint-disable-line max-len
-        const uri = '/api/players'
+        const uri = '/api/allstars/2018'
         fetch(uri)
           .then(response => response.json())
           .then((payload) => {
             if (payload.players) {
+              console.log(payload.players)
               const pending = payload.players
                 .map(s => (playerUtil.getSanitizedPlayer(s)))
               const i = {
@@ -120,6 +123,20 @@ const Lineup = () => {
     },
     [items],
   )
+
+  useEffect(() => {
+    const uri = '/api/captains/2018'
+    fetch(uri)
+      .then(response => response.json())
+      .then((payload) => {
+        if (payload.players) {
+          console.log(payload.players)
+          const pending = payload.players
+            .map(s => (playerUtil.getSanitizedPlayer(s)))
+          setCaptains(pending)
+        }
+      })
+  }, [])
 
   if (items === null) {
     return (
@@ -145,7 +162,7 @@ const Lineup = () => {
     <Row>
       <DragDropContext onDragEnd={onDragEnd}>
         <Col sm={{ size: 4 }}>
-          <legend>LeBron James</legend>
+          <legend><Captain player={captains[0]} /></legend>
           <Droppable droppableId="west">
             {(provided, snapshot) => (
               <div
@@ -219,7 +236,7 @@ const Lineup = () => {
         )}
 
         <Col sm={{ size: 4 }}>
-          <legend>Kyrie Irving</legend>
+          <legend><Captain player={captains[1]} /></legend>
           <Droppable droppableId="east">
             {(provided, snapshot) => (
               <div

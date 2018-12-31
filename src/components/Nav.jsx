@@ -40,6 +40,16 @@ const Navigation = () => {
               Edit Players
             </Link>
           </DropdownItem>
+          <DropdownItem>
+            <Link to="/admin/edit-captains">
+              Edit Captains
+            </Link>
+          </DropdownItem>
+          <DropdownItem>
+            <Link to="/admin/edit-allstars">
+              Edit Allstars
+            </Link>
+          </DropdownItem>
         </>
       )
     }

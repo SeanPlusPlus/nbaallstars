@@ -1,0 +1,16 @@
+.captain-card {
+    width: 35%;
+}
+
+.west-captain {
+    float: left;
+}
+
+.east-captain {
+    float: right;
+}
+
+.conference-title {
+    text-align: center;
+    font-size: 30px;
+}
