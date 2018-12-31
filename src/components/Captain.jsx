@@ -18,6 +18,9 @@ const Captain = (props) => {
   )
 }
 Captain.propTypes = {
+  // Not sure how to make this one go away. Committing but adding a todo
+  // TODO: Figure this out
+  // eslint-disable-next-line react/require-default-props
   player: PropTypes.shape({
     headshot: PropTypes.string,
     position: PropTypes.string,

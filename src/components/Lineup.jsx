@@ -107,7 +107,6 @@ const Lineup = () => {
           .then(response => response.json())
           .then((payload) => {
             if (payload.players) {
-              console.log(payload.players)
               const pending = payload.players
                 .map(s => (playerUtil.getSanitizedPlayer(s)))
               const i = {
@@ -130,7 +129,6 @@ const Lineup = () => {
       .then(response => response.json())
       .then((payload) => {
         if (payload.players) {
-          console.log(payload.players)
           const pending = payload.players
             .map(s => (playerUtil.getSanitizedPlayer(s)))
           setCaptains(pending)
