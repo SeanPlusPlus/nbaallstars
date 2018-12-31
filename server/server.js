@@ -88,6 +88,18 @@ app.get('/api/players', auth, invited, (req, res) => {
   })
 })
 
+app.get('/api/non-allstars/:year', auth, admin, (req, res) => {
+  const { year } = req.params
+  database.getPlayersThatArentAllstars(year).then((players) => {
+    stats.getPlayerStats(players).then((playerStats) => {
+      const results = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players: results })
+    }).catch(() => {
+      res.send({ players })
+    })
+  })
+})
+
 app.get('/api/remove-player', auth, admin, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {

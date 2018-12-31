@@ -156,6 +156,49 @@ function getAllYears() {
   })
 }
 
+function getPlayersThatArentAllstars(year) {
+  const allTables = [
+    Player.findAll(),
+    Allstar.findAll({
+      order: [
+        ['updatedAt', 'DESC'],
+      ],
+      where: {
+        yearId: year,
+      },
+    }),
+    Captain.findAll({
+      order: [
+        ['updatedAt', 'DESC'],
+      ],
+      where: {
+        yearId: year,
+      },
+    }),
+  ]
+  return Promise.all(allTables).then((tables) => {
+    const players = tables[0].map(x => _.get(x, 'dataValues', {}))
+    const allstars = tables[1].map(x => _.get(x, 'dataValues', {}))
+    const captains = tables[2].map(x => _.get(x, 'dataValues', {}))
+
+    const results = players.filter((player) => {
+      let isAnAllstarorCaptain = false
+      allstars.forEach((allstar) => {
+        if (allstar.playerId === player.id) {
+          isAnAllstarorCaptain = true
+        }
+      })
+      captains.forEach((allstar) => {
+        if (allstar.playerId === player.id) {
+          isAnAllstarorCaptain = true
+        }
+      })
+      return !isAnAllstarorCaptain
+    })
+    return results
+  })
+}
+
 module.exports = {
   getUserFromID,
   getAllUsers,
@@ -169,4 +212,5 @@ module.exports = {
   getCaptainsWithESPNID,
   getAllYears,
   getCaptains,
+  getPlayersThatArentAllstars,
 }

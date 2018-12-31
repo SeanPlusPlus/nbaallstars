@@ -99,6 +99,16 @@
             "id": "040d9b40-5fc4-4d61-8c2b-294343c32de7",
             "espnID": "3975",
             "name": "Steph Curry"
+        },
+        {
+            "id": "d34e45c0-5b62-4cea-bb1c-75ba8691894f",
+            "espnID": "3102531",
+            "name": "Kristaps Porzingis"
+        },
+        {
+            "id": "20dff4dc-7c09-429e-b884-22f4f2f8b00a",
+            "espnID": "4277905",
+            "name": "Trae Young"
         }
     ],
     "captains": [

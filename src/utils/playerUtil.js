@@ -24,6 +24,16 @@ const addPlayer = playerID => request.get(`/api/add-player?playerID=${playerID}`
 
 const removeAllstar = (playerID, year) => {
   console.log(`TODO: Remove ${playerID} in ${year} now`)
+  return new Promise((resolve) => {
+    resolve()
+  })
+}
+
+const addAllstars = (playerIDs, year) => {
+  console.log(`TODO: Add ${playerIDs} in ${year} now`)
+  return new Promise((resolve) => {
+    resolve()
+  })
 }
 
 export default {
@@ -31,4 +41,5 @@ export default {
   removePlayer,
   addPlayer,
   removeAllstar,
+  addAllstars,
 }
