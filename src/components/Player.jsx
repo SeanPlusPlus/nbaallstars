@@ -9,7 +9,7 @@ const Player = (props) => {
   return (
     <>
       <div className="headshot">
-        <img height="55px" src={player.headshot} alt="headshot" />
+        <img height="55px" src={player.headshot} alt="headshot" className="player-headshot rounded-circle" />
       </div>
       <div className="player-info">
         <div>
