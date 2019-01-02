@@ -197,7 +197,7 @@ const Lineup = () => {
 
         {items.pending.length > 0 && (
           <Col sm={{ size: 4 }}>
-            <legend>Pending</legend>
+            <legend className="pending-header">Pending</legend>
             <Droppable droppableId="pending">
               {(provided, snapshot) => (
                 <div
