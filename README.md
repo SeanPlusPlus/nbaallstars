@@ -124,5 +124,10 @@ sls deploy
 to add players:
 
 ```
-node Models/addPlayers.js
+node tableScripts/createAllTables.js
+node tableScripts/addAllData.js
 ```
+
+## Table model
+
+https://app.quickdatabasediagrams.com/#/d/swnTCG
