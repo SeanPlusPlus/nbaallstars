@@ -1,3 +1,7 @@
 #lineup-loader {
     min-height: 336px;
 }
+
+.pending-header {
+    min-height: 55px;
+}

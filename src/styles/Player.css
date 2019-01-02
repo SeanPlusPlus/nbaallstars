@@ -6,3 +6,7 @@
 .player-stats {
     font-size: 10px;
 }
+
+.player-headshot {
+    border: 1px solid #ddd;
+}

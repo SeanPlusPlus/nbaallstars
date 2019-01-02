@@ -13,6 +13,8 @@ import Login from './components/Login'
 import Profile from './components/Profile'
 import Users from './components/Users'
 import EditPlayers from './components/EditPlayers'
+import EditCaptains from './components/EditCaptains'
+import EditAllstars from './components/EditAllstars'
 
 const App = () => {
   Auth.getUserInfoFromCookie().then((twitterUserData) => {
@@ -27,6 +29,8 @@ const App = () => {
       <Route path="/profile" exact component={Profile} />
       <Route path="/admin/users" exact component={Users} />
       <Route path="/admin/edit-players" exact component={EditPlayers} />
+      <Route path="/admin/edit-captains" exact component={EditCaptains} />
+      <Route path="/admin/edit-allstars" exact component={EditAllstars} />
     </>
     </Router>
   )

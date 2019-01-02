@@ -1,0 +1,13 @@
+.headshot {
+    float: left;
+    padding-right: 16px;
+}
+
+.captain-profile {
+    height: 55px;
+    line-height: 55px;
+}
+
+.team-name {
+    vertical-align: middle;
+}

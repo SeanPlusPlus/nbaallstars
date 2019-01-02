@@ -32,6 +32,76 @@ app.get('/api/users', auth, admin, (req, res) => {
   })
 })
 
+app.get('/api/years', auth, admin, (req, res) => {
+  database.getAllYears().then((years) => {
+    console.log(years)
+    res.send({ years })
+  })
+})
+
+app.get('/api/allstars/:year', (req, res) => {
+  const { year } = req.params
+  database.getAllstarsForYear(year).then((response) => {
+    let players = response.map(player => _.get(player, 'dataValues.player.dataValues', {}))
+    stats.getPlayerStats(players).then((playerStats) => {
+      players = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players })
+    }).catch(() => {
+      res.send({ players })
+    })
+  })
+})
+
+app.delete('/api/allstars/:year/:id', (req, res) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' })
+  const {
+    id,
+    year,
+  } = req.params
+  database.removeAllstar(id, year).then(() => {
+    res.send({ message: 'Success' })
+  }).catch(() => {
+    res.send({ message: 'Error removing player from database' })
+  })
+})
+
+app.post('/api/allstars/:year/:ids', (req, res) => {
+  res.header({ 'Access-Control-Allow-Origin': '*' })
+  const {
+    ids,
+    year,
+  } = req.params
+  database.addAllstars(ids.split(','), year).then(() => {
+    res.send({ message: 'Success' })
+  }).catch(() => {
+    res.send({ message: 'Error removing player from database' })
+  })
+})
+
+app.get('/api/captains/:year', (req, res) => {
+  const { year } = req.params
+  database.getCaptainsForYear(year).then((response) => {
+    let players = response.map(player => ({ ..._.get(player, 'dataValues.player.dataValues', {}), conference: player.conference }))
+    stats.getPlayerStats(players).then((playerStats) => {
+      players = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players })
+    }).catch(() => {
+      res.send({ players })
+    })
+  })
+})
+
+app.get('/api/captains', auth, admin, (req, res) => {
+  database.getCaptains().then((players) => {
+    stats.getPlayerStats(players).then((playerStats) => {
+      const output = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players: output })
+    }).catch(() => {
+      res.send({ players })
+    })
+  })
+})
+
 app.get('/api/players', auth, invited, (req, res) => {
   database.getAllPlayers().then((response) => {
     let players = response.map(player => _.get(player, 'dataValues', {}))
@@ -44,24 +114,36 @@ app.get('/api/players', auth, invited, (req, res) => {
   })
 })
 
-app.get('/api/remove-player', auth, admin, (req, res) => {
+app.get('/api/non-allstars/:year', auth, admin, (req, res) => {
+  const { year } = req.params
+  database.getPlayersThatArentAllstars(year).then((players) => {
+    stats.getPlayerStats(players).then((playerStats) => {
+      const results = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      res.send({ players: results })
+    }).catch(() => {
+      res.send({ players })
+    })
+  })
+})
+
+app.delete('/api/player/:id', auth, admin, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
-    playerID,
-  } = req.query
-  database.removePlayer(playerID).then(() => {
+    id,
+  } = req.params
+  database.removePlayer(id).then(() => {
     res.send({ message: 'Success' })
   }).catch(() => {
     res.send({ message: 'Error removing player from database' })
   })
 })
 
-app.get('/api/add-player', auth, admin, (req, res) => {
+app.post('/api/player/:id', auth, admin, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
-    playerID,
-  } = req.query
-  database.addPlayer(playerID).then(() => {
+    id,
+  } = req.params
+  database.addPlayer(id).then(() => {
     res.send({ message: 'Success' })
   }).catch(() => {
     res.send({ message: 'Error removing player from database' })
@@ -104,10 +186,10 @@ app.get('/twitter/access-token', (req, res) => {
   })
 })
 
-app.get('/api/add-user', auth, (req, res) => {
+app.post('/api/user/:passcode', auth, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
-  const addUserPasscode = req.query.passcode
-  if (addUserPasscode === ADD_USER_PASSCODE) {
+  const { passcode } = req.params
+  if (passcode === ADD_USER_PASSCODE) {
     database.addUserToGame(req.profile.user).then(() => {
       res.send({ message: 'Success' })
     }).catch((error) => {
@@ -119,7 +201,7 @@ app.get('/api/add-user', auth, (req, res) => {
   }
 })
 
-app.get('/api/get-user', (req, res) => {
+app.get('/api/user', (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     userID,
