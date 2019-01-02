@@ -4,8 +4,10 @@ import PropTypes from 'prop-types'
 // styles
 import '../styles/Player.css'
 
+const combiner = 'http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/'
+
 const getAvatar = id => (
-  `http://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/${id}.png&w=350&h=350&scale=crop`
+  `${combiner}${id}.png&w=350&h=350&scale=crop`
 )
 
 const Player = (props) => {
@@ -13,7 +15,12 @@ const Player = (props) => {
   return (
     <>
       <div className="headshot">
-        <img height="55px" src={getAvatar(player.id)} alt="headshot" className="player-headshot rounded-circle" />
+        <img
+          height="55px"
+          src={getAvatar(player.id)}
+          alt="headshot"
+          className="player-headshot rounded-circle"
+        />
       </div>
       <div className="player-info">
         <div>
