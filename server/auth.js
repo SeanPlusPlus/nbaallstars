@@ -5,6 +5,10 @@ const database = require('./util/database')
 const { NODE_ENV } = process.env
 
 const auth = (req, res, next) => new Promise((resolve) => {
+  if (NODE_ENV === 'test') {
+    return resolve(next())
+  }
+
   const { userID, tokenHash } = session.decryptUserCookie(req.cookies)
 
   if (!userID) {
@@ -60,6 +64,10 @@ const admin = (req, res, next) => {
 }
 
 const invited = (req, res, next) => {
+  if (NODE_ENV === 'test') {
+    return next()
+  }
+
   const isInvited = _.get(req, 'profile.user.isInvited', false)
   if (!isInvited) {
     res.status(403)

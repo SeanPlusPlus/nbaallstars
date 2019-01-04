@@ -251,4 +251,8 @@ if (NODE_ENV === 'development') {
   app.listen(port, () => console.log(`Example app listening on port ${port}!`)) // eslint-disable-line no-console
 }
 
+if (NODE_ENV === 'test') {
+  module.exports = app
+}
+
 module.exports.handler = serverless(app)

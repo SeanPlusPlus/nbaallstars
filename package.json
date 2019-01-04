@@ -53,7 +53,7 @@
     "build": "react-scripts build && rm -rf docs/ && mv build/ docs/",
     "lint": "eslint ./src/**/*.js* && eslint ./server/**/*.js && eslint ./models/**/*.js",
     "testweb": "cross-env CI=true react-scripts test --env=jsdom --colors",
-    "testapi": "export NODE_ENV=test && export DEV_PORT=5432 && mocha --exit --timeout 15000",
+    "testapi": "export NODE_ENV=test && mocha --exit --timeout 15000",
     "test": "yarn testweb && yarn testapi",
     "validate": "yarn lint && yarn test"
   },
