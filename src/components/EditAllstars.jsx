@@ -28,7 +28,7 @@ const EditAllstars = () => {
     request.get(`/api/allstars/${year}`).then((x) => {
       setAllstars(x.players)
     })
-    request.get(`/api/non-allstars/${yearSelected}`).then((x) => {
+    request.get(`/api/non-allstars/${year}`).then((x) => {
       setOtherPlayers(x.players)
     })
   }
