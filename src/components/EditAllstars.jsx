@@ -26,8 +26,7 @@ const EditAllstars = () => {
 
   function refreshPlayerData(year) {
     request.get(`/api/allstars/${year}`).then((x) => {
-      const newAllstars = x.players.map(player => playerUtil.getSanitizedPlayer(player))
-      setAllstars(newAllstars)
+      setAllstars(x.players)
     })
     request.get(`/api/non-allstars/${yearSelected}`).then((x) => {
       setOtherPlayers(x.players)

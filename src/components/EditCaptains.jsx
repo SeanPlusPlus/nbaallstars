@@ -7,7 +7,6 @@ import {
 } from 'reactstrap'
 
 import request from '../utils/request'
-import playerUtil from '../utils/playerUtil'
 
 // styles
 import '../styles/EditCaptains.css'
@@ -24,7 +23,7 @@ const EditCaptains = () => {
         if (!newCaptains[captain.year]) {
           newCaptains[captain.year] = {}
         }
-        newCaptains[captain.year][captain.conference] = playerUtil.getSanitizedPlayer(captain)
+        newCaptains[captain.year][captain.conference] = captain
       })
       setCaptains(newCaptains)
     })

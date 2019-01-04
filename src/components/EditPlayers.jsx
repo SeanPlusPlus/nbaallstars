@@ -18,7 +18,7 @@ const EditPlayers = () => {
   const [playerIDInput, setPlayerIDInput] = useState([])
   function refreshPlayerData() {
     request.get('/api/players').then((data) => {
-      setPlayers(data.players.map(s => playerUtil.getSanitizedPlayer(s)))
+      setPlayers(data.players)
     })
   }
   useEffect(() => {
