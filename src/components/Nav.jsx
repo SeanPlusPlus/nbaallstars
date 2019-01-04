@@ -58,11 +58,11 @@ const Navigation = () => {
         <UncontrolledDropdown nav inNavbar>
           <DropdownToggle className="user-card" nav>
             {
-              _.get(user, 'profile_image_url') && (
+              _.get(user, 'photoURL') && (
               <img
                 className="twitter-avatar rounded-circle"
                 alt="User avatar"
-                src={user.profile_image_url.replace('_normal', '')}
+                src={user.photoURL.replace('_normal', '')}
               />
               )
             }

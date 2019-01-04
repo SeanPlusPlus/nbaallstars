@@ -7,6 +7,7 @@ const database = require('./util/database')
 const twitter = require('./util/twitter')
 const session = require('./util/session')
 const stats = require('./util/stats')
+const sanitizer = require('./util/sanitizer')
 const { auth, admin, invited } = require('./auth')
 
 dotenv.config()
@@ -27,7 +28,7 @@ app.get('/api/profile', auth, (req, res) => {
 
 app.get('/api/users', auth, admin, (req, res) => {
   database.getAllUsers().then((response) => {
-    const users = response.map(r => _.get(r, 'dataValues', {}))
+    const users = response.map(r => _.get(r, 'dataValues', {})).map(user => sanitizer.getUser(user))
     res.send({ users })
   })
 })
@@ -44,7 +45,8 @@ app.get('/api/allstars/:year', (req, res) => {
   database.getAllstarsForYear(year).then((response) => {
     let players = response.map(player => _.get(player, 'dataValues.player.dataValues', {}))
     stats.getPlayerStats(players).then((playerStats) => {
-      players = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      players = players.map((player, index) => (
+        sanitizer.getPlayer({ ...player, ...playerStats[index] })))
       res.send({ players })
     }).catch(() => {
       res.send({ players })
@@ -83,7 +85,8 @@ app.get('/api/captains/:year', (req, res) => {
   database.getCaptainsForYear(year).then((response) => {
     let players = response.map(player => ({ ..._.get(player, 'dataValues.player.dataValues', {}), conference: player.conference }))
     stats.getPlayerStats(players).then((playerStats) => {
-      players = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      players = players.map((player, index) => (
+        sanitizer.getCaptain({ ...player, ...playerStats[index] })))
       res.send({ players })
     }).catch(() => {
       res.send({ players })
@@ -94,7 +97,8 @@ app.get('/api/captains/:year', (req, res) => {
 app.get('/api/captains', auth, admin, (req, res) => {
   database.getCaptains().then((players) => {
     stats.getPlayerStats(players).then((playerStats) => {
-      const output = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      const output = players.map((player, index) => (
+        sanitizer.getCaptain({ ...player, ...playerStats[index] })))
       res.send({ players: output })
     }).catch(() => {
       res.send({ players })
@@ -106,7 +110,8 @@ app.get('/api/players', auth, invited, (req, res) => {
   database.getAllPlayers().then((response) => {
     let players = response.map(player => _.get(player, 'dataValues', {}))
     stats.getPlayerStats(players).then((playerStats) => {
-      players = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      players = players.map((player, index) => (
+        sanitizer.getPlayer({ ...player, ...playerStats[index] })))
       res.send({ players })
     }).catch(() => {
       res.send({ players })
@@ -118,7 +123,8 @@ app.get('/api/non-allstars/:year', auth, admin, (req, res) => {
   const { year } = req.params
   database.getPlayersThatArentAllstars(year).then((players) => {
     stats.getPlayerStats(players).then((playerStats) => {
-      const results = players.map((player, index) => ({ ...player, ...playerStats[index] }))
+      const results = players.map((player, index) => (
+        sanitizer.getPlayer({ ...player, ...playerStats[index] })))
       res.send({ players: results })
     }).catch(() => {
       res.send({ players })
@@ -217,7 +223,14 @@ app.get('/api/user', (req, res) => {
       } = userData.dataValues
       if (session.checkUserVerification(tokenHash, accessToken, accessTokenSecret)) {
         twitter.getUserInfo(accessToken, accessTokenSecret).then((twitterUser) => {
-          res.send({ ...twitterUser, isAdmin, isInvited })
+          const user = sanitizer.getUser({
+            ...twitterUser,
+            photoURL: twitterUser.profile_image_url,
+            twitterID: twitterUser.id,
+            isAdmin,
+            isInvited,
+          })
+          res.send(user)
         }).catch((error) => {
           res.status(500)
           res.send({ message: 'Error getting user', error })

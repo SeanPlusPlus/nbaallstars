@@ -6,7 +6,6 @@ import {
   Col,
 } from 'reactstrap'
 
-import playerUtil from '../utils/playerUtil'
 import '../styles/Lineup.css'
 import Player from './Player'
 import Captain from './Captain'
@@ -108,7 +107,6 @@ const Lineup = () => {
           .then((payload) => {
             if (payload.players) {
               const pending = payload.players
-                .map(s => (playerUtil.getSanitizedPlayer(s)))
               const i = {
                 ...items,
                 pending,
@@ -130,7 +128,6 @@ const Lineup = () => {
       .then((payload) => {
         if (payload.players) {
           const pending = payload.players
-            .map(s => (playerUtil.getSanitizedPlayer(s)))
           setCaptains(pending)
         }
       })
