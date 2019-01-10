@@ -24,10 +24,23 @@ const Player = (props) => {
       </div>
       <div className="player-info">
         <div>
-          {player.name}
+          {player.firstName}
         </div>
         <div>
-          {`${player.position} ${player.number}`}
+          {player.lastName}
+        </div>
+        <div>
+          <img
+            src={player.teamLogo}
+            className="player-team-logo"
+            alt="teamlogo"
+          />
+          <span className="player-number">
+            {player.number}
+          </span>
+          <span className="player-position">
+            {player.position}
+          </span>
         </div>
         <div className="player-stats">
           {`${player.stats[0].abbreviation}: ${Math.round(player.stats[0].value)}`}
