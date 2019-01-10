@@ -1,6 +1,7 @@
 .headshot {
     float: left;
     padding-right: 16px;
+    height: 75px;
 }
 
 .player-stats {
@@ -9,4 +10,18 @@
 
 .player-headshot {
     border: 1px solid #ddd;
+}
+
+.player-team-logo {
+    height: 19px;
+}
+
+.player-position, .player-number {
+    color: #444;
+}
+
+.player-position:before, .player-number:before {
+    content: "\2022";
+    color: #a5a6a7;
+    padding: 0 .2em;
 }
