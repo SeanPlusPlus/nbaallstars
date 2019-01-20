@@ -14,7 +14,6 @@ import 'react-bootstrap-typeahead/css/Typeahead.css'
 // local components
 import Nav from './Nav'
 import PlayerTable from './PlayerTable'
-import AdminRedirect from './AdminRedirect'
 
 
 const DEFAULT_YEAR = 2018
@@ -109,7 +108,6 @@ const EditAllstars = () => {
     <>
       <Nav />
       <Container id="main">
-        <AdminRedirect />
         <Input type="select" value={yearSelected} onChange={selectDifferentYear}>
           {yearOptions}
         </Input>

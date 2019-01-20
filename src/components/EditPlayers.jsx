@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useGlobal } from 'reactn'
 import {
   Button, Label,
   Input, Container,
@@ -11,10 +10,8 @@ import playerUtil from '../utils/playerUtil'
 // local components
 import PlayerTable from './PlayerTable'
 import Nav from './Nav'
-import AdminRedirect from './AdminRedirect'
 
 const EditPlayers = () => {
-  const [user] = useGlobal('user')
   const [players, setPlayers] = useState([])
   const [playerIDInput, setPlayerIDInput] = useState([])
   function refreshPlayerData() {
@@ -35,29 +32,24 @@ const EditPlayers = () => {
       refreshPlayerData()
     })
   }
-  let addUsers
-  if (user && user.isAdmin) {
-    // Show add user section
-    addUsers = (
-      <div>
-        <Label for="playerID-input">Player ID</Label>
-        <Input
-          type="number"
-          name="playerID"
-          id="playerID-input"
-          value={playerIDInput}
-          onChange={e => setPlayerIDInput(e.target.value)}
-        />
-        <Button onClick={addPlayer}>Add Player</Button>
-      </div>
-    )
-  }
+  const addUsers = (
+    <div>
+      <Label for="playerID-input">Player ID</Label>
+      <Input
+        type="number"
+        name="playerID"
+        id="playerID-input"
+        value={playerIDInput}
+        onChange={e => setPlayerIDInput(e.target.value)}
+      />
+      <Button onClick={addPlayer}>Add Player</Button>
+    </div>
+  )
 
   return (
     <>
       <Nav />
       <Container id="main">
-        <AdminRedirect />
         {addUsers}
         <PlayerTable removePlayer={removePlayer} players={players} />
       </Container>

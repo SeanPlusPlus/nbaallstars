@@ -15,6 +15,7 @@ import Users from './components/Users'
 import EditPlayers from './components/EditPlayers'
 import EditCaptains from './components/EditCaptains'
 import EditAllstars from './components/EditAllstars'
+import PrivateRouter from './components/PrivateRouter'
 
 const App = () => {
   Auth.getUserInfoFromCookie().then((twitterUserData) => {
@@ -26,11 +27,11 @@ const App = () => {
       <Refresh />
       <Route path="/" exact component={Main} />
       <Route path="/login" exact component={Login} />
-      <Route path="/profile" exact component={Profile} />
-      <Route path="/admin/users" exact component={Users} />
-      <Route path="/admin/edit-players" exact component={EditPlayers} />
-      <Route path="/admin/edit-captains" exact component={EditCaptains} />
-      <Route path="/admin/edit-allstars" exact component={EditAllstars} />
+      <PrivateRouter path="/profile" exact component={Profile} />
+      <PrivateRouter path="/admin/users" admin exact component={Users} />
+      <PrivateRouter path="/admin/edit-players" admin exact component={EditPlayers} />
+      <PrivateRouter path="/admin/edit-captains" admin exact component={EditCaptains} />
+      <PrivateRouter path="/admin/edit-allstars" admin exact component={EditAllstars} />
     </>
     </Router>
   )

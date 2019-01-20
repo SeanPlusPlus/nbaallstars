@@ -13,7 +13,6 @@ import '../styles/EditCaptains.css'
 
 // local components
 import Nav from './Nav'
-import AdminRedirect from './AdminRedirect'
 
 
 const EditCaptains = () => {
@@ -62,7 +61,6 @@ const EditCaptains = () => {
     <>
       <Nav />
       <Container id="main">
-        <AdminRedirect />
         {captainCards}
       </Container>
     </>
