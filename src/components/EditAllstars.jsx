@@ -15,7 +15,6 @@ import 'react-bootstrap-typeahead/css/Typeahead.css'
 import Nav from './Nav'
 import PlayerTable from './PlayerTable'
 
-
 const DEFAULT_YEAR = 2018
 
 const EditAllstars = () => {

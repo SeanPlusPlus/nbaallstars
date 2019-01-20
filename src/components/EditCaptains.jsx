@@ -14,7 +14,6 @@ import '../styles/EditCaptains.css'
 // local components
 import Nav from './Nav'
 
-
 const EditCaptains = () => {
   const [captains, setCaptains] = useState()
   useEffect(() => {
