@@ -13,11 +13,16 @@ import '../styles/EditCaptains.css'
 
 // local components
 import Nav from './Nav'
+import AdminRedirect from './AdminRedirect'
+
 
 const EditCaptains = () => {
   const [captains, setCaptains] = useState()
   useEffect(() => {
     request.get('/api/captains').then((x) => {
+      if (!x.players) {
+        return
+      }
       const newCaptains = {}
       x.players.forEach((captain) => {
         if (!newCaptains[captain.year]) {
@@ -57,6 +62,7 @@ const EditCaptains = () => {
     <>
       <Nav />
       <Container id="main">
+        <AdminRedirect />
         {captainCards}
       </Container>
     </>

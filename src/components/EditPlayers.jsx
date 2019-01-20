@@ -11,6 +11,7 @@ import playerUtil from '../utils/playerUtil'
 // local components
 import PlayerTable from './PlayerTable'
 import Nav from './Nav'
+import AdminRedirect from './AdminRedirect'
 
 const EditPlayers = () => {
   const [user] = useGlobal('user')
@@ -56,6 +57,7 @@ const EditPlayers = () => {
     <>
       <Nav />
       <Container id="main">
+        <AdminRedirect />
         {addUsers}
         <PlayerTable removePlayer={removePlayer} players={players} />
       </Container>

@@ -40,7 +40,7 @@ app.get('/api/years', auth, admin, (req, res) => {
   })
 })
 
-app.get('/api/allstars/:year', (req, res) => {
+app.get('/api/allstars/:year', auth, (req, res) => {
   const { year } = req.params
   database.getAllstarsForYear(year).then((response) => {
     let players = response.map(player => _.get(player, 'dataValues.player.dataValues', {}))
@@ -54,7 +54,7 @@ app.get('/api/allstars/:year', (req, res) => {
   })
 })
 
-app.delete('/api/allstars/:year/:id', (req, res) => {
+app.delete('/api/allstars/:year/:id', auth, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     id,
@@ -67,7 +67,7 @@ app.delete('/api/allstars/:year/:id', (req, res) => {
   })
 })
 
-app.post('/api/allstars/:year/:ids', (req, res) => {
+app.post('/api/allstars/:year/:ids', auth, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     ids,
@@ -80,7 +80,7 @@ app.post('/api/allstars/:year/:ids', (req, res) => {
   })
 })
 
-app.get('/api/captains/:year', (req, res) => {
+app.get('/api/captains/:year', auth, (req, res) => {
   const { year } = req.params
   database.getCaptainsForYear(year).then((response) => {
     let players = response.map(player => ({ ..._.get(player, 'dataValues.player.dataValues', {}), conference: player.conference }))

@@ -14,6 +14,8 @@ import 'react-bootstrap-typeahead/css/Typeahead.css'
 // local components
 import Nav from './Nav'
 import PlayerTable from './PlayerTable'
+import AdminRedirect from './AdminRedirect'
+
 
 const DEFAULT_YEAR = 2018
 
@@ -26,10 +28,14 @@ const EditAllstars = () => {
 
   function refreshPlayerData(year) {
     request.get(`/api/allstars/${year}`).then((x) => {
-      setAllstars(x.players)
+      if (x.players) {
+        setAllstars(x.players)
+      }
     })
     request.get(`/api/non-allstars/${year}`).then((x) => {
-      setOtherPlayers(x.players)
+      if (x.players) {
+        setOtherPlayers(x.players)
+      }
     })
   }
 
@@ -39,18 +45,20 @@ const EditAllstars = () => {
 
   useEffect(() => {
     request.get('/api/years').then((x) => {
-      setYears(x.years)
+      if (x.years) {
+        setYears(x.years)
+      }
     })
   }, [])
 
-  function removeAllstar(playerID) {
+  const removeAllstar = (playerID) => {
     playerUtil.removeAllstar(playerID, yearSelected).then(() => {
       refreshPlayerData(yearSelected)
     })
   }
 
   function addAllstars() {
-    const playerIDs = playersSelected.map(x => x.espnID)
+    const playerIDs = playersSelected.map(x => x.id)
     playerUtil.addAllstars(playerIDs, yearSelected).then(() => {
       refreshPlayerData(yearSelected)
     })
@@ -101,6 +109,7 @@ const EditAllstars = () => {
     <>
       <Nav />
       <Container id="main">
+        <AdminRedirect />
         <Input type="select" value={yearSelected} onChange={selectDifferentYear}>
           {yearOptions}
         </Input>
