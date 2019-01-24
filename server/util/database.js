@@ -5,6 +5,7 @@ const Player = require('../../models/player')
 const Captain = require('../../models/captain')
 const Allstar = require('../../models/allstar')
 const Year = require('../../models/year')
+const Entry = require('../../models/entry')
 const twitter = require('./twitter')
 const stats = require('./stats')
 
@@ -230,6 +231,23 @@ function getPlayersThatArentAllstars(year) {
   })
 }
 
+function getLineup(userId) {
+  return Entry.findAll({
+    include: [{
+      model: Player,
+    },
+    {
+      model: Captain,
+      include: [{
+        model: Player,
+      }],
+    }],
+    where: {
+      userId,
+    },
+  }).then(response => response.map(r => _.get(r, 'dataValues', {})))
+}
+
 module.exports = {
   getUserFromID,
   getAllUsers,
@@ -246,4 +264,5 @@ module.exports = {
   getPlayersThatArentAllstars,
   removeAllstar,
   addAllstars,
+  getLineup,
 }

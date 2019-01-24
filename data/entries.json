@@ -1,0 +1,64 @@
+{
+    "entries": [
+        {
+            "pickOrder": "1",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "2056e88e-fd84-4c20-b49d-2b7e3686410c",
+            "captainId": "30e876e6-537f-44f2-acc0-8a431130f95b"
+        },
+        {
+            "pickOrder": "2",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "97c1c3e3-215b-48cc-976e-b6bc2b99fabb",
+            "captainId": "30e876e6-537f-44f2-acc0-8a431130f95b"
+        },
+        {
+            "pickOrder": "3",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "29412065-a5eb-40e2-90b8-d146fac493ea",
+            "captainId": "30e876e6-537f-44f2-acc0-8a431130f95b"
+        },
+        {
+            "pickOrder": "4",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "edae7590-5591-4b3a-8559-38927a417f1b",
+            "captainId": "30e876e6-537f-44f2-acc0-8a431130f95b"
+        },
+        {
+            "pickOrder": "5",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "1a322116-c28d-47fa-8795-9ff03bfc7ac1",
+            "captainId": "30e876e6-537f-44f2-acc0-8a431130f95b"
+        },
+        {
+            "pickOrder": "1",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "8444a5e0-c7f4-4bb5-a747-f5b4ebac1f5a",
+            "captainId": "1eee8187-8a64-46b1-8593-338e518d6f29"
+        },
+        {
+            "pickOrder": "2",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "3cd40d43-6c76-479d-b8a0-35f6235858d5",
+            "captainId": "1eee8187-8a64-46b1-8593-338e518d6f29"
+        },
+        {
+            "pickOrder": "3",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "dc6580f2-ccb4-47e3-9e28-286c47bb0a67",
+            "captainId": "1eee8187-8a64-46b1-8593-338e518d6f29"
+        },
+        {
+            "pickOrder": "4",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "6e6517ba-4d92-4e93-86d0-75b68522a6d6",
+            "captainId": "1eee8187-8a64-46b1-8593-338e518d6f29"
+        },
+        {
+            "pickOrder": "5",
+            "userId": "10775686-2a21-42ab-bd78-437cb2da58d8",
+            "playerId": "4f853e9b-e366-4df9-88bb-5bed52e94728",
+            "captainId": "1eee8187-8a64-46b1-8593-338e518d6f29"
+        }
+    ]
+}

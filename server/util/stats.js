@@ -8,6 +8,12 @@ function getPlayerStats(players) {
     .then(playerStats => playerStats.map(playerStat => JSON.parse(playerStat)))
 }
 
+function getPlayerStatsFromEntries(entries) {
+  const promises = entries.map(entry => rp.get(`${ESPN_URL}${entry.player.espnID}`))
+  return Promise.all(promises)
+    .then(playerStats => playerStats.map(playerStat => JSON.parse(playerStat)))
+}
+
 function getPlayerName(playerID) {
   return rp.get(`${ESPN_URL}${playerID}`).then((data) => {
     const playerData = JSON.parse(data)
@@ -18,4 +24,5 @@ function getPlayerName(playerID) {
 module.exports = {
   getPlayerStats,
   getPlayerName,
+  getPlayerStatsFromEntries,
 }

@@ -121,6 +121,53 @@ app.get('/api/players', auth, invited, (req, res) => {
   })
 })
 
+app.get('/api/lineup', auth, invited, (req, res) => {
+  const user = _.get(req, 'profile.user')
+  database.getLineup(user.id).then((entries) => {
+    stats.getPlayerStatsFromEntries(entries).then((playerStats) => {
+      let entriesWithStats = entries.map((entry, index) => (
+        { ...entry, ...playerStats[index] }
+      ))
+      let captains = []
+      entriesWithStats.some((entry) => {
+        if (captains.some(captain => captain.id === entry.captain.id)) {
+          return false
+        }
+        captains.push(entry.captain)
+        if (captains.length >= 2) {
+          return true
+        }
+        return false
+      })
+      captains = captains.map(r => _.get(r, 'dataValues', {}))
+      captains = captains.map(captain => ({
+        ...captain,
+        ..._.get(captain, 'player.dataValues', {}),
+      }))
+      stats.getPlayerStats(captains).then((captainStats) => {
+        const captainsWithStats = captains.map((captain, index) => (
+          sanitizer.getCaptain({ ...captain, ...captainStats[index] })))
+        entriesWithStats = entriesWithStats.map((entry) => {
+          if (captainsWithStats[0].id === entry.captain.id) {
+            return {
+              ...entry,
+              captain: captainsWithStats[0],
+            }
+          }
+          return {
+            ...entry,
+            captain: captainsWithStats[1],
+          }
+        })
+        res.send({
+          captains: captainsWithStats.map(captain => sanitizer.getCaptain(captain)),
+          entries: entriesWithStats.map(entry => sanitizer.getEntry(entry)),
+        })
+      })
+    })
+  })
+})
+
 app.get('/api/non-allstars/:year', auth, admin, (req, res) => {
   const { year } = req.params
   database.getPlayersThatArentAllstars(year).then((players) => {

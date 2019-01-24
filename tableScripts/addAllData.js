@@ -9,15 +9,18 @@ const Player = require('../models/player')
 const Result = require('../models/result')
 const User = require('../models/user')
 const Year = require('../models/year')
+const Entry = require('../models/entry')
 const sequelize = require('../models/connection')
 
 const playersData = fs.readFileSync('../data/players.json')
 const usersData = fs.readFileSync('../data/users.json')
 const resultsData = fs.readFileSync('../data/results.json')
+const entriesData = fs.readFileSync('../data/entries.json')
 
 const { players, captains, allstars } = JSON.parse(playersData)
 const { users } = JSON.parse(usersData)
 const { results } = JSON.parse(resultsData)
+const { entries } = JSON.parse(entriesData)
 const years = [2018, 2019]
 
 
@@ -33,8 +36,8 @@ Promise.all(noDependencies).then(() => {
       Captain.bulkCreate(captains),
     ],
   ).then(() => {
-    // Result.bulkCreate(results).then(() => {
-    sequelize.close()
-    // })
+    Entry.bulkCreate(entries).then(() => {
+      sequelize.close()
+    })
   })
 })

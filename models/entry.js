@@ -8,7 +8,6 @@ const Captain = require('./captain')
 const Entry = sequelize.define('entry', {
   id: { type: Sequelize.UUID, primaryKey: true, defaultValue: () => uuid() },
   pickOrder: { type: Sequelize.INTEGER },
-  score: { type: Sequelize.INTEGER },
 })
 
 Entry.belongsTo(User)
