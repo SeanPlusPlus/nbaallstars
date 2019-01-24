@@ -18,6 +18,9 @@ const EditCaptains = () => {
   const [captains, setCaptains] = useState()
   useEffect(() => {
     request.get('/api/captains').then((x) => {
+      if (!x.players) {
+        return
+      }
       const newCaptains = {}
       x.players.forEach((captain) => {
         if (!newCaptains[captain.year]) {
