@@ -35,12 +35,11 @@ app.get('/api/users', auth, admin, (req, res) => {
 
 app.get('/api/years', auth, admin, (req, res) => {
   database.getAllYears().then((years) => {
-    console.log(years)
     res.send({ years })
   })
 })
 
-app.get('/api/allstars/:year', auth, (req, res) => {
+app.get('/api/allstars/:year', auth, invited, (req, res) => {
   const { year } = req.params
   database.getAllstarsForYear(year).then((response) => {
     let players = response.map(player => _.get(player, 'dataValues.player.dataValues', {}))
@@ -54,7 +53,7 @@ app.get('/api/allstars/:year', auth, (req, res) => {
   })
 })
 
-app.delete('/api/allstars/:year/:id', auth, (req, res) => {
+app.delete('/api/allstars/:year/:id', auth, admin, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     id,
@@ -67,7 +66,7 @@ app.delete('/api/allstars/:year/:id', auth, (req, res) => {
   })
 })
 
-app.post('/api/allstars/:year/:ids', auth, (req, res) => {
+app.post('/api/allstars/:year/:ids', auth, admin, (req, res) => {
   res.header({ 'Access-Control-Allow-Origin': '*' })
   const {
     ids,
@@ -80,10 +79,13 @@ app.post('/api/allstars/:year/:ids', auth, (req, res) => {
   })
 })
 
-app.get('/api/captains/:year', auth, (req, res) => {
+app.get('/api/captains/:year', auth, invited, (req, res) => {
   const { year } = req.params
   database.getCaptainsForYear(year).then((response) => {
-    let players = response.map(player => ({ ..._.get(player, 'dataValues.player.dataValues', {}), conference: player.conference }))
+    let players = response.map(player => ({
+      ..._.get(player, 'dataValues.player.dataValues', {}),
+      conference: player.conference,
+    }))
     stats.getPlayerStats(players).then((playerStats) => {
       players = players.map((player, index) => (
         sanitizer.getCaptain({ ...player, ...playerStats[index] })))
@@ -115,6 +117,53 @@ app.get('/api/players', auth, invited, (req, res) => {
       res.send({ players })
     }).catch(() => {
       res.send({ players })
+    })
+  })
+})
+
+app.get('/api/lineup', auth, invited, (req, res) => {
+  const user = _.get(req, 'profile.user')
+  database.getLineup(user.id).then((entries) => {
+    stats.getPlayerStatsFromEntries(entries).then((playerStats) => {
+      let entriesWithStats = entries.map((entry, index) => (
+        { ...entry, ...playerStats[index] }
+      ))
+      let captains = []
+      entriesWithStats.some((entry) => {
+        if (captains.some(captain => captain.id === entry.captain.id)) {
+          return false
+        }
+        captains.push(entry.captain)
+        if (captains.length >= 2) {
+          return true
+        }
+        return false
+      })
+      captains = captains.map(r => _.get(r, 'dataValues', {}))
+      captains = captains.map(captain => ({
+        ...captain,
+        ..._.get(captain, 'player.dataValues', {}),
+      }))
+      stats.getPlayerStats(captains).then((captainStats) => {
+        const captainsWithStats = captains.map((captain, index) => (
+          sanitizer.getCaptain({ ...captain, ...captainStats[index] })))
+        entriesWithStats = entriesWithStats.map((entry) => {
+          if (captainsWithStats[0].id === entry.captain.id) {
+            return {
+              ...entry,
+              captain: captainsWithStats[0],
+            }
+          }
+          return {
+            ...entry,
+            captain: captainsWithStats[1],
+          }
+        })
+        res.send({
+          captains: captainsWithStats.map(captain => sanitizer.getCaptain(captain)),
+          entries: entriesWithStats.map(entry => sanitizer.getEntry(entry)),
+        })
+      })
     })
   })
 })

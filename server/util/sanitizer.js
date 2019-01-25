@@ -3,8 +3,8 @@ const _ = require('lodash')
 const getPlayer = player => ({
   id: player.espnID,
   name: _.get(player, 'athlete.displayName', player.name),
-  firstName: _.get(player, 'athlete.firstName', player.name.split(' ')[0]),
-  lastName: _.get(player, 'athlete.lastName', player.name.split(' ')[1]),
+  firstName: _.get(player, 'athlete.firstName', player.name && player.name.split(' ')[0]),
+  lastName: _.get(player, 'athlete.lastName', player.name && player.name.split(' ')[1]),
   headshot: _.get(player, 'athlete.headshot.href', null),
   position: _.get(player, 'athlete.position.abbreviation', 'N/A'),
   number: _.get(player, 'athlete.displayJersey', '00'),
@@ -28,8 +28,15 @@ const getUser = user => ({
   isInvited: user.isInvited,
 })
 
+const getEntry = entry => ({
+  captainName: entry.captain.name,
+  pickOrder: entry.pickOrder,
+  ...getPlayer(entry),
+})
+
 module.exports = {
   getPlayer,
   getCaptain,
   getUser,
+  getEntry,
 }
